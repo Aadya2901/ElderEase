@@ -74,6 +74,16 @@ All tools used are open-source.
 
 ---
 
+## 🔧 Node-RED Setup
+
+1. Install Node.js (v18+ recommended)
+2. Install Node-RED:
+   npm install -g --unsafe-perm node-red
+3. Start Node-RED:
+   node-red
+4. Open: http://localhost:1880
+
+---
 # 📦 Module Breakdown
 
 ---
@@ -332,7 +342,7 @@ ElderEase Phase 1 is being developed collaboratively with clearly defined module
 
 ---
 
-## 🔹 iam-anish15  
+## 🔹 Anish Kushwaha  
 **Role:** UI & Documentation Lead  
 
 ### Primary Responsibilities:
