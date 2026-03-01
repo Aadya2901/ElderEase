@@ -1,0 +1,391 @@
+# 💖 ElderEase – Phase 1  
+## Real-Time Rule-Based Senior Health Monitoring System  
+
+![Version](https://img.shields.io/badge/version-v1.0-blue)
+![Phase](https://img.shields.io/badge/phase-1-orange)
+![Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-MIT-green)
+![FOSS](https://img.shields.io/badge/FOSS-compliant-brightgreen)
+
+---
+
+# 📄 Abstract
+
+ElderEase is a modular, real-time health monitoring system designed to simulate and analyze vital health parameters of elderly individuals.  
+
+Phase 1 establishes a rule-based monitoring architecture using Node-RED, enabling structured health data simulation, validation, classification, and logging.  
+
+The system follows an event-driven, flow-based design and is built entirely using open-source technologies to ensure FOSS compliance.  
+
+This phase serves as the foundational layer for future expansions including database integration, full-stack web dashboards, and machine learning-based predictive analytics.
+
+---
+
+# 🎯 Problem Statement
+
+Elderly individuals living independently face significant health risks such as:
+
+- Sudden heart rate spikes  
+- Low oxygen saturation  
+- Fever episodes  
+- Lack of continuous monitoring  
+
+Most existing systems are reactive and hardware-dependent. ElderEase aims to create a scalable monitoring architecture starting with a simulated real-time pipeline.
+
+---
+
+# 🏗️ System Architecture (Phase 1)
+
+```
+[ Vital Data Simulation Module ]
+↓
+[ Data Validation Module ]
+↓
+[ Decision Engine Module ]
+↓
+[ Monitoring & Logging Module ]
+↓
+[ Real-Time Dashboard (Upcoming) ]
+```
+
+
+Architecture Characteristics:
+
+- Event-driven system
+- Flow-based programming model
+- Modular layered design
+- Scalable for database & ML integration
+
+---
+
+# 🛠️ Tech Stack (Phase 1)
+
+| Layer | Technology | Purpose |
+|--------|------------|----------|
+| Runtime | Node.js | Runs Node-RED |
+| Core Engine | Node-RED | Flow-based processing |
+| Programming | JavaScript | Logic implementation |
+| Data Format | JSON | Structured message passing |
+| UI (Planned) | node-red-dashboard | Real-time monitoring UI |
+| Logging | Node-RED context | Local system metrics |
+| Version Control | Git + GitHub | Continuous commits |
+
+All tools used are open-source.
+
+---
+
+# 📦 Module Breakdown
+
+---
+
+## 🔹 1. Vital Data Simulation Module
+
+Simulates real-time wearable sensor data.
+
+Generated Fields:
+
+- `userId`
+- `deviceId`
+- `heartRate`
+- `spo2`
+- `temperature`
+- `timestamp`
+- `systemVersion`
+
+Example Output:
+
+```
+{
+  "userId": "ELD001",
+  "deviceId": "SIM001",
+  "heartRate": 87,
+  "spo2": 96,
+  "temperature": 36.8,
+  "timestamp": "2026-03-01T14:00:00",
+  "systemVersion": "v1.0"
+}
+```
+
+---
+
+## 🔹 2. Data Validation Module
+
+The **Data Validation Module** ensures that all simulated health readings fall within realistic physiological ranges before further processing.
+
+### Validation Ranges
+
+- **Heart Rate:** 40–180 bpm  
+- **SpO₂:** 70–100 %  
+- **Temperature:** 34–42 °C  
+
+### Functionality
+
+- Verifies each incoming reading.
+- Flags invalid or out-of-range values.
+- Logs invalid readings for monitoring.
+- Prevents corrupted data from entering the decision engine.
+
+### Example (Invalid Flagged Output)
+
+```
+{
+  "heartRate": 220,
+  "spo2": 95,
+  "temperature": 36.9,
+  "valid": false,
+  "error": "Heart Rate out of realistic range"
+}
+```
+
+---
+
+## 🔹 3. Decision Engine Module
+
+The **Decision Engine Module** performs rule-based classification of validated health readings.
+
+It analyzes processed data and determines the real-time health status of the monitored individual.
+
+---
+
+### 📊 Status Categories
+
+- NORMAL
+- WARNING
+- EMERGENCY
+
+---
+
+### ⚙️ Rule Logic (Phase 1)
+
+- heartRate > 110 → EMERGENCY
+- spo2 < 90 → EMERGENCY
+- temperature > 38°C → EMERGENCY
+- Borderline conditions → WARNING
+- Otherwise → NORMAL
+
+---
+
+### 🧠 Decision Output Structure
+
+```json
+{
+  "status": "EMERGENCY",
+  "reason": "Low Oxygen Level",
+  "riskLevel": 3,
+  "timestamp": "2026-03-01T14:00:00"
+}
+```
+
+---
+
+### 🚦 Risk Level Mapping
+
+| Risk Level | Status |
+|------------|---------|
+| 1 | NORMAL |
+| 2 | WARNING |
+| 3 | EMERGENCY |
+
+---
+
+### 🔮 Design Advantages
+
+- Clear separation of validation and classification logic
+- Easy rule modification
+- Expandable to ML-based prediction models
+- Compatible with database persistence in Phase 2
+
+---
+
+## 🔹 4. Monitoring & Logging Module
+
+The **Monitoring & Logging Module** enhances system transparency, reliability, and observability.
+
+It tracks system-level metrics and emergency events for operational monitoring.
+
+---
+
+### 📈 Metrics Tracked
+
+- Total readings processed
+- Emergency event count
+- Last emergency timestamp
+- Recent reading history (last N records)
+
+---
+
+### 💾 Storage Mechanism
+
+- Uses Node-RED flow/global context storage
+- Maintains temporary in-memory logs
+- No external database dependency (Phase 1)
+- Structured for future database integration
+
+---
+
+### 📝 Example Logged Record
+
+```json
+{
+  "timestamp": "2026-03-01T14:00:00",
+  "status": "EMERGENCY",
+  "reason": "High Heart Rate",
+  "riskLevel": 3
+}
+```
+
+---
+
+### ✅ Architectural Benefits
+
+- Improves system reliability
+- Enables audit-style monitoring
+- Makes prototype production-ready
+- Simplifies transition to persistent storage
+
+---
+
+## 🔹 5. Manual Emergency Injection
+
+Testing capability for controlled demo scenarios.
+
+### 🎯 Supported Simulations
+
+- Simulate High Heart Rate
+- Simulate Low SpO₂
+- Simulate Fever
+
+Allows controlled validation of the Decision Engine and edge-case testing without modifying core simulation logic.
+
+---
+
+## 📊 JSON Schema (Phase 1)
+
+```json
+{
+  "userId": "string",
+  "deviceId": "string",
+  "heartRate": "number",
+  "spo2": "number",
+  "temperature": "number",
+  "status": "string",
+  "reason": "string",
+  "riskLevel": "number",
+  "timestamp": "ISO Date",
+  "systemVersion": "string"
+}
+```
+
+Designed with structured extensibility for database persistence and ML-based analytics in future phases.
+
+---
+
+## 🧪 Testing Strategy
+
+| Test Case | Input | Expected Output |
+|------------|--------|----------------|
+| Normal HR | 85 bpm | NORMAL |
+| High HR | 125 bpm | EMERGENCY |
+| Low SpO₂ | 82 % | EMERGENCY |
+| High Temp | 39 °C | EMERGENCY |
+
+Manual inject nodes validate all boundary and emergency conditions.
+
+---
+
+## 🚀 Development Roadmap
+
+### Phase 1 (Current)
+
+- Simulation
+- Validation
+- Rule-based classification
+- Logging
+- Basic dashboard
+
+### Phase 2
+
+- Express backend API
+- MongoDB integration
+- Persistent health history
+
+### Phase 3
+
+- React dashboard
+- Authentication system
+- Role-based access control
+
+### Phase 4
+
+- Machine Learning prediction
+- Anomaly detection
+- Predictive health scoring
+
+---
+
+## 📈 Weekly Progress Tracking
+
+### Week 1 (Completed)
+
+- Node-RED environment setup
+- Vital simulation implemented
+- Structured JSON schema finalized
+- Data validation logic added
+- Manual emergency injection built
+
+### Week 2 (Planned)
+
+- Decision engine implementation
+- Risk classification levels
+- Emergency counter
+- Structured logging system
+
+---
+
+## 🔐 FOSS Compliance
+
+- No proprietary APIs
+- No paid services
+- Fully local execution
+- Built entirely on open-source technologies
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+MIT License
+
+Copyright (c) 2026 ElderEase
+
+Permission is hereby granted, free of charge, to any person obtaining a copy  
+of this software and associated documentation files (the "Software"), to deal  
+in the Software without restriction, including without limitation the rights  
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  
+copies of the Software...
+
+(Full MIT License text can be placed in a separate `LICENSE` file.)
+
+---
+
+## 👩‍💻 Team Structure
+
+| Role | Responsibility |
+|------|----------------|
+| Data & Simulation Lead | Vital generation & validation |
+| Logic & Monitoring Lead | Decision engine & logging |
+| UI & Documentation Lead | Dashboard & documentation |
+
+---
+
+## 🌱 Future Vision
+
+ElderEase aims to evolve into a predictive, scalable elderly healthcare monitoring ecosystem integrating IoT, full-stack architecture, and machine learning.
+
+---
+
+## 💬 Vision Statement
+
+Building a structured, scalable foundation for intelligent senior health monitoring — one module at a time.
+
