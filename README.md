@@ -83,6 +83,14 @@ All tools used are open-source.
    node-red
 4. Open: http://localhost:1880
 
+### 📸 Node-RED Welcome Screen
+
+![Node-RED Welcome](docs/images/node-red-welcome.png)
+
+### 📸 Node-RED Editor Interface
+
+![Node-RED Editor](docs/images/node-red-editor.png)
+
 ---
 # 📦 Module Breakdown
 
