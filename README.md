@@ -292,6 +292,69 @@ Designed with structured extensibility for database persistence and ML-based ana
 Manual inject nodes validate all boundary and emergency conditions.
 
 ---
+---
+
+# 👥 Project Members & Responsibilities
+
+ElderEase Phase 1 is being developed collaboratively with clearly defined module ownership to ensure modular architecture and consistent progress.
+
+---
+
+## 🔹 Aadya Patel  
+**Role:** Data & Simulation Lead  
+
+### Primary Responsibilities:
+- Design and implement the Vital Data Simulation Module  
+- Generate realistic heart rate, SpO₂, and temperature values  
+- Define and maintain structured JSON schema  
+- Implement Data Validation logic  
+- Maintain payload consistency and metadata (timestamp, deviceId, versioning)
+
+### Secondary Contributions:
+- Assist in architecture design  
+- Support integration between modules  
+
+---
+
+## 🔹 Ananya Mishra  
+**Role:** Logic & Monitoring Lead  
+
+### Primary Responsibilities:
+- Design and implement the Decision Engine Module  
+- Develop rule-based health classification logic (NORMAL / WARNING / EMERGENCY)  
+- Implement riskLevel mapping system  
+- Build Monitoring & Logging Module  
+- Track system metrics (emergency count, last emergency, total readings)
+
+### Secondary Contributions:
+- Optimize rule logic  
+- Ensure clean separation between validation and classification layers  
+
+---
+
+## 🔹 iam-anish15  
+**Role:** UI & Documentation Lead  
+
+### Primary Responsibilities:
+- Design and implement Dashboard layout (Phase 1 UI integration)  
+- Structure flow grouping and visual organization in Node-RED  
+- Maintain and update README documentation  
+- Create architecture diagrams and weekly progress reports  
+- Ensure FOSS compliance documentation  
+
+### Secondary Contributions:
+- Support logging display and visualization features  
+- Maintain repository structure and commit consistency  
+
+---
+
+## 🤝 Collaboration Model
+
+- Each module is developed independently but integrated through structured JSON payloads.
+- Weekly reviews ensure architectural consistency.
+- All members contribute commits regularly following conventional commit standards.
+
+---
 
 ## 🚀 Development Roadmap
 
