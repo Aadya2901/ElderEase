@@ -28,7 +28,7 @@
         "topic": "",
         "payload": "timestamp",
         "payloadType": "str",
-        "x": 130,
+        "x": 190,
         "y": 140,
         "wires": [
             [
@@ -49,8 +49,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 250,
-        "y": 300,
+        "x": 850,
+        "y": 360,
         "wires": []
     },
     {
@@ -58,15 +58,15 @@
         "type": "function",
         "z": "94c07a1968faae61",
         "name": "Vital Simulation Module",
-        "func": "let heartRate = Math.floor(Math.random() * 80) + 60;\nlet spo2 = Math.floor(Math.random() * 15) + 85;\nlet temperature = Number((Math.random() * 3 + 35).toFixed(1));\n\nlet status = \"NORMAL\";\n\nif (heartRate > 110 || spo2 < 90 || temperature > 38) {\n    status = \"EMERGENCY\";\n} else if (heartRate > 95 && heartRate <= 110) {\n    status = \"WARNING\";\n}\n\nmsg.payload = {\n    heartRate,\n    spo2,\n    temperature,\n    status,\n    timestamp: new Date().toISOString()\n};\n\nreturn msg;",
+        "func": "let heartRate = Math.floor(Math.random() * 80) + 60;\nlet spo2 = Math.floor(Math.random() * 15) + 85;\nlet temperature = Number((Math.random() * 3 + 35).toFixed(1));\n\nmsg.payload = {\n    userId: \"ELD001\",\n    deviceId: \"SIM001\",\n    heartRate: heartRate,\n    spo2: spo2,\n    temperature: temperature,\n    timestamp: new Date().toISOString(),\n    systemVersion: \"v1.0\"\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 170,
-        "y": 220,
+        "x": 510,
+        "y": 260,
         "wires": [
             [
                 "28597e10795590a6"

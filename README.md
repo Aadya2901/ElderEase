@@ -124,6 +124,12 @@ Example Output:
 }
 ```
 
+### 📸 Live Simulation Output
+
+The following screenshot shows real-time vital data being generated every 5 seconds using the simulation module.
+
+![Phase 1 Vital Simulation](docs/images/phase1-vital-simulation-output.png)
+
 ---
 
 ## 🔹 2. Data Validation Module
