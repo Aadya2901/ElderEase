@@ -283,6 +283,38 @@ Allows controlled validation of the Decision Engine and edge-case testing withou
 
 ---
 
+## 🔹 6. Real-Time Dashboard Module
+
+The **Dashboard Module** provides live visualization of simulated health data using `node-red-dashboard`.
+
+It operates as a dedicated UI layer, separated from core simulation and decision logic.
+
+### 🖥️ Dashboard Features
+
+- Real-time Heart Rate gauge
+- Auto-updating every 5 seconds
+- Extract Heart Rate function for UI isolation
+- Modular UI configuration using dashboard tabs and groups
+- Clean separation between backend processing and frontend display
+
+### 🔄 Data Flow for Dashboard
+
+```
+Vital Simulation Module
+↓
+Extract Heart Rate Function
+↓
+Heart Rate Gauge (UI)
+```
+
+### 📸 Live Dashboard Output
+
+The screenshot below demonstrates the real-time dashboard updating dynamically based on simulated vital data.
+
+![Phase 1 Dashboard Output](docs/images/dashboard-live.png)
+
+---
+
 ## 📊 JSON Schema (Phase 1)
 
 ```json
@@ -417,13 +449,21 @@ ElderEase Phase 1 is being developed collaboratively with clearly defined module
 ✔ Implemented real-time vital simulation module  
 ✔ Added structured JSON payload with ISO timestamp  
 ✔ Configured 5-second automated data trigger  
+✔ Integrated Node-RED dashboard for live visualization  
+✔ Implemented Extract Heart Rate UI processing layer  
+✔ Deployed real-time heart rate gauge interface  
+
+Feature Ownership:
+- Simulation Layer – Aadya Patel  
+- Decision & Monitoring Logic – Ananya Mishra  
+- Dashboard & Documentation – Anish Kushwaha  
 
 ### Week 2 (Planned)
 
 - Refactor decision engine into dedicated module
-- Risk classification levels
-- Emergency counter
-- Structured logging system
+- Implement risk classification improvements
+- Add emergency event counter
+- Build structured logging system
 
 ---
 
