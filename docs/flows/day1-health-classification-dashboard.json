@@ -1,0 +1,291 @@
+[
+    {
+        "id": "b2c90564e38caf54",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "180706793b1a751b",
+        "type": "inject",
+        "z": "b2c90564e38caf54",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"heartRate\": 120,   \"spo2\": 95,   \"temperature\": 37 }",
+        "payloadType": "json",
+        "x": 170,
+        "y": 140,
+        "wires": [
+            [
+                "671721486f5ae08e"
+            ]
+        ]
+    },
+    {
+        "id": "8f9a66edc7b0f32a",
+        "type": "function",
+        "z": "b2c90564e38caf54",
+        "name": " Main function ",
+        "func": "let heartRate = msg.payload.heartRate;\nlet spo2 = msg.payload.spo2;\nlet temperature = msg.payload.temperature;\n\nlet status = \"NORMAL\";\nlet color = \"green\";\n\nif (heartRate > 110 || spo2 < 90 || temperature > 39) {\n    status = \"EMERGENCY\";\n    color = \"red\";\n}\n\nmsg.payload = {\n    heartRate,\n    spo2,\n    temperature,\n    status,\n    color\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "fe84a56e41db185c",
+                "f732e5d5e160a7d8",
+                "aab743a8f10609e1",
+                "20dc2245eec6a81f",
+                "82f78210fad0bdfe"
+            ]
+        ]
+    },
+    {
+        "id": "fe84a56e41db185c",
+        "type": "debug",
+        "z": "b2c90564e38caf54",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "0e432abccdac5466",
+        "type": "ui_gauge",
+        "z": "b2c90564e38caf54",
+        "name": "Heart Rate",
+        "group": "b52794db6a242d0e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Heart Rate",
+        "label": "bpm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "150",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 150,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b4934c224c6f16d8",
+        "type": "ui_gauge",
+        "z": "b2c90564e38caf54",
+        "name": "SpO2 Gauge",
+        "group": "b52794db6a242d0e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "SpO2",
+        "label": "%",
+        "format": "{{value}}",
+        "min": "80",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 350,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "40ed88385abe6578",
+        "type": "ui_gauge",
+        "z": "b2c90564e38caf54",
+        "name": "Temperature Gauge",
+        "group": "b52794db6a242d0e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "C",
+        "format": "{{value}}",
+        "min": "30",
+        "max": "45",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 680,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "82f78210fad0bdfe",
+        "type": "ui_text",
+        "z": "b2c90564e38caf54",
+        "group": "b52794db6a242d0e",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Status",
+        "format": "<span style=\"color:{{msg.payload.color}}; font-size:28px; font-weight:bold;\"> {{msg.payload.status}} </span>",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 370,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "20dc2245eec6a81f",
+        "type": "function",
+        "z": "b2c90564e38caf54",
+        "name": "HR Extract",
+        "func": "msg.payload = msg.payload.heartRate;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "0e432abccdac5466"
+            ]
+        ]
+    },
+    {
+        "id": "f732e5d5e160a7d8",
+        "type": "function",
+        "z": "b2c90564e38caf54",
+        "name": "SpO2 Extract",
+        "func": "msg.payload = msg.payload.spo2;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "b4934c224c6f16d8"
+            ]
+        ]
+    },
+    {
+        "id": "aab743a8f10609e1",
+        "type": "function",
+        "z": "b2c90564e38caf54",
+        "name": "Temp extract",
+        "func": "msg.payload = msg.payload.temperature;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "40ed88385abe6578"
+            ]
+        ]
+    },
+    {
+        "id": "671721486f5ae08e",
+        "type": "function",
+        "z": "b2c90564e38caf54",
+        "name": "Random Generator ",
+        "func": "msg.payload = {\n    heartRate: Math.floor(Math.random() * 40) + 80,\n    spo2: Math.floor(Math.random() * 5) + 94,\n    temperature: parseFloat((Math.random() * 2 + 36).toFixed(1))\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 40,
+        "wires": [
+            [
+                "8f9a66edc7b0f32a"
+            ]
+        ]
+    },
+    {
+        "id": "b52794db6a242d0e",
+        "type": "ui_group",
+        "name": "Patient Vitals",
+        "tab": "2c34c4ebfec47b8f",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2c34c4ebfec47b8f",
+        "type": "ui_tab",
+        "name": "Health Monitor",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "7cae8ea1e4774df9",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
