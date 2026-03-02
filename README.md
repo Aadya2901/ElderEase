@@ -408,11 +408,9 @@ ElderEase Phase 1 is being developed collaboratively with clearly defined module
 
 ### Week 1 (Completed)
 
-- Node-RED environment setup
-- Vital simulation implemented
-- Structured JSON schema finalized
-- Data validation logic added
-- Manual emergency injection built
+✔ Implemented real-time vital simulation module  
+✔ Added structured JSON payload with ISO timestamp  
+✔ Configured 5-second automated data trigger  
 
 ### Week 2 (Planned)
 
@@ -447,16 +445,6 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software...
 
 (Full MIT License text can be placed in a separate `LICENSE` file.)
-
----
-
-## 👩‍💻 Team Structure
-
-| Role | Responsibility |
-|------|----------------|
-| Data & Simulation Lead | Vital generation & validation |
-| Logic & Monitoring Lead | Decision engine & logging |
-| UI & Documentation Lead | Dashboard & documentation |
 
 ---
 
