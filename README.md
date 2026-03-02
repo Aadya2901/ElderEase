@@ -414,7 +414,7 @@ ElderEase Phase 1 is being developed collaboratively with clearly defined module
 
 ### Week 2 (Planned)
 
-- Decision engine implementation
+- Refactor decision engine into dedicated module
 - Risk classification levels
 - Emergency counter
 - Structured logging system
