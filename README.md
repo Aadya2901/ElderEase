@@ -147,6 +147,8 @@ The **Data Validation Module** ensures that all simulated health readings fall w
 - Verifies each incoming reading.
 - Flags invalid or out-of-range values.
 - Logs invalid readings for monitoring.
+- Appends `valid` and `error` fields.
+- Preserves structured payload integrity.
 - Prevents corrupted data from entering the decision engine.
 
 ### Example (Invalid Flagged Output)
@@ -160,6 +162,9 @@ The **Data Validation Module** ensures that all simulated health readings fall w
   "error": "Heart Rate out of realistic range"
 }
 ```
+
+📸 Live Validation Output
+![Validation Output](docs/images/phase1-validation-output.png)
 
 ---
 
