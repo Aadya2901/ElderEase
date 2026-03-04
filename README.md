@@ -205,8 +205,6 @@ It analyzes processed data and determines the real-time health status of the mon
 }
 ```
 
----
-
 ### 🚦 Risk Level Mapping
 
 | Risk Level | Status |
@@ -223,6 +221,10 @@ It analyzes processed data and determines the real-time health status of the mon
 - Easy rule modification
 - Expandable to ML-based prediction models
 - Compatible with database persistence in Phase 2
+
+📸 Decision Engine Output
+![Decision Output](docs/images/phase1-decision-output.png)
+
 
 ---
 

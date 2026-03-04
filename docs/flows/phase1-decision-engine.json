@@ -1,0 +1,239 @@
+[
+    {
+        "id": "94c07a1968faae61",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b8502c893818ba36",
+        "type": "ui_tab",
+        "name": "ElderEase Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e5b7e2d9ec19bf42",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "5cb1f7f01b774bdd",
+        "type": "ui_group",
+        "name": "Live Vitals",
+        "tab": "b8502c893818ba36",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "65971e14ac52e323",
+        "type": "inject",
+        "z": "94c07a1968faae61",
+        "name": "Auto Vital Trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "timestamp",
+        "payloadType": "str",
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "08c32c9d3e21506f"
+            ]
+        ]
+    },
+    {
+        "id": "28597e10795590a6",
+        "type": "debug",
+        "z": "94c07a1968faae61",
+        "name": "Decision Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "08c32c9d3e21506f",
+        "type": "function",
+        "z": "94c07a1968faae61",
+        "name": "Vital Simulation Module",
+        "func": "let heartRate = Math.floor(Math.random() * 80) + 60;\nlet spo2 = Math.floor(Math.random() * 15) + 85;\nlet temperature = Number((Math.random() * 3 + 35).toFixed(1));\n\nmsg.payload = {\n    userId: \"ELD001\",\n    deviceId: \"SIM001\",\n    heartRate: heartRate,\n    spo2: spo2,\n    temperature: temperature,\n    timestamp: new Date().toISOString(),\n    systemVersion: \"v1.0\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "f2c6adedcb761880"
+            ]
+        ]
+    },
+    {
+        "id": "f2c6adedcb761880",
+        "type": "function",
+        "z": "94c07a1968faae61",
+        "name": "Validation Module",
+        "func": "let hr = msg.payload.heartRate;\nlet spo2 = msg.payload.spo2;\nlet temp = msg.payload.temperature;\n\nlet valid = true;\nlet error = null;\n\n// Heart Rate range check\nif (hr < 40 || hr > 180) {\n    valid = false;\n    error = \"Heart Rate out of realistic range\";\n}\n\n// SpO2 range check\nif (spo2 < 70 || spo2 > 100) {\n    valid = false;\n    error = \"SpO2 out of realistic range\";\n}\n\n// Temperature range check\nif (temp < 34 || temp > 42) {\n    valid = false;\n    error = \"Temperature out of realistic range\";\n}\n\n// Append validation result\nmsg.payload.valid = valid;\nmsg.payload.error = error;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "0c6e6990665c41d3"
+            ]
+        ]
+    },
+    {
+        "id": "0c6e6990665c41d3",
+        "type": "function",
+        "z": "94c07a1968faae61",
+        "name": "Decision Engine Module",
+        "func": "if (!msg.payload.valid) {\n    msg.payload.status = \"INVALID\";\n    msg.payload.riskLevel = 0;\n    return msg;\n}\n\nlet hr = msg.payload.heartRate;\nlet spo2 = msg.payload.spo2;\nlet temp = msg.payload.temperature;\n\nlet status = \"NORMAL\";\nlet riskLevel = 1;\n\n// EMERGENCY conditions\nif (hr > 110 || spo2 < 90 || temp > 38) {\n    status = \"EMERGENCY\";\n    riskLevel = 3;\n}\n\n// WARNING conditions\nelse if (\n    (hr >= 95 && hr <= 110) ||\n    (spo2 >= 90 && spo2 <= 93) ||\n    (temp >= 37.5 && temp <= 38)\n) {\n    status = \"WARNING\";\n    riskLevel = 2;\n}\n\nmsg.payload.status = status;\nmsg.payload.riskLevel = riskLevel;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 360,
+        "wires": [
+            [
+                "28597e10795590a6"
+            ]
+        ]
+    },
+    {
+        "id": "372947ada227bcbd",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
