@@ -1,6 +1,6 @@
 [
     {
-        "id": "b2c90564e38caf54",
+        "id": "94c07a1968faae61",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
@@ -8,10 +8,10 @@
         "env": []
     },
     {
-        "id": "180706793b1a751b",
+        "id": "65971e14ac52e323",
         "type": "inject",
-        "z": "b2c90564e38caf54",
-        "name": "",
+        "z": "94c07a1968faae61",
+        "name": "Auto Vital Trigger",
         "props": [
             {
                 "p": "payload"
@@ -21,65 +21,103 @@
                 "vt": "str"
             }
         ],
-        "repeat": "2",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{   \"heartRate\": 120,   \"spo2\": 95,   \"temperature\": 37 }",
-        "payloadType": "json",
-        "x": 170,
+        "payload": "timestamp",
+        "payloadType": "str",
+        "x": 190,
         "y": 140,
         "wires": [
             [
-                "671721486f5ae08e"
+                "08c32c9d3e21506f"
             ]
         ]
     },
     {
-        "id": "8f9a66edc7b0f32a",
+        "id": "28597e10795590a6",
+        "type": "debug",
+        "z": "94c07a1968faae61",
+        "name": "Simulation Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "08c32c9d3e21506f",
         "type": "function",
-        "z": "b2c90564e38caf54",
-        "name": " Main function ",
-        "func": "let heartRate = msg.payload.heartRate;\nlet spo2 = msg.payload.spo2;\nlet temperature = msg.payload.temperature;\n\nlet status = \"NORMAL\";\nlet color = \"green\";\n\nif (heartRate > 110 || spo2 < 90 || temperature > 39) {\n    status = \"EMERGENCY\";\n    color = \"red\";\n}\n\nmsg.payload = {\n    heartRate,\n    spo2,\n    temperature,\n    status,\n    color\n};\n\nreturn msg;",
+        "z": "94c07a1968faae61",
+        "name": "Vital Simulation Module",
+        "func": "let heartRate = Math.floor(Math.random() * 80) + 60;\nlet spo2 = Math.floor(Math.random() * 15) + 85;\nlet temperature = Number((Math.random() * 3 + 35).toFixed(1));\n\nmsg.payload = {\n    userId: \"ELD001\",\n    deviceId: \"SIM001\",\n    heartRate: heartRate,\n    spo2: spo2,\n    temperature: temperature,\n    timestamp: new Date().toISOString(),\n    systemVersion: \"v1.0\"\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
+        "x": 470,
         "y": 140,
         "wires": [
             [
-                "fe84a56e41db185c",
-                "f732e5d5e160a7d8",
-                "aab743a8f10609e1",
-                "20dc2245eec6a81f",
-                "82f78210fad0bdfe"
+                "f2c6adedcb761880"
             ]
         ]
     },
     {
-        "id": "fe84a56e41db185c",
-        "type": "debug",
-        "z": "b2c90564e38caf54",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 560,
-        "y": 140,
-        "wires": []
+        "id": "f2c6adedcb761880",
+        "type": "function",
+        "z": "94c07a1968faae61",
+        "name": "Validation Module",
+        "func": "let hr = msg.payload.heartRate;\nlet spo2 = msg.payload.spo2;\nlet temp = msg.payload.temperature;\n\nlet valid = true;\nlet error = null;\n\n// Heart Rate range check\nif (hr < 40 || hr > 180) {\n    valid = false;\n    error = \"Heart Rate out of realistic range\";\n}\n\n// SpO2 range check\nif (spo2 < 70 || spo2 > 100) {\n    valid = false;\n    error = \"SpO2 out of realistic range\";\n}\n\n// Temperature range check\nif (temp < 34 || temp > 42) {\n    valid = false;\n    error = \"Temperature out of realistic range\";\n}\n\n// Append validation result\nmsg.payload.valid = valid;\nmsg.payload.error = error;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "0c6e6990665c41d3"
+            ]
+        ]
     },
     {
-        "id": "0e432abccdac5466",
+        "id": "0c6e6990665c41d3",
+        "type": "function",
+        "z": "94c07a1968faae61",
+        "name": "Decision Engine Module",
+        "func": "// Stop classification if data is invalid\nif (!msg.payload.valid) {\n    msg.payload.status = \"INVALID\";\n    msg.payload.riskLevel = 0;\n    return msg;\n}\n\nlet hr = msg.payload.heartRate;\nlet spo2 = msg.payload.spo2;\nlet temp = msg.payload.temperature;\n\nlet status = \"NORMAL\";\nlet riskLevel = 1;\n\n// Emergency conditions\nif (hr > 110 || spo2 < 90 || temp > 38) {\n    status = \"EMERGENCY\";\n    riskLevel = 3;\n}\n// Warning condition\nelse if (hr > 95 && hr <= 110) {\n    status = \"WARNING\";\n    riskLevel = 2;\n}\n\nmsg.payload.status = status;\nmsg.payload.riskLevel = riskLevel;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 360,
+        "wires": [
+            [
+                "5e1e2be0e2461cc3",
+                "da53afe9d7421d8a"
+            ]
+        ]
+    },
+    {
+        "id": "6a2d70e9d3f4dabf",
         "type": "ui_gauge",
-        "z": "b2c90564e38caf54",
+        "z": "94c07a1968faae61",
         "name": "Heart Rate",
         "group": "b52794db6a242d0e",
         "order": 0,
@@ -100,14 +138,14 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 150,
-        "y": 320,
+        "x": 170,
+        "y": 600,
         "wires": []
     },
     {
-        "id": "b4934c224c6f16d8",
+        "id": "95a3f1d00aa6c0cf",
         "type": "ui_gauge",
-        "z": "b2c90564e38caf54",
+        "z": "94c07a1968faae61",
         "name": "SpO2 Gauge",
         "group": "b52794db6a242d0e",
         "order": 1,
@@ -129,13 +167,13 @@
         "diff": false,
         "className": "",
         "x": 350,
-        "y": 320,
+        "y": 580,
         "wires": []
     },
     {
-        "id": "40ed88385abe6578",
+        "id": "6942acd7760f67c0",
         "type": "ui_gauge",
-        "z": "b2c90564e38caf54",
+        "z": "94c07a1968faae61",
         "name": "Temperature Gauge",
         "group": "b52794db6a242d0e",
         "order": 2,
@@ -156,14 +194,14 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 680,
-        "y": 340,
+        "x": 780,
+        "y": 560,
         "wires": []
     },
     {
-        "id": "82f78210fad0bdfe",
+        "id": "da53afe9d7421d8a",
         "type": "ui_text",
-        "z": "b2c90564e38caf54",
+        "z": "94c07a1968faae61",
         "group": "b52794db6a242d0e",
         "order": 3,
         "width": 0,
@@ -177,14 +215,14 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 370,
-        "y": 480,
+        "x": 770,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "20dc2245eec6a81f",
+        "id": "72d87ce1a6cdc4b4",
         "type": "function",
-        "z": "b2c90564e38caf54",
+        "z": "94c07a1968faae61",
         "name": "HR Extract",
         "func": "msg.payload = msg.payload.heartRate;\nreturn msg;",
         "outputs": 1,
@@ -193,18 +231,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 150,
-        "y": 220,
+        "x": 170,
+        "y": 520,
         "wires": [
             [
-                "0e432abccdac5466"
+                "6a2d70e9d3f4dabf"
             ]
         ]
     },
     {
-        "id": "f732e5d5e160a7d8",
+        "id": "52be30a4c3fb67d4",
         "type": "function",
-        "z": "b2c90564e38caf54",
+        "z": "94c07a1968faae61",
         "name": "SpO2 Extract",
         "func": "msg.payload = msg.payload.spo2;\nreturn msg;",
         "outputs": 1,
@@ -213,18 +251,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
-        "y": 220,
+        "x": 410,
+        "y": 520,
         "wires": [
             [
-                "b4934c224c6f16d8"
+                "95a3f1d00aa6c0cf"
             ]
         ]
     },
     {
-        "id": "aab743a8f10609e1",
+        "id": "60d62bae64d2872a",
         "type": "function",
-        "z": "b2c90564e38caf54",
+        "z": "94c07a1968faae61",
         "name": "Temp extract",
         "func": "msg.payload = msg.payload.temperature;\nreturn msg;",
         "outputs": 1,
@@ -233,33 +271,54 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 590,
-        "y": 220,
+        "x": 830,
+        "y": 480,
         "wires": [
             [
-                "40ed88385abe6578"
+                "6942acd7760f67c0"
             ]
         ]
     },
     {
-        "id": "671721486f5ae08e",
+        "id": "5e1e2be0e2461cc3",
         "type": "function",
-        "z": "b2c90564e38caf54",
-        "name": "Random Generator ",
-        "func": "msg.payload = {\n    heartRate: Math.floor(Math.random() * 40) + 80,\n    spo2: Math.floor(Math.random() * 5) + 94,\n    temperature: parseFloat((Math.random() * 2 + 36).toFixed(1))\n};\n\nreturn msg;",
+        "z": "94c07a1968faae61",
+        "name": "Monitoring and Metrics Module",
+        "func": "// Get stored metrics from flow memory\nlet totalReadings = flow.get(\"totalReadings\") || 0;\nlet emergencyCount = flow.get(\"emergencyCount\") || 0;\nlet lastEmergencyTime = flow.get(\"lastEmergencyTime\") || null;\nlet history = flow.get(\"history\") || [];\n\n// Increase total readings count\ntotalReadings++;\n\n// Check if current reading is an emergency\nif (msg.payload.status === \"EMERGENCY\") {\n    emergencyCount++;\n    lastEmergencyTime = new Date().toISOString();\n}\n\n// Save current reading into history\nhistory.push({\n    heartRate: msg.payload.heartRate,\n    spo2: msg.payload.spo2,\n    temperature: msg.payload.temperature,\n    status: msg.payload.status,\n    time: new Date().toISOString()\n});\n\n// Keep only last 5 readings\nif (history.length > 5) {\n    history.shift();\n}\n\n// Save metrics back into flow memory\nflow.set(\"totalReadings\", totalReadings);\nflow.set(\"emergencyCount\", emergencyCount);\nflow.set(\"lastEmergencyTime\", lastEmergencyTime);\nflow.set(\"history\", history);\n\n// Attach metrics to message\nmsg.metrics = {\n    totalReadings: totalReadings,\n    emergencyCount: emergencyCount,\n    lastEmergencyTime: lastEmergencyTime,\n    history: history\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
-        "y": 40,
+        "x": 490,
+        "y": 420,
         "wires": [
             [
-                "8f9a66edc7b0f32a"
+                "72d87ce1a6cdc4b4",
+                "52be30a4c3fb67d4",
+                "60d62bae64d2872a",
+                "28597e10795590a6",
+                "eb019d26a570643c"
             ]
         ]
+    },
+    {
+        "id": "eb019d26a570643c",
+        "type": "debug",
+        "z": "94c07a1968faae61",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 420,
+        "wires": []
     },
     {
         "id": "b52794db6a242d0e",
@@ -281,7 +340,7 @@
         "hidden": false
     },
     {
-        "id": "7cae8ea1e4774df9",
+        "id": "dcfbbe41d9ed6446",
         "type": "global-config",
         "env": [],
         "modules": {
