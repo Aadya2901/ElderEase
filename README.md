@@ -104,7 +104,42 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 - Designed for future IoT sensor integration
 
 ### 📊 System Architecture Diagram
-![System Architecture](docs/images/hardware-system-architecture.png)
+The following diagram illustrates the complete scalable architecture of the ElderEase monitoring system.
+
+![ElderEase System Architecture](docs/images/hardware-system-architecture.png)
+
+### System Workflow
+
+1. **Health Sensors**
+   - MAX30102 sensor measures heart rate and SpO₂
+   - Temperature sensor measures body temperature
+
+2. **IoT Microcontroller**
+   - ESP32 collects sensor readings
+   - Handles data acquisition and preprocessing
+
+3. **Wireless Data Transmission**
+   - Sensor readings are transmitted via Wi-Fi using HTTP APIs
+
+4. **Backend Server**
+   - Node.js + Express processes incoming health data
+   - Performs system-level health analysis
+
+5. **Database Storage**
+   - MongoDB stores patient health records
+   - Enables historical health analytics
+
+6. **Caregiver Monitoring Dashboard**
+   - Displays real-time patient health metrics
+   - Generates alerts for abnormal conditions
+
+---
+
+⚠ **Note:**  
+The current Phase 1 prototype uses simulated health data through Node-RED.  
+The IoT hardware layer shown in the architecture diagram represents a **future system extension** and is not part of the current prototype implementation.
+
+>>>>>>> 0c3414b (docs: add full healthcare system architecture diagram with IoT pipeline)
 ---
 
 ## 🧩 Future IoT Hardware Integration (Proposed)
