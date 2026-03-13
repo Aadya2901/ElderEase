@@ -327,6 +327,26 @@ The screenshot below demonstrates the real-time dashboard updating dynamically b
 
 ---
 
+## 🔹 7. Emergency Alert Module
+
+The **Emergency Alert Module** detects abnormal health conditions classified by the Decision Engine and generates visual alerts on the monitoring dashboard.
+
+### Features
+
+* Detects **EMERGENCY** health states
+* Displays alert messages with vital details
+* Enables rapid identification of critical conditions
+* Designed for future integration with notification services
+
+### Example Alert
+
+```
+⚠ EMERGENCY DETECTED
+HR: 121 | SpO₂: 86 | Temp: 37.3
+```
+
+---
+
 ## 📊 JSON Schema (Phase 1)
 
 ```json
