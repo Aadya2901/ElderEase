@@ -152,16 +152,17 @@ Hardware integration is planned as a **future system extension** and is not part
 
 ---
 
-# 🛠️ Tech Stack (Phase 1)
+# 🛠️ Tech Stack
 
 | Layer | Technology | Purpose |
-|--------|------------|----------|
-| Runtime | Node.js | Runs Node-RED |
+|------|-------------|---------|
+| Runtime | Node.js | Runs Node-RED and backend |
 | Core Engine | Node-RED | Flow-based processing |
+| Backend | Express.js | API layer |
 | Programming | JavaScript | Logic implementation |
 | Data Format | JSON | Structured message passing |
-| UI (Planned) | node-red-dashboard | Real-time monitoring UI |
-| Logging | Node-RED context | Local system metrics |
+| Database | MongoDB (Planned Phase 3) | Persistent health data |
+| UI | Node-RED Dashboard / React (future) | Monitoring interface |
 | Version Control | Git + GitHub | Continuous commits |
 
 All tools used are open-source.
