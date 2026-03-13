@@ -387,6 +387,24 @@ Designed with structured extensibility for database persistence and ML-based ana
 
 ---
 
+## 🔹 9. Live Vital Monitoring Chart
+
+A **real-time line chart** visualizes heart rate fluctuations over time.
+
+### Capabilities
+
+* Displays last N heart rate readings
+* Updates automatically every 5 seconds
+* Provides trend visualization for patient monitoring
+
+### Example Visualization
+
+```
+Heart Rate Trend Over Time
+```
+
+--- 
+
 ## 🧪 Testing Strategy
 
 | Test Case | Input | Expected Output |
