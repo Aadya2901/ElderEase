@@ -533,59 +533,41 @@ The chart visualizes heart rate trends over time for continuous monitoring.
 Manual inject nodes validate all boundary and emergency conditions.
 
 ---
----
 
 # 👥 Project Members & Responsibilities
 
-ElderEase Phase 1 is being developed collaboratively with clearly defined module ownership to ensure modular architecture and consistent progress.
+ElderEase is developed collaboratively with clear module ownership aligned with the system architecture.
 
 ---
 
 ## 🔹 Aadya Patel  
-**Role:** Data & Simulation Lead  
+Role: Frontend & AI/ML Lead  
 
-### Primary Responsibilities:
-- Design and implement the Vital Data Simulation Module  
-- Generate realistic heart rate, SpO₂, and temperature values  
-- Define and maintain structured JSON schema  
-- Implement Data Validation logic  
-- Maintain payload consistency and metadata (timestamp, deviceId, versioning)
-
-### Secondary Contributions:
-- Assist in architecture design  
-- Support integration between modules  
+Primary Responsibilities
+- Design system architecture
+- Develop frontend monitoring dashboard
+- Implement data visualization components
+- Design AI/ML health prediction models (future phase)
 
 ---
 
 ## 🔹 Ananya Mishra  
-**Role:** Logic & Monitoring Lead  
+Role: Database & Monitoring Systems Lead  
 
-### Primary Responsibilities:
-- Design and implement the Decision Engine Module  
-- Develop rule-based health classification logic (NORMAL / WARNING / EMERGENCY)  
-- Implement riskLevel mapping system  
-- Build Monitoring & Logging Module  
-- Track system metrics (emergency count, last emergency, total readings)
-
-### Secondary Contributions:
-- Optimize rule logic  
-- Ensure clean separation between validation and classification layers  
+Primary Responsibilities
+- Design MongoDB database schema
+- Implement persistent health data storage
+- Manage monitoring and logging infrastructure
 
 ---
 
 ## 🔹 Anish Kushwaha  
-**Role:** UI & Documentation Lead  
+Role: Backend & API Systems Lead  
 
-### Primary Responsibilities:
-- Design and implement Dashboard layout (Phase 1 UI integration)  
-- Structure flow grouping and visual organization in Node-RED  
-- Maintain and update README documentation  
-- Create architecture diagrams and weekly progress reports  
-- Ensure FOSS compliance documentation  
-
-### Secondary Contributions:
-- Support logging display and visualization features  
-- Maintain repository structure and commit consistency  
+Primary Responsibilities
+- Develop backend APIs using Node.js + Express
+- Implement system communication between modules
+- Manage API endpoints for dashboard data retrieval
 
 ---
 
