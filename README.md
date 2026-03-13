@@ -293,7 +293,7 @@ Allows controlled validation of the Decision Engine and edge-case testing withou
 ### 📸 Manual Emergency Simulation
 Manual injection nodes allow testing emergency conditions instantly.
 
-![Manual Emergency Simulation](docs/images/manual-emergency-nodes.png)
+![Manual Emergency Simulation](docs/images/manual-emergency-injection.png)
 ---
 
 ## 🔹 6. Real-Time Dashboard Module
@@ -401,7 +401,7 @@ Designed with structured extensibility for database persistence and ML-based ana
 ### 📸 Daily Health Monitoring Summary
 The system tracks warning and emergency events during runtime.
 
-![Daily Health Summary](docs/images/daily-summary.png)
+![Daily Health Summary](docs/images/daily-health-summary.png)
 
 ---
 
