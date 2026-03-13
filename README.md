@@ -37,25 +37,71 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 # 🏗️ System Architecture (Phase 1)
 
 ```
-[ Vital Data Simulation Module ]
-↓
-[ Data Validation Module ]
-↓
-[ Decision Engine Module ]
-↓
-[ Monitoring & Logging Module ]
-↓
-[ Emergency Detection Module ]
-↓
-[ Real-Time Dashboard Module ]
+                ┌────────────────────────────┐
+                │ Vital Data Generation      │
+                │ (Node-RED Simulation)      │
+                │ Phase 1                    │
+                └─────────────┬──────────────┘
+                              │
+                              ▼
+                ┌────────────────────────────┐
+                │ Data Validation Module     │
+                │ Physiological Range Check  │
+                │ Phase 1                    │
+                └─────────────┬──────────────┘
+                              │
+                              ▼
+                ┌────────────────────────────┐
+                │ Decision Engine            │
+                │ Rule-Based Health Status   │
+                │ Phase 1                    │
+                └─────────────┬──────────────┘
+                              │
+                              ▼
+                ┌────────────────────────────┐
+                │ Backend API Layer          │
+                │ Node.js + Express          │
+                │ Phase 2                    │
+                └─────────────┬──────────────┘
+                              │
+                              ▼
+                ┌────────────────────────────┐
+                │ Database Layer             │
+                │ MongoDB Health Records     │
+                │ Phase 3                    │
+                └─────────────┬──────────────┘
+                              │
+                              ▼
+                ┌────────────────────────────┐
+                │ Frontend Monitoring UI     │
+                │ Web Dashboard (React)      │
+                │ Phase 4                    │
+                └─────────────┬──────────────┘
+                              │
+                              ▼
+                ┌────────────────────────────┐
+                │ AI / ML Health Analytics   │
+                │ Anomaly Detection          │
+                │ Predictive Health Scoring  │
+                │ Phase 5                    │
+                └─────────────┬──────────────┘
+                              │
+                              ▼
+                ┌────────────────────────────┐
+                │ Future IoT Hardware Layer  │
+                │ Sensors + ESP32            │
+                │ (Future Extension)         │
+                └────────────────────────────┘
 ```
 
-Architecture Characteristics:
+### Architecture Characteristics:
 
-* Event-driven system
-* Flow-based programming model
-* Modular layered design
-* Scalable for database & ML integration
+- Event-driven system
+- Flow-based processing using Node-RED
+- API-driven backend architecture
+- Modular layered design
+- Scalable for AI-based analytics
+- Designed for future IoT sensor integration
 
 
 ---
