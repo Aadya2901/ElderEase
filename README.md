@@ -300,13 +300,14 @@ It operates as a dedicated UI layer, separated from core simulation and decision
 
 ### 🖥️ Dashboard Features
 
-- Real-time SpO₂ Gauge
-- Real-time Temperature Gauge
-- Color-coded Health Status Indicator
-- Emergency Alert Display
-- Daily Health Summary Counter
-- Live Heart Rate Monitoring Chart
-- Manual Emergency Simulation Controls
+* Real-time **Heart Rate Gauge**
+* Real-time **SpO₂ Gauge**
+* Real-time **Temperature Gauge**
+* **Color-coded Health Status Indicator**
+* **Emergency Alert Display**
+* **Daily Health Summary Counter**
+* **Live Heart Rate Monitoring Chart**
+* **Manual Emergency Simulation Controls**
 
 ### 🔄 Data Flow for Dashboard
 
