@@ -1,9 +1,9 @@
-# 💖 ElderEase – Phase 1  
-## Real-Time Rule-Based Senior Health Monitoring System  
+# 💖 ElderEase – Intelligent Senior Health Monitoring System
 
-![Version](https://img.shields.io/badge/version-v1.0-blue)
-![Phase](https://img.shields.io/badge/phase-1-orange)
-![Status](https://img.shields.io/badge/status-active-success)
+![Version](https://img.shields.io/badge/version-v1.1-blue)
+![Architecture](https://img.shields.io/badge/architecture-modular-success)
+![Phase](https://img.shields.io/badge/phase-2-orange)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![FOSS](https://img.shields.io/badge/FOSS-compliant-brightgreen)
 
@@ -103,6 +103,8 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 - Scalable for AI-based analytics
 - Designed for future IoT sensor integration
 
+### 📊 System Architecture Diagram
+![System Architecture](docs/images/system-architecture.png)
 ---
 
 ## 🧩 Future IoT Hardware Integration (Proposed)
