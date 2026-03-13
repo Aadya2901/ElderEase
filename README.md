@@ -45,16 +45,18 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 ↓
 [ Monitoring & Logging Module ]
 ↓
-[ Real-Time Dashboard (Upcoming) ]
+[ Emergency Detection Module ]
+↓
+[ Real-Time Dashboard Module ]
 ```
-
 
 Architecture Characteristics:
 
-- Event-driven system
-- Flow-based programming model
-- Modular layered design
-- Scalable for database & ML integration
+* Event-driven system
+* Flow-based programming model
+* Modular layered design
+* Scalable for database & ML integration
+
 
 ---
 
@@ -298,11 +300,13 @@ It operates as a dedicated UI layer, separated from core simulation and decision
 
 ### 🖥️ Dashboard Features
 
-- Real-time Heart Rate gauge
-- Auto-updating every 5 seconds
-- Extract Heart Rate function for UI isolation
-- Modular UI configuration using dashboard tabs and groups
-- Clean separation between backend processing and frontend display
+- Real-time SpO₂ Gauge
+- Real-time Temperature Gauge
+- Color-coded Health Status Indicator
+- Emergency Alert Display
+- Daily Health Summary Counter
+- Live Heart Rate Monitoring Chart
+- Manual Emergency Simulation Controls
 
 ### 🔄 Data Flow for Dashboard
 
