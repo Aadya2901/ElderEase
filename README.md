@@ -522,17 +522,16 @@ ElderEase Phase 1 is being developed collaboratively with clearly defined module
 ✔ Implemented Extract Heart Rate UI processing layer  
 ✔ Deployed real-time heart rate gauge interface  
 
-Feature Ownership:
-- Simulation Layer – Aadya Patel  
-- Decision & Monitoring Logic – Ananya Mishra  
-- Dashboard & Documentation – Anish Kushwaha  
+### Week 2 (Completed)
 
-### Week 2 (Planned)
-
-- Refactor decision engine into dedicated module
-- Implement risk classification improvements
-- Add emergency event counter
-- Build structured logging system
+✔ Implemented multi-vital dashboard with gauges
+✔ Added SpO₂ and Temperature monitoring visualization
+✔ Implemented color-coded health status indicator
+✔ Built emergency alert detection and display system
+✔ Added daily health summary counter
+✔ Implemented manual emergency simulation controls
+✔ Integrated live heart rate monitoring chart
+✔ Refactored dashboard architecture for modular UI components
 
 ---
 
