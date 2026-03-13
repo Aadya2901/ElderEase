@@ -103,6 +103,52 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 - Scalable for AI-based analytics
 - Designed for future IoT sensor integration
 
+---
+
+## 🧩 Future IoT Hardware Integration (Proposed)
+
+Although Phase 1 uses simulated health data through Node-RED, the architecture is designed to support integration with real IoT health sensors in future phases.
+
+### Proposed Hardware Pipeline
+
+```
+          Health Sensors  
+          (MAX30102 – Heart Rate & SpO₂  
+          Temperature Sensor)
+
+                  ↓
+
+          ESP32 / NodeMCU  
+          IoT Microcontroller
+
+                  ↓
+
+          WiFi / HTTP Transmission
+
+                  ↓
+
+          Backend API Server  
+          (Node.js + Express)
+
+                  ↓
+
+          MongoDB Database
+
+                  ↓
+
+          Caregiver Monitoring Dashboard
+```
+
+### Design Objective
+
+The hardware integration layer will enable:
+
+- Real-time physiological data acquisition
+- Wireless transmission of vital health data
+- Integration with backend health analytics systems
+- Remote caregiver monitoring
+
+Hardware integration is planned as a **future system extension** and is not part of the current prototype implementation.
 
 ---
 
