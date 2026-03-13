@@ -597,33 +597,39 @@ ElderEase Phase 1 is being developed collaboratively with clearly defined module
 
 ---
 
-## 🚀 Development Roadmap
+# 🚀 Development Roadmap
 
-### Phase 1 (Current)
+### Phase 1 — Monitoring Prototype
+• Vital data simulation  
+• Data validation  
+• Decision engine  
+• Monitoring and logging  
+• Basic dashboard  
 
-- Simulation
-- Validation
-- Rule-based classification
-- Logging
-- Basic dashboard
+### Phase 2 — Backend Infrastructure
+• Node.js + Express APIs  
+• Data processing endpoints  
+• API-based system architecture  
 
-### Phase 2
+### Phase 3 — Database Integration
+• MongoDB health records  
+• Persistent monitoring data  
+• Historical health analytics  
 
-- Express backend API
-- MongoDB integration
-- Persistent health history
+### Phase 4 — Advanced Frontend
+• React-based dashboard  
+• Authentication system  
+• Role-based access control  
 
-### Phase 3
+### Phase 5 — AI/ML Intelligence
+• Anomaly detection models  
+• Predictive health risk scoring  
+• Early warning analytics  
 
-- React dashboard
-- Authentication system
-- Role-based access control
-
-### Phase 4
-
-- Machine Learning prediction
-- Anomaly detection
-- Predictive health scoring
+### Phase 6 — IoT Hardware Integration (Future)
+• Real health sensors  
+• ESP32 IoT device  
+• Remote physiological monitoring
 
 ---
 
