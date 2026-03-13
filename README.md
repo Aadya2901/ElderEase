@@ -672,6 +672,12 @@ ElderEase aims to evolve into a predictive, scalable elderly healthcare monitori
 
 ---
 
+## 🔬 Research Direction
+
+ElderEase is designed as a scalable healthcare monitoring architecture that can evolve from a simulation-based prototype into a full IoT-enabled intelligent monitoring platform integrating real sensors, backend infrastructure, and machine learning models.
+
+---
+
 ## 💬 Vision Statement
 
 Building a structured, scalable foundation for intelligent senior health monitoring — one module at a time.
