@@ -104,7 +104,7 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 - Designed for future IoT sensor integration
 
 ### 📊 System Architecture Diagram
-![System Architecture](docs/images/system-architecture.png)
+![System Architecture](docs/images/hardware-system-architecture.png)
 ---
 
 ## 🧩 Future IoT Hardware Integration (Proposed)
