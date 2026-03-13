@@ -290,6 +290,10 @@ Testing capability for controlled demo scenarios.
 
 Allows controlled validation of the Decision Engine and edge-case testing without modifying core simulation logic.
 
+### 📸 Manual Emergency Simulation
+Manual injection nodes allow testing emergency conditions instantly.
+
+![Manual Emergency Simulation](docs/images/manual-emergency-nodes.png)
 ---
 
 ## 🔹 6. Real-Time Dashboard Module
@@ -320,10 +324,14 @@ Heart Rate Gauge (UI)
 ```
 
 ### 📸 Live Dashboard Output
-
 The screenshot below demonstrates the real-time dashboard updating dynamically based on simulated vital data.
 
 ![Phase 1 Dashboard Output](docs/images/dashboard-live.png)
+
+### 📸 Vital Monitoring Dashboard
+The dashboard displays real-time vital health parameters through interactive gauges.
+
+![Dashboard Gauges](docs/images/dashboard-gauges.png)
 
 ---
 
@@ -344,6 +352,11 @@ The **Emergency Alert Module** detects abnormal health conditions classified by 
 ⚠ EMERGENCY DETECTED
 HR: 121 | SpO₂: 86 | Temp: 37.3
 ```
+
+### 📸 Emergency Alert Display
+The dashboard immediately highlights critical health events when abnormal vitals are detected.
+
+![Emergency Alert](docs/images/emergency-alert.png)
 
 ---
 
@@ -385,6 +398,11 @@ Emergencies Today: 212
 
 Designed with structured extensibility for database persistence and ML-based analytics in future phases.
 
+### 📸 Daily Health Monitoring Summary
+The system tracks warning and emergency events during runtime.
+
+![Daily Health Summary](docs/images/daily-summary.png)
+
 ---
 
 ## 🔹 9. Live Vital Monitoring Chart
@@ -402,6 +420,11 @@ A **real-time line chart** visualizes heart rate fluctuations over time.
 ```
 Heart Rate Trend Over Time
 ```
+
+### 📸 Live Heart Rate Monitoring Chart
+The chart visualizes heart rate trends over time for continuous monitoring.
+
+![Heart Rate Chart](docs/images/heart-rate-chart.png)
 
 --- 
 
