@@ -347,6 +347,25 @@ HR: 121 | SpO₂: 86 | Temp: 37.3
 
 ---
 
+## 🔹 8. Daily Health Summary Module
+
+Tracks system activity and health events during runtime.
+
+### Metrics Displayed
+
+* Total warnings detected
+* Total emergency events
+* Continuous monitoring statistics
+
+### Example Summary
+
+```
+Warnings Today: 87
+Emergencies Today: 212
+```
+
+---
+
 ## 📊 JSON Schema (Phase 1)
 
 ```json
