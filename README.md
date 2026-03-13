@@ -34,7 +34,7 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 
 ---
 
-# 🏗️ System Architecture (Phase 1)
+# 🏗️ System Architecture 
 
 ```
                 ┌────────────────────────────┐
@@ -94,6 +94,8 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
                 └────────────────────────────┘
 ```
 
+The following layered architecture illustrates both the current prototype (Phase 1) and the planned scalable system evolution across future development phases.
+
 ### Architecture Characteristics:
 
 - Event-driven system
@@ -109,6 +111,32 @@ The following diagram illustrates the complete scalable architecture of the Elde
 ![ElderEase System Architecture](docs/images/hardware-system-architecture.png)
 
 ### System Workflow
+
+## 🔄 Current Prototype Workflow (Phase 1)
+
+### 1️⃣ Vital Data Simulation
+- Node-RED generates simulated health data  
+- Includes heart rate, SpO₂, and temperature readings  
+
+### 2️⃣ Data Validation
+- Physiological range checks ensure data reliability  
+- Prevents unrealistic sensor values from entering the system  
+
+### 3️⃣ Decision Engine
+- Rule-based health classification  
+- Determines **NORMAL / WARNING / EMERGENCY** health states  
+
+### 4️⃣ Monitoring & Logging
+- Tracks system metrics and emergency events  
+- Maintains runtime monitoring statistics  
+
+### 5️⃣ Dashboard Visualization
+- Displays real-time health data using the **Node-RED dashboard**  
+- Provides live monitoring of patient vitals
+
+---
+
+## 🔄 Future IoT Workflow (Planned Extension) 
 
 1. **Health Sensors**
    - MAX30102 sensor measures heart rate and SpO₂
@@ -139,7 +167,6 @@ The following diagram illustrates the complete scalable architecture of the Elde
 The current Phase 1 prototype uses simulated health data through Node-RED.  
 The IoT hardware layer shown in the architecture diagram represents a **future system extension** and is not part of the current prototype implementation.
 
->>>>>>> 0c3414b (docs: add full healthcare system architecture diagram with IoT pipeline)
 ---
 
 ## 🧩 Future IoT Hardware Integration (Proposed)
@@ -190,20 +217,18 @@ Hardware integration is planned as a **future system extension** and is not part
 ---
 
 # 🛠️ Tech Stack
-
-| Layer | Technology | Purpose |
-|------|-------------|---------|
-| Runtime | Node.js | Runs Node-RED and backend |
-| Core Engine | Node-RED | Flow-based processing |
-| Backend | Express.js | API layer |
-| Programming | JavaScript | Logic implementation |
-| Data Format | JSON | Structured message passing |
-| Database | MongoDB (Planned Phase 3) | Persistent health data |
-| UI | Node-RED Dashboard / React (future) | Monitoring interface |
-| Version Control | Git + GitHub | Continuous commits |
-
-All tools used are open-source.
-
+```
+| Layer           |             Technology               |           Purpose                     |
+|-----------------|--------------------------------------|---------------------------------------|
+| Runtime         |             Node.js                  | Runs Node-RED and backend services    |
+| Core Engine     |               Node-RED               | Flow-based health data simulation     |
+| Backend         |         Express.js                   | API layer for system integration      |
+| Programming     |          JavaScript                  | System logic implementation           |
+| Data Format     |                  JSON                | Structured health data exchange       |
+| Database        |         MongoDB (Phase 3)            | Persistent health record storage      |
+| UI              | Node-RED Dashboard / React (Phase 4) | Monitoring interface                  |
+| Version Control |             Git + GitHub             | Project version management            |
+```
 ---
 
 ## 🔧 Node-RED Setup
