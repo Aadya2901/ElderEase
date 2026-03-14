@@ -733,4 +733,4 @@ ElderEase is designed as a scalable healthcare monitoring architecture that can 
 
 ## 💬 Final Note
 
-“Empowering women with comfort, confidence, and compassionate digital care.” 🌸
+“Because every heartbeat deserves timely care.” ❤️🌸
