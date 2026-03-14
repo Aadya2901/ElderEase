@@ -681,15 +681,18 @@ Primary Responsibilities
 
 ### Week 1 (Completed)
 
+```
 ✔ Implemented real-time vital simulation module  
 ✔ Added structured JSON payload with ISO timestamp  
 ✔ Configured 5-second automated data trigger  
 ✔ Integrated Node-RED dashboard for live visualization  
 ✔ Implemented Extract Heart Rate UI processing layer  
 ✔ Deployed real-time heart rate gauge interface  
+```
 
 ### Week 2 (Completed)
 
+```
 ✔ Implemented multi-vital dashboard with gauges
 ✔ Added SpO₂ and Temperature monitoring visualization
 ✔ Implemented color-coded health status indicator
@@ -698,6 +701,7 @@ Primary Responsibilities
 ✔ Implemented manual emergency simulation controls
 ✔ Integrated live heart rate monitoring chart
 ✔ Refactored dashboard architecture for modular UI components
+```
 
 ---
 
@@ -740,7 +744,6 @@ ElderEase is designed as a scalable healthcare monitoring architecture that can 
 
 ---
 
-## 💬 Vision Statement
+## 💬 Final Note
 
-Building a structured, scalable foundation for intelligent senior health monitoring — one module at a time.
-
+“Empowering women with comfort, confidence, and compassionate digital care.” 🌸
