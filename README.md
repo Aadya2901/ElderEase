@@ -714,24 +714,11 @@ Primary Responsibilities
 
 ---
 
-## 📜 License
+# 📜 License
 
-This project is licensed under the MIT License.
-
-MIT License
-
-Copyright (c) 2026 ElderEase
-
-Permission is hereby granted, free of charge, to any person obtaining a copy  
-of this software and associated documentation files (the "Software"), to deal  
-in the Software without restriction, including without limitation the rights  
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  
-copies of the Software...
-
-(Full MIT License text can be placed in a separate `LICENSE` file.)
+This project is licensed under the **MIT License**.
 
 ---
-
 ## 🌱 Future Vision
 
 ElderEase aims to evolve into a predictive, scalable elderly healthcare monitoring ecosystem integrating IoT, full-stack architecture, and machine learning.
