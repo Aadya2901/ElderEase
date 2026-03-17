@@ -640,6 +640,100 @@ Primary Responsibilities
 - All members contribute commits regularly following conventional commit standards.
 
 ---
+###  Phase 2 ###
+---
+
+# 🗄️ Database Architecture (MongoDB) – Phase 2
+
+Phase 2 introduces persistent data storage using MongoDB, enabling long-term tracking, analysis, and scalability of health data.
+
+---
+
+## 📌 Database Overview
+
+- Database Name: `ElderEase`
+- Collections:
+  - `alerts`
+  - `patients`
+  - `thresholds`
+   - `vitals`
+
+
+---
+
+## 🧱 Collection Design
+
+### 1. users
+Stores basic user information.
+
+```json
+{
+  "userId": "ELD001",
+  "name": "string",
+  "age": "number",
+  "gender": "string"
+}
+```
+
+---
+
+### 2. health_records
+Stores continuous health monitoring data.
+
+```json
+{
+  "userId": "ELD001",
+  "heartRate": 85,
+  "spo2": 96,
+  "temperature": 36.7,
+  "status": "NORMAL",
+  "riskLevel": 1,
+  "timestamp": "ISO Date"
+}
+```
+
+---
+
+### 3. appointments
+Stores medical appointments and reminders.
+
+```json
+{
+  "userId": "ELD001",
+  "doctorName": "string",
+  "date": "ISO Date",
+  "status": "upcoming"
+}
+```
+
+---
+
+## ⚙️ Setup Process
+
+1. Install MongoDB
+2. Open MongoDB Compass
+3. Create database: `ElderEase`
+4. Create required collections
+5. Verify document insertion
+
+---
+
+## 🔗 Integration Plan
+
+- MongoDB will connect with Express backend (Phase 2)
+- Health records will be stored in real-time
+- Logging module will transition from in-memory → database persistence
+
+---
+
+## 🎯 Benefits
+
+- Persistent health history
+- Scalable architecture
+- Enables analytics & ML (Phase 4)
+- Supports real-world deployment
+
+---
 
 # 🚀 Development Roadmap
 
