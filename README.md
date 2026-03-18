@@ -459,14 +459,19 @@ It operates as a dedicated UI layer, separated from core simulation and decision
 
 ### 🖥️ Dashboard Features
 
-* Real-time **Heart Rate Gauge**
-* Real-time **SpO₂ Gauge**
-* Real-time **Temperature Gauge**
-* **Color-coded Health Status Indicator**
-* **Emergency Alert Display**
-* **Daily Health Summary Counter**
-* **Live Heart Rate Monitoring Chart**
-* **Manual Emergency Simulation Controls**
+### 🖥️ Dashboard Features
+
+- Real-time Heart Rate Gauge  
+- Real-time SpO₂ Gauge  
+- Real-time Temperature Gauge  
+- Color-coded Health Status Indicator  
+- Health Risk Score Indicator  
+- Actionable Health Insights Panel  
+- Emergency Alert Banner  
+- Daily Health Summary Counter  
+- Live Heart Rate Monitoring Chart  
+- Vital Trend Analysis (increasing/decreasing patterns)  
+- Manual Emergency Simulation Controls  
 
 ### 🔄 Data Flow for Dashboard
 
@@ -593,6 +598,76 @@ The chart visualizes heart rate trends over time for continuous monitoring.
 | High Temp | 39 °C | EMERGENCY |
 
 Manual inject nodes validate all boundary and emergency conditions.
+
+---
+
+---
+
+## 🔹 10. Health Risk Score Module
+
+The Health Risk Score Module computes a numerical risk score based on real-time vital readings.
+
+### Functionality
+
+- Aggregates multiple vital parameters into a single score
+- Provides simplified health assessment for caregivers
+- Enhances decision-making capability
+
+### Example
+
+Risk Score: 7 / 10  
+Status: EMERGENCY  
+
+---
+
+## 🔹 11. Actionable Health Insights Module
+
+This module transforms raw health data into meaningful recommendations for caregivers.
+
+### Features
+
+- Generates real-time health insights
+- Provides recommended actions based on vitals
+- Supports early intervention and decision support
+
+### Example Insights
+
+⚠ Low Oxygen Level → Check breathing immediately  
+⚠ High Heart Rate → Ask patient to rest  
+
+---
+
+## 🔹 12. Emergency Alert Module
+
+Detects critical health conditions and displays real-time emergency alerts.
+
+### Features
+
+- Identifies EMERGENCY states from decision engine
+- Displays prominent alert banner on dashboard
+- Shows detailed vital information
+
+### Example
+
+🚨 EMERGENCY DETECTED  
+HR: 121 | SpO₂: 86 | Temp: 38.2  
+
+---
+
+## 🔹 13. Trend Analysis Module
+
+Analyzes recent vital readings to detect patterns over time.
+
+### Features
+
+- Identifies increasing or decreasing trends
+- Provides early warning signals
+- Enhances monitoring intelligence
+
+### Example
+
+📈 Heart Rate Increasing → Possible stress  
+📉 Heart Rate Decreasing → Returning to normal  
 
 ---
 
@@ -787,14 +862,18 @@ Stores medical appointments and reminders.
 ### Week 2 (Completed)
 
 ```
-✔ Implemented multi-vital dashboard with gauges
-✔ Added SpO₂ and Temperature monitoring visualization
-✔ Implemented color-coded health status indicator
-✔ Built emergency alert detection and display system
-✔ Added daily health summary counter
-✔ Implemented manual emergency simulation controls
-✔ Integrated live heart rate monitoring chart
-✔ Refactored dashboard architecture for modular UI components
+✔ Implemented multi-vital dashboard with gauges  
+✔ Added SpO₂ and Temperature monitoring visualization  
+✔ Implemented color-coded health status indicator  
+✔ Built emergency alert detection and display system  
+✔ Added daily health summary counter  
+✔ Implemented manual emergency simulation controls  
+✔ Integrated live heart rate monitoring chart  
+✔ Refactored dashboard architecture for modular UI components  
+✔ Added health risk score system  
+✔ Implemented actionable health insights panel  
+✔ Added real-time emergency alert banner  
+✔ Implemented trend analysis for vital monitoring  
 ```
 
 ---
