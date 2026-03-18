@@ -28,8 +28,8 @@
         "topic": "",
         "payload": "timestamp",
         "payloadType": "str",
-        "x": 190,
-        "y": 140,
+        "x": 470,
+        "y": 120,
         "wires": [
             [
                 "09e6dbad1fac0194"
@@ -49,8 +49,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 390,
-        "y": 780,
+        "x": 1510,
+        "y": 640,
         "wires": []
     },
     {
@@ -65,7 +65,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
+        "x": 870,
         "y": 140,
         "wires": [
             [
@@ -85,7 +85,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 390,
+        "x": 630,
         "y": 220,
         "wires": [
             [
@@ -105,11 +105,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
-        "y": 320,
+        "x": 770,
+        "y": 280,
         "wires": [
             [
-                "2392d9d421385bd9"
+                "ac16a95c0191e0ec"
             ]
         ]
     },
@@ -137,8 +137,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 90,
-        "y": 740,
+        "x": 490,
+        "y": 600,
         "wires": []
     },
     {
@@ -165,8 +165,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 330,
-        "y": 620,
+        "x": 770,
+        "y": 580,
         "wires": []
     },
     {
@@ -193,8 +193,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 1100,
-        "y": 580,
+        "x": 2140,
+        "y": 260,
         "wires": []
     },
     {
@@ -214,8 +214,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1090,
-        "y": 360,
+        "x": 1390,
+        "y": 140,
         "wires": []
     },
     {
@@ -230,8 +230,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 90,
-        "y": 580,
+        "x": 550,
+        "y": 500,
         "wires": [
             [
                 "b0dc473851a959ee"
@@ -250,8 +250,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 390,
-        "y": 540,
+        "x": 730,
+        "y": 400,
         "wires": [
             [
                 "ac580ac6afe3e5e6"
@@ -270,8 +270,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
-        "y": 480,
+        "x": 1710,
+        "y": 320,
         "wires": [
             [
                 "959fed3ad7129ddf"
@@ -290,19 +290,21 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
-        "y": 420,
+        "x": 1330,
+        "y": 360,
         "wires": [
             [
                 "7e852c3714138bd9",
-                "5a3242a67dba3d83",
                 "7dad5643652834fc",
                 "4c76d9d7ef823d87",
                 "7df617afe8ccf734",
                 "5fdc94daedcf2b46",
                 "0d60b5fee5a2743c",
                 "3b91e949f12c4034",
-                "44f78ca59e688346"
+                "44f78ca59e688346",
+                "5a3242a67dba3d83",
+                "fb27988cbb7ed9bf",
+                "05a9e02a94544865"
             ]
         ]
     },
@@ -319,8 +321,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 940,
-        "y": 420,
+        "x": 1700,
+        "y": 200,
         "wires": []
     },
     {
@@ -335,8 +337,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 790,
-        "y": 340,
+        "x": 1110,
+        "y": 200,
         "wires": [
             [
                 "383383d24e1fa553"
@@ -355,8 +357,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 810,
-        "y": 580,
+        "x": 1690,
+        "y": 420,
         "wires": [
             [
                 "307a4f16a728493e"
@@ -375,8 +377,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
-        "y": 680,
+        "x": 980,
+        "y": 500,
         "wires": [
             [
                 "69bc5425c8ed6e19"
@@ -400,8 +402,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 710,
-        "y": 780,
+        "x": 1250,
+        "y": 540,
         "wires": []
     },
     {
@@ -410,19 +412,19 @@
         "z": "6ac9e94bf2b7e02d",
         "group": "8cabe600bcc5c077",
         "order": 5,
-        "width": 0,
-        "height": 0,
+        "width": "12",
+        "height": "1",
         "name": "",
         "label": "",
-        "format": "<div style=\"text-align:center; color:red; font-size:20px; font-weight:bold;\"> {{msg.payload.alert}} {{msg.payload.alertDetails}} </div>",
+        "format": "<div style=\"     background-color: red;     color: white;     padding: 12px;     font-size: 20px;     font-weight: bold;     text-align: center;     border-radius: 8px; \"> {{msg.payload.alert}} </div>",
         "layout": "row-center",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1030,
-        "y": 720,
+        "x": 1930,
+        "y": 360,
         "wires": []
     },
     {
@@ -442,8 +444,8 @@
         "topic": "",
         "payload": "{  \"userId\": \"ELD001\",  \"deviceId\": \"SIM001\",  \"heartRate\": 130,  \"spo2\": 96,  \"temperature\": 36.8,  \"timestamp\": \"manual\",  \"systemVersion\": \"v1.0\" }",
         "payloadType": "json",
-        "x": 110,
-        "y": 280,
+        "x": 270,
+        "y": 200,
         "wires": [
             [
                 "b4007771f7285101"
@@ -468,7 +470,7 @@
         "payload": "{  \"userId\": \"ELD001\",  \"deviceId\": \"SIM001\",  \"heartRate\": 88,  \"spo2\": 82,  \"temperature\": 36.7,  \"timestamp\": \"manual\",  \"systemVersion\": \"v1.0\" }",
         "payloadType": "json",
         "x": 220,
-        "y": 360,
+        "y": 320,
         "wires": [
             [
                 "b4007771f7285101"
@@ -496,7 +498,7 @@
         "topic": "",
         "payload": "{  \"userId\": \"ELD001\",  \"deviceId\": \"SIM001\",  \"heartRate\": 95,  \"spo2\": 95,  \"temperature\": 39,  \"timestamp\": \"manual\",  \"systemVersion\": \"v1.0\" }",
         "payloadType": "json",
-        "x": 100,
+        "x": 200,
         "y": 440,
         "wires": [
             [
@@ -542,8 +544,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 990,
-        "y": 800,
+        "x": 1830,
+        "y": 640,
         "wires": [
             []
         ]
@@ -560,13 +562,95 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
-        "y": 860,
+        "x": 1640,
+        "y": 540,
         "wires": [
             [
                 "c7df023cab6250cd"
             ]
         ]
+    },
+    {
+        "id": "ac16a95c0191e0ec",
+        "type": "function",
+        "z": "6ac9e94bf2b7e02d",
+        "name": "Risk Score Module",
+        "func": "let hr = msg.payload.heartRate;\nlet spo2 = msg.payload.spo2;\nlet temp = msg.payload.temperature;\n\nlet score = 0;\n\nif (hr > 110) score += 3;\nif (spo2 < 92) score += 4;\nif (temp > 38) score += 3;\n\nmsg.payload.riskScore = score;\n\n// Risk label\nif(score <= 3) msg.payload.riskLabel = \"NORMAL\";\nelse if(score <= 6) msg.payload.riskLabel = \"WARNING\";\nelse msg.payload.riskLabel = \"EMERGENCY\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 320,
+        "wires": [
+            [
+                "2392d9d421385bd9"
+            ]
+        ]
+    },
+    {
+        "id": "fb27988cbb7ed9bf",
+        "type": "ui_text",
+        "z": "6ac9e94bf2b7e02d",
+        "group": "8cabe600bcc5c077",
+        "order": 7,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "",
+        "format": "<div style=\"font-size:24px;font-weight:bold;\"> Risk Score: {{msg.payload.riskScore}} / 10 <br> Status: {{msg.payload.riskLabel}} </div>",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1410,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "05a9e02a94544865",
+        "type": "function",
+        "z": "6ac9e94bf2b7e02d",
+        "name": "Health Insights Generator",
+        "func": "let hr = msg.payload.heartRate;\nlet spo2 = msg.payload.spo2;\nlet temp = msg.payload.temperature;\n\nlet insights = [];\n\n// 🔴 Critical conditions\nif (spo2 < 90) {\n    insights.push(\"⚠ Low Oxygen Level → Check breathing immediately\");\n}\n\nif (hr > 110) {\n    insights.push(\"⚠ High Heart Rate → Ask patient to rest\");\n}\n\nif (temp > 38) {\n    insights.push(\"⚠ Fever Detected → Monitor temperature\");\n}\n\n// 🟡 Mild conditions\nif (hr >= 95 && hr <= 110) {\n    insights.push(\"⚠ Slightly Elevated HR → Possible stress/fatigue\");\n}\n\nif (spo2 >= 90 && spo2 < 94) {\n    insights.push(\"⚠ Oxygen slightly low → Monitor closely\");\n}\n\n// 🟢 Normal\nif (insights.length === 0) {\n    insights.push(\"✅ Patient Stable\");\n}\n\nmsg.payload.insights = insights.join(\"<br><br>\");\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1690,
+        "y": 100,
+        "wires": [
+            [
+                "2706f8c61fb5c170"
+            ]
+        ]
+    },
+    {
+        "id": "2706f8c61fb5c170",
+        "type": "ui_text",
+        "z": "6ac9e94bf2b7e02d",
+        "group": "8cabe600bcc5c077",
+        "order": 8,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "",
+        "format": "<div style=\"font-size:16px; text-align:left;\"> {{msg.payload.insights}} </div>",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1950,
+        "y": 80,
+        "wires": []
     },
     {
         "id": "8cabe600bcc5c077",
@@ -588,7 +672,7 @@
         "hidden": false
     },
     {
-        "id": "5e9c55274b9ac094",
+        "id": "072f97644d264cc4",
         "type": "global-config",
         "env": [],
         "modules": {
