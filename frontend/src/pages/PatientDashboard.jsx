@@ -4,6 +4,7 @@ import RiskScore from "../components/RiskScore";
 import InsightsPanel from "../components/InsightsPanel";
 import HealthSummary from "../components/HealthSummary";
 import AlertBanner from "../components/AlertBanner";
+import HeartRateChart from "../components/HeartRateChart";
 
 export default function PatientDashboard() {
 
@@ -70,6 +71,9 @@ export default function PatientDashboard() {
 
       {/* Insights Section */}
       <InsightsPanel insights={generateInsights()} />
+      
+      {/* Charts Section */}
+      {/* <HeartRateChart /> */}
     </div>
   );
 }
