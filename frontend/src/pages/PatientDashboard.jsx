@@ -43,27 +43,41 @@ export default function PatientDashboard() {
     const healthScore = 100 - riskScore * 10;
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ 
+      padding: "20px",
+      background: "#f3f4f6",
+      minHeight: "100vh"
+    }}>
       
       <AlertBanner status={status} />
 
-      <h1>Patient Dashboard</h1>
+      <h1 style={{ marginBottom: "20px" }}>
+        ElderEase Dashboard
+      </h1>
 
       {/* Summary Section */}
-      <HealthSummary 
-        score={healthScore} 
-        warnings={warnings} 
-        emergencies={emergencies} 
-      />
+      <div style={{ marginTop: "20px" }}>
+        <HealthSummary score={healthScore} warnings={warnings} emergencies={emergencies} />
+      </div>
 
       {/* Top Section */}
-      <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
+      <div style={{ 
+          display: "flex", 
+          gap: "15px", 
+          alignItems: "center",
+          marginTop: "20px"
+      }}>
         <StatusBadge status={status} />
         <RiskScore score={riskScore} />
       </div>
 
       {/* Cards Section */}
-      <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+      <div style={{ 
+        display: "flex", 
+        gap: "20px", 
+        marginTop: "20px",
+        flexWrap: "wrap"
+      }}>
         <VitalCard title="Heart Rate" value={heartRate} unit="bpm" />
         <VitalCard title="SpO2" value={spo2} unit="%" />
         <VitalCard title="Temperature" value={temperature} unit="°C" />
@@ -73,7 +87,11 @@ export default function PatientDashboard() {
       <InsightsPanel insights={generateInsights()} />
       
       {/* Charts Section */}
-      {/* <HeartRateChart /> */}
+      <div style={{ marginTop: "20px" }}>
+        <HeartRateChart />
+      </div>
     </div>
+
+    
   );
 }
