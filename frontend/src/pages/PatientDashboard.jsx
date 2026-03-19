@@ -2,6 +2,7 @@ import VitalCard from "../components/VitalCard";
 import StatusBadge from "../components/StatusBadge";
 import RiskScore from "../components/RiskScore";
 import InsightsPanel from "../components/InsightsPanel";
+import HealthSummary from "../components/HealthSummary";
 
 export default function PatientDashboard() {
 
@@ -15,6 +16,9 @@ export default function PatientDashboard() {
   return (
     <div style={{ padding: "20px" }}>
       <h1>Patient Dashboard</h1>
+
+      {/* Summary Section */}
+      <HealthSummary score={67} warnings={2} emergencies={0} />
 
       {/* Top Section */}
       <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
