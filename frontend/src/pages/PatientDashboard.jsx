@@ -3,6 +3,7 @@ import StatusBadge from "../components/StatusBadge";
 import RiskScore from "../components/RiskScore";
 import InsightsPanel from "../components/InsightsPanel";
 import HealthSummary from "../components/HealthSummary";
+import AlertBanner from "../components/AlertBanner";
 
 export default function PatientDashboard() {
 
@@ -15,6 +16,9 @@ export default function PatientDashboard() {
 
   return (
     <div style={{ padding: "20px" }}>
+      
+      <AlertBanner status="EMERGENCY" />
+
       <h1>Patient Dashboard</h1>
 
       {/* Summary Section */}
