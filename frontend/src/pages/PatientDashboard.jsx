@@ -403,13 +403,16 @@ export default function PatientDashboard() {
 
             {insights.map((msg, i) => (
               <div key={i} style={{
-                marginTop: "10px",
-                padding: "12px",
-                borderRadius: "10px",
-                background:
-                  msg.includes("⚠") ? "#fef3c7" :
-                  msg.includes("🚨") ? "#fee2e2" :
-                  "#dcfce7"
+                marginTop: "12px",
+                padding: "14px",
+                borderRadius: "12px",
+                borderLeft: msg.includes("🚨")
+                  ? "5px solid #ef4444"
+                  : msg.includes("⚠")
+                  ? "5px solid #f59e0b"
+                  : "5px solid #10b981",
+                background: "#f9fafb",
+                fontWeight: "500"
               }}>
                 {msg}
               </div>
