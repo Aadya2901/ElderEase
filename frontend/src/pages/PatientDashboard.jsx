@@ -163,7 +163,7 @@ export default function PatientDashboard() {
         {/* 📈 CHART SECTION */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
+          gridTemplateColumns: "repeat(3, 1fr)",
           gap: "20px",
           marginTop: "20px"
         }}>
