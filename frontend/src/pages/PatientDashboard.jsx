@@ -55,10 +55,11 @@ export default function PatientDashboard() {
 
   const card = {
     background: "#ffffff",
-    padding: "20px",
+    padding: "16px",
     borderRadius: "16px",
-    boxShadow: "0 6px 20px rgba(0,0,0,0.08)"
-};
+    boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
+    height: "260px"
+  };
 
   return (
     <div style={{ 
