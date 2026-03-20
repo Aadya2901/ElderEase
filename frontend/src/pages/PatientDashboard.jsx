@@ -202,7 +202,14 @@ export default function PatientDashboard() {
           <h2 style={{ marginTop: "8px" }}>{riskScore}/10</h2>
         </div>
 
-        <div style={{ ...card, padding: "12px" }}>
+        <div style={{
+          ...card,
+          padding: "12px",
+          border:
+            status === "EMERGENCY" ? "2px solid #ef4444" :
+            status === "WARNING" ? "2px solid #f59e0b" :
+            "2px solid #10b981"
+        }}>
           <h4>Status</h4>
           <h2 style={{ marginTop: "8px" }}>{status}</h2>
         </div>
