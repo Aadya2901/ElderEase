@@ -11,7 +11,6 @@ import {
   XAxis, YAxis,
   Tooltip
 } from "recharts";
-import { useEffect, useState, useRef } from "react";
 
 export default function PatientDashboard() {
   const [data, setData] = useState({
