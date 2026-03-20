@@ -174,20 +174,93 @@ export default function PatientDashboard() {
           marginTop: "20px"
         }}>
 
-          <div style={{ ...card, padding: "12px" }}>
-              <h3 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "10px" }}>
+          {/* ❤️ HEART RATE */}
+          <div style={{ ...card, padding: "16px" }}>
+            <div style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "16px"
+            }}>
+              <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
                 Heart Rate
               </h3>
+
+              <div style={{ display: "flex", gap: "10px" }}>
+                <span style={{
+                  background: "#10b981",
+                  color: "white",
+                  padding: "5px 12px",
+                  borderRadius: "999px",
+                  fontSize: "12px"
+                }}>
+                  24 Hours
+                </span>
+                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Weekly</span>
+                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Monthly</span>
+              </div>
+            </div>
+
             <HeartRateChart data={history} dataKey="heartRate" color="#ef4444" />
           </div>
 
-          <div style={{ ...card, padding: "12px" }}>
-            <h3>SpO2</h3>
+          {/* 🔵 SpO2 */}
+          <div style={{ ...card, padding: "16px" }}>
+            <div style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "16px"
+            }}>
+              <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
+                SpO2
+              </h3>
+
+              <div style={{ display: "flex", gap: "10px" }}>
+                <span style={{
+                  background: "#10b981",
+                  color: "white",
+                  padding: "5px 12px",
+                  borderRadius: "999px",
+                  fontSize: "12px"
+                }}>
+                  24 Hours
+                </span>
+                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Weekly</span>
+                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Monthly</span>
+              </div>
+            </div>
+
             <HeartRateChart data={history} dataKey="spo2" color="#3b82f6" />
           </div>
 
-          <div style={{ ...card, padding: "12px" }}>
-            <h3>Temperature</h3>
+          {/* 🟡 TEMPERATURE */}
+          <div style={{ ...card, padding: "16px" }}>
+            <div style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "16px"
+            }}>
+              <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
+                Temperature
+              </h3>
+
+              <div style={{ display: "flex", gap: "10px" }}>
+                <span style={{
+                  background: "#10b981",
+                  color: "white",
+                  padding: "5px 12px",
+                  borderRadius: "999px",
+                  fontSize: "12px"
+                }}>
+                  24 Hours
+                </span>
+                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Weekly</span>
+                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Monthly</span>
+              </div>
+            </div>
+
             <HeartRateChart data={history} dataKey="temperature" color="#f59e0b" />
           </div>
 
