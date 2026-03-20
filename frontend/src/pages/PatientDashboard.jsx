@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import VitalCard from "../components/VitalCard";
 import StatusBadge from "../components/StatusBadge";
 import RiskScore from "../components/RiskScore";
