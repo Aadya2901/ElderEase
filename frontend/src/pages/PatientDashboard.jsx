@@ -20,6 +20,8 @@ export default function PatientDashboard() {
 
   const [history, setHistory] = useState([]);
 
+  const [showSettings, setShowSettings] = useState(false);
+
   // 🔥 LIVE SIMULATION
   const hours = ["00:00","04:00","08:00","12:00","16:00","20:00"];
   const indexRef = useRef(0);
@@ -83,15 +85,18 @@ export default function PatientDashboard() {
         <h2 style={{ fontWeight: "700" }}>ElderEase</h2>
         
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          <button style={{
+          <button
+  onClick={() => setShowSettings(!showSettings)}
+  style={{
             padding: "6px 12px",
             borderRadius: "8px",
             border: "none",
             background: "#e5e7eb",
             cursor: "pointer"
-          }}>
-            ⚙ Custom Thresholds
-          </button>
+          }}
+        >
+          ⚙ Custom Thresholds
+        </button>
 
           <span style={{
             background: "#f59e0b",
@@ -104,6 +109,20 @@ export default function PatientDashboard() {
         </div>
 
       </div>
+
+      {showSettings && (
+        <div style={{
+          ...card,
+          marginTop: "20px",
+          marginBottom: "10px"
+        }}>
+          <h3>Custom Thresholds</h3>
+
+          <p>Heart Rate Max: 110 bpm</p>
+          <p>SpO2 Min: 92%</p>
+          <p>Temperature Max: 38°C</p>
+        </div>
+      )}
 
       <div style={{ padding: "20px" }}>
 
