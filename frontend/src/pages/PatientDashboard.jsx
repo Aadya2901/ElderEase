@@ -23,14 +23,16 @@ export default function PatientDashboard() {
   const [showSettings, setShowSettings] = useState(false);
 
   // 🔥 LIVE SIMULATION
-  const hours = ["00:00","04:00","08:00","12:00","16:00","20:00"];
   const indexRef = useRef(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
 
       const newData = {
-        time: hours[indexRef.current],
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit"
+        }),
         heartRate: Math.floor(70 + Math.random() * 50),
         spo2: Math.floor(88 + Math.random() * 10),
         temperature: parseFloat((36 + Math.random() * 2).toFixed(1))
@@ -243,6 +245,7 @@ export default function PatientDashboard() {
         </div>
 
       </div>
+
         {/* 🧠 STATUS + AI */}
         <div style={{
           ...card,
