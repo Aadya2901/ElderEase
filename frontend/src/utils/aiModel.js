@@ -31,6 +31,20 @@ export function generateInsights(hr, spo2, temp) {
     insights.push("✅ All vitals are within normal range. Patient stable.");
   }
 
+  // 🧠 TREND ANALYSIS 
+  if (history.length >= 3) {
+    const last = history[history.length - 1];
+    const prev = history[history.length - 2];
+
+    if (last.spo2 < prev.spo2) {
+      insights.push("📉 Oxygen levels showing downward trend over time.");
+    }
+
+    if (last.heartRate > prev.heartRate) {
+      insights.push("📈 Heart rate increasing steadily.");
+    }
+  }
+
   return insights;
 }
 
