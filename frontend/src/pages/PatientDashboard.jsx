@@ -170,7 +170,9 @@ export default function PatientDashboard() {
         }}>
 
           <div style={card}>
-            <h3>Heart Rate</h3>
+              <h3 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "10px" }}>
+                Heart Rate
+              </h3>
             <HeartRateChart data={history} dataKey="heartRate" color="#ef4444" />
           </div>
 
