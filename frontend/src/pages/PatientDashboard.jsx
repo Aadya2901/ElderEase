@@ -65,7 +65,8 @@ export default function PatientDashboard() {
     background: "#ffffff",
     padding: "16px",
     borderRadius: "16px",
-    boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+    transition: "0.2s ease"
   };
 
   const [thresholds, setThresholds] = useState({
