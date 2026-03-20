@@ -86,14 +86,14 @@ export default function PatientDashboard() {
         
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
           <button
-  onClick={() => setShowSettings(!showSettings)}
-  style={{
-            padding: "6px 12px",
-            borderRadius: "8px",
-            border: "none",
-            background: "#e5e7eb",
-            cursor: "pointer"
-          }}
+            onClick={() => setShowSettings(!showSettings)}
+            style={{
+              padding: "6px 12px",
+              borderRadius: "8px",
+              border: "none",
+              background: "#e5e7eb",
+              cursor: "pointer"
+            }}
         >
           ⚙ Custom Thresholds
         </button>
@@ -120,9 +120,54 @@ export default function PatientDashboard() {
         }}>
           <h3>Custom Thresholds</h3>
 
-          <p>Heart Rate Max: 110 bpm</p>
-          <p>SpO2 Min: 92%</p>
-          <p>Temperature Max: 38°C</p>
+          {/* ❤️ Heart Rate */}
+          <div style={{ marginTop: "10px" }}>
+            <label>Heart Rate Max</label>
+            <input
+              type="number"
+              defaultValue={110}
+              style={{
+                width: "100%",
+                padding: "6px",
+                marginTop: "4px",
+                borderRadius: "6px",
+                border: "1px solid #e5e7eb"
+              }}
+            />
+          </div>
+
+          {/* 🔵 SpO2 */}
+          <div style={{ marginTop: "10px" }}>
+            <label>SpO2 Min</label>
+            <input
+              type="number"
+              defaultValue={92}
+              style={{
+                width: "100%",
+                padding: "6px",
+                marginTop: "4px",
+                borderRadius: "6px",
+                border: "1px solid #e5e7eb"
+              }}
+            />
+          </div>
+
+          {/* 🟡 Temperature */}
+          <div style={{ marginTop: "10px" }}>
+            <label>Temperature Max</label>
+            <input
+              type="number"
+              defaultValue={38}
+              style={{
+                width: "100%",
+                padding: "6px",
+                marginTop: "4px",
+                borderRadius: "6px",
+                border: "1px solid #e5e7eb"
+              }}
+            />
+          </div>
+
         </div>
       )}
 
