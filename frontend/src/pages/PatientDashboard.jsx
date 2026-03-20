@@ -4,8 +4,15 @@ import StatusBadge from "../components/StatusBadge";
 import RiskScore from "../components/RiskScore";
 import AlertBanner from "../components/AlertBanner";
 import HeartRateChart from "../components/HeartRateChart";
-
 import { predictRisk, generateInsights, getRiskLevel } from "../utils/aiModel";
+
+import {
+  LineChart, Line,
+  BarChart, Bar,
+  XAxis, YAxis,
+  CartesianGrid,
+  Tooltip
+} from "recharts";
 
 export default function PatientDashboard() {
   const [data, setData] = useState({
@@ -173,6 +180,21 @@ export default function PatientDashboard() {
             <HeartRateChart data={history} />
           </div>
 
+        </div>
+
+        {/* 📊 VITALS DISTRIBUTION */}
+        <div style={{ ...card, marginTop: "20px" }}>
+          <h3>Vitals Distribution</h3>
+
+          <BarChart width={600} height={250} data={history}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="heartRate" />
+            <YAxis />
+            <Tooltip />
+
+            <Bar dataKey="heartRate" fill="#ef4444" />
+            <Bar dataKey="spo2" fill="#3b82f6" />
+          </BarChart>
         </div>
 
                 {/* 💡 INSIGHTS */}
