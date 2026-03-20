@@ -79,7 +79,13 @@ export default function PatientDashboard() {
         <AlertBanner status={status} />
 
         {/* 🏥 TITLE */}
-        <h1 style={{ marginTop: "20px" }}>My Health Dashboard</h1>
+        <h1 style={{
+          marginTop: "20px",
+          fontSize: "28px",
+          fontWeight: "700"
+        }}>
+          My Health Dashboard
+        </h1>
 
         {/* 📊 HEALTH SUMMARY */}
         <div style={{ ...card, marginTop: "20px" }}>
@@ -112,13 +118,14 @@ export default function PatientDashboard() {
           </div>
         </div>
 
-        </div>
-
         {/* ❤️ VITALS */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))"
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+          gap: "20px",
+          marginTop: "20px"
         }}>
+          
           <VitalCard title="Heart Rate" value={heartRate} unit="bpm" />
           <VitalCard title="SpO2" value={spo2} unit="%" />
           <VitalCard title="Temperature" value={temperature} unit="°C" />
