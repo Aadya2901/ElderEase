@@ -50,7 +50,7 @@ export default function PatientDashboard() {
   // 🧠 AI LOGIC
   const riskScore = predictRisk(heartRate, spo2, temperature);
   const riskLevel = getRiskLevel(riskScore);
-  const insights = generateInsights(heartRate, spo2, temperature);
+  const insights = generateInsights(heartRate, spo2, temperature, history);
 
   const status =
     riskLevel === "HIGH"
@@ -125,7 +125,7 @@ export default function PatientDashboard() {
           <p>Temperature Max: 38°C</p>
         </div>
       )}
-      
+
         {/* 🚨 ALERT */}
         <AlertBanner status={status} />
 
