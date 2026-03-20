@@ -259,12 +259,12 @@ export default function PatientDashboard() {
         }}>
 
           {/* ❤️ HEART RATE */}
-          <div style={{ ...card, padding: "16px" }}>
+          <div style={{ ...card, padding: "14px" }}>
             <div style={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "16px"
+              marginBottom: "12px"
             }}>
               <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
                 Heart Rate
@@ -289,12 +289,12 @@ export default function PatientDashboard() {
           </div>
 
           {/* 🔵 SpO2 */}
-          <div style={{ ...card, padding: "16px" }}>
+          <div style={{ ...card, padding: "14px" }}>
             <div style={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "16px"
+              marginBottom: "12px"
             }}>
               <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
                 SpO2
@@ -319,12 +319,12 @@ export default function PatientDashboard() {
           </div>
 
           {/* 🟡 TEMPERATURE */}
-          <div style={{ ...card, padding: "16px" }}>
+          <div style={{ ...card, padding: "14px" }}>
             <div style={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "16px"
+              marginBottom: "12px"
             }}>
               <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
                 Temperature
