@@ -81,7 +81,28 @@ export default function PatientDashboard() {
         boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
       }}>
         <h2 style={{ fontWeight: "700" }}>ElderEase</h2>
-        <p style={{ color: "gray" }}>Patient Dashboard</p>
+        
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <button style={{
+            padding: "6px 12px",
+            borderRadius: "8px",
+            border: "none",
+            background: "#e5e7eb",
+            cursor: "pointer"
+          }}>
+            ⚙ Custom Thresholds
+          </button>
+
+          <span style={{
+            background: "#f59e0b",
+            padding: "4px 10px",
+            borderRadius: "10px",
+            fontSize: "12px"
+          }}>
+            Warning
+          </span>
+        </div>
+
       </div>
 
       <div style={{ padding: "20px" }}>
