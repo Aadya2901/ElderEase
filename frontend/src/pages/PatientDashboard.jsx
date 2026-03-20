@@ -400,7 +400,7 @@ export default function PatientDashboard() {
 
           {/* 💡 AI INSIGHTS */}
           <div style={card}>
-            <h3>AI Insights</h3>
+            <h3>Insights</h3>
 
             {insights.map((msg, i) => (
               <div key={i} style={{
