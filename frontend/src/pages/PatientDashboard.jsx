@@ -5,7 +5,6 @@ import RiskScore from "../components/RiskScore";
 import AlertBanner from "../components/AlertBanner";
 import HeartRateChart from "../components/HeartRateChart";
 import { predictRisk, generateInsights, getRiskLevel } from "../utils/aiModel";
-import { ResponsiveContainer } from "recharts";
 import {
   LineChart, Line,
   XAxis, YAxis,
