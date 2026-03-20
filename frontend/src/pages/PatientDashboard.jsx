@@ -168,19 +168,19 @@ export default function PatientDashboard() {
           marginTop: "20px"
         }}>
 
-          <div style={card}>
+          <div style={{ ...card, padding: "12px" }}>
               <h3 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "10px" }}>
                 Heart Rate
               </h3>
             <HeartRateChart data={history} dataKey="heartRate" color="#ef4444" />
           </div>
 
-          <div style={card}>
+          <div style={{ ...card, padding: "12px" }}>
             <h3>SpO2</h3>
             <HeartRateChart data={history} dataKey="spo2" color="#3b82f6" />
           </div>
 
-          <div style={card}>
+          <div style={{ ...card, padding: "12px" }}>
             <h3>Temperature</h3>
             <HeartRateChart data={history} dataKey="temperature" color="#f59e0b" />
           </div>
