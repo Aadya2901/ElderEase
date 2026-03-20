@@ -25,9 +25,10 @@ export default function PatientDashboard() {
   useEffect(() => {
     const interval = setInterval(() => {
       const newData = {
+        time: new Date().toLocaleTimeString().slice(0,5), 
         heartRate: Math.floor(70 + Math.random() * 50),
         spo2: Math.floor(88 + Math.random() * 10),
-        temperature: (36 + Math.random() * 2).toFixed(1)
+        temperature: parseFloat((36 + Math.random() * 2).toFixed(1))
       };
 
       setData(newData);
