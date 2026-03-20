@@ -47,8 +47,19 @@ export default function PatientDashboard() {
       ? "WARNING"
       : "NORMAL";
 
+  const card = {
+    background: "#ffffff",
+    padding: "20px",
+    borderRadius: "16px",
+    boxShadow: "0 6px 20px rgba(0,0,0,0.08)"
+};
+
   return (
-    <div style={{ background: "#f9fafb", minHeight: "100vh" }}>
+    <div style={{ 
+      padding: "30px",
+      background: "#f3f4f6",
+      minHeight: "100vh"
+    }}>
       
       {/* 🔷 NAVBAR */}
       <div style={{
