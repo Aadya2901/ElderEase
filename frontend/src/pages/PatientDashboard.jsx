@@ -18,21 +18,25 @@ export default function PatientDashboard() {
     temperature: 36.8
   });
 
+  const [thresholds, setThresholds] = useState({
+    heartRate: 110,
+    spo2: 92,
+    temperature: 38
+  });
+
   const [history, setHistory] = useState([]);
 
   const [showSettings, setShowSettings] = useState(false);
 
   // 🔥 LIVE SIMULATION
+  const hours = ["00:00","04:00","08:00","12:00","16:00","20:00"];
   const indexRef = useRef(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
 
       const newData = {
-        time: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit"
-        }),
+        time: hours[indexRef.current], // ✅ stable labels
         heartRate: Math.floor(70 + Math.random() * 50),
         spo2: Math.floor(88 + Math.random() * 10),
         temperature: parseFloat((36 + Math.random() * 2).toFixed(1))
@@ -42,6 +46,7 @@ export default function PatientDashboard() {
 
       setData(newData);
       setHistory(prev => [...prev.slice(-9), newData]);
+
     }, 3000);
 
     return () => clearInterval(interval);
@@ -50,9 +55,22 @@ export default function PatientDashboard() {
   const { heartRate, spo2, temperature } = data;
 
   // 🧠 AI LOGIC
-  const riskScore = predictRisk(heartRate, spo2, temperature);
+  const riskScore = predictRisk(
+    heartRate,
+    spo2,
+    temperature,
+    thresholds
+  );
+
   const riskLevel = getRiskLevel(riskScore);
-  const insights = generateInsights(heartRate, spo2, temperature, history);
+
+  const insights = generateInsights(
+    heartRate, 
+    spo2, 
+    temperature, 
+    history,
+    thresholds
+  );
 
   const status =
     riskLevel === "HIGH"
@@ -63,17 +81,13 @@ export default function PatientDashboard() {
 
   const card = {
     background: "#ffffff",
-    padding: "16px",
-    borderRadius: "16px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-    transition: "0.2s ease"
+    padding: "18px",
+    borderRadius: "14px",
+    border: "1px solid #f1f5f9",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+    transition: "all 0.2s ease",
+    cursor: "pointer"
   };
-
-  const [thresholds, setThresholds] = useState({
-    heartRate: 110,
-    spo2: 92,
-    temperature: 38
-  });
 
   return (
     <div style={{ 
@@ -216,12 +230,20 @@ export default function PatientDashboard() {
         marginTop: "20px"
       }}>
 
-        <div style={{ ...card, padding: "12px" }}>
+        <div
+          style={{ ...card, padding: "12px" }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-4px)"}
+          onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0px)"}
+        >
           <h4>Health Score</h4>
           <h2 style={{ marginTop: "8px" }}>{100 - riskScore * 5}</h2>
         </div>
 
-        <div style={{ ...card, padding: "12px" }}>
+        <div
+          style={{ ...card, padding: "12px" }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-4px)"}
+          onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0px)"}
+        >
           <h4>Risk Score</h4>
           <h2 style={{ marginTop: "8px" }}>{riskScore}/10</h2>
         </div>
@@ -238,7 +260,11 @@ export default function PatientDashboard() {
           <h2 style={{ marginTop: "8px" }}>{status}</h2>
         </div>
 
-        <div style={{ ...card, padding: "12px" }}>
+        <div
+          style={{ ...card, padding: "12px" }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-4px)"}
+          onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0px)"}
+        >
           <h4>Alerts</h4>
           <h2 style={{ marginTop: "8px" }}>
             {riskLevel === "HIGH" ? 1 : 0}
@@ -246,27 +272,6 @@ export default function PatientDashboard() {
         </div>
 
       </div>
-
-        {/* 🧠 STATUS + AI */}
-        <div style={{
-          ...card,
-          marginTop: "20px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}>
-          <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
-            <StatusBadge status={status} />
-          </div>
-
-          <div style={{ textAlign: "right" }}>
-            <p style={{ fontWeight: "600" }}>AI Risk</p>
-            <p>{riskLevel}</p>
-            <p style={{ fontSize: "12px", color: "gray" }}>
-              {riskScore * 10}% probability
-            </p>
-          </div>
-        </div>
 
         {/* ❤️ VITALS */}
         <div style={{
@@ -384,40 +389,58 @@ export default function PatientDashboard() {
         {/* 🧠 BOTTOM SECTION */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "2fr 1fr",
+          gridTemplateColumns: "1fr",
           gap: "20px",
           marginTop: "20px"
         }}>
 
-          {/* 📋 RECENT ACTIVITY */}
-          <div style={card}>
-            <h3>Recent Activity</h3>
-
-            <p>Heart rate fluctuating</p>
-            <p>SpO2 slightly low</p>
-            <p>Temperature stable</p>
-          </div>
-
           {/* 💡 AI INSIGHTS */}
           <div style={card}>
-            <h3>Insights</h3>
+            <h3 style={{ marginBottom: "10px" }}>AI Insights</h3>
 
-            {insights.map((msg, i) => (
-              <div key={i} style={{
-                marginTop: "12px",
-                padding: "14px",
-                borderRadius: "12px",
-                borderLeft: msg.includes("🚨")
-                  ? "5px solid #ef4444"
-                  : msg.includes("⚠")
-                  ? "5px solid #f59e0b"
-                  : "5px solid #10b981",
-                background: "#f9fafb",
-                fontWeight: "500"
-              }}>
-                {msg}
-              </div>
-            ))}
+            {insights.map((msg, i) => {
+              const isDanger = msg.includes("🚨");
+              const isWarning = msg.includes("⚠");
+
+              return (
+                <div
+                  key={i}
+                  style={{
+                    marginTop: "10px",
+                    padding: "12px 14px",
+                    borderRadius: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+
+                    background:
+                      isDanger ? "#fff1f2" :
+                      isWarning ? "#fffbeb" :
+                      "#f0fdf4",
+
+                    color:
+                      isDanger ? "#991b1b" :
+                      isWarning ? "#92400e" :
+                      "#065f46",
+
+                    border:
+                      isDanger
+                        ? "1px solid #fecaca"
+                        : isWarning
+                        ? "1px solid #fde68a"
+                        : "1px solid #a7f3d0",
+                  }}
+                >
+                  <span style={{ fontSize: "18px" }}>
+                    {isDanger ? "🚨" : isWarning ? "⚠" : "✅"}
+                  </span>
+
+                  <span style={{ fontWeight: "500" }}>
+                    {msg.replace(/[🚨⚠📉📈✅]/g, "")}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
         </div>
