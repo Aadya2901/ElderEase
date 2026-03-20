@@ -8,9 +8,7 @@ import { predictRisk, generateInsights, getRiskLevel } from "../utils/aiModel";
 
 import {
   LineChart, Line,
-  BarChart, Bar,
   XAxis, YAxis,
-  CartesianGrid,
   Tooltip
 } from "recharts";
 
@@ -186,21 +184,6 @@ export default function PatientDashboard() {
             <HeartRateChart data={history} dataKey="temperature" color="#f59e0b" />
           </div>
 
-        </div>
-
-        {/* 📊 VITALS DISTRIBUTION */}
-        <div style={{ ...card, marginTop: "20px" }}>
-          <h3>Vitals Distribution</h3>
-
-          <BarChart width={600} height={250} data={history}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="heartRate" />
-            <YAxis />
-            <Tooltip />
-
-            <Bar dataKey="heartRate" fill="#ef4444" />
-            <Bar dataKey="spo2" fill="#3b82f6" />
-          </BarChart>
         </div>
 
         {/* 🧠 BOTTOM SECTION */}
