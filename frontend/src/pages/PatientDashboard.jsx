@@ -66,6 +66,12 @@ export default function PatientDashboard() {
     boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
   };
 
+  const [thresholds, setThresholds] = useState({
+    heartRate: 110,
+    spo2: 92,
+    temperature: 38
+  });
+
   return (
     <div style={{ 
       padding: "30px",
@@ -125,7 +131,12 @@ export default function PatientDashboard() {
             <label>Heart Rate Max</label>
             <input
               type="number"
-              defaultValue={110}
+              min={60}
+              max={200}
+              value={thresholds.heartRate}
+              onChange={(e) =>
+                setThresholds({ ...thresholds, heartRate: Number(e.target.value) })
+              }
               style={{
                 width: "100%",
                 padding: "6px",
@@ -141,7 +152,12 @@ export default function PatientDashboard() {
             <label>SpO2 Min</label>
             <input
               type="number"
-              defaultValue={92}
+              min={80}
+              max={100}
+              value={thresholds.spo2}
+              onChange={(e) =>
+                setThresholds({ ...thresholds, spo2: Number(e.target.value) })
+              }
               style={{
                 width: "100%",
                 padding: "6px",
@@ -157,7 +173,12 @@ export default function PatientDashboard() {
             <label>Temperature Max</label>
             <input
               type="number"
-              defaultValue={38}
+              min={34}
+              max={42}
+              value={thresholds.temperature}
+              onChange={(e) =>
+                setThresholds({ ...thresholds, temperature: Number(e.target.value) })
+              }
               style={{
                 width: "100%",
                 padding: "6px",
@@ -232,7 +253,6 @@ export default function PatientDashboard() {
         }}>
           <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
             <StatusBadge status={status} />
-            <RiskScore score={riskScore} />
           </div>
 
           <div style={{ textAlign: "right" }}>
