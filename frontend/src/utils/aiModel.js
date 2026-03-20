@@ -9,16 +9,29 @@ export function predictRisk(hr, spo2, temp) {
 }
 
 export function generateInsights(hr, spo2, temp) {
-  let messages = [];
+  const insights = [];
 
-  if (hr > 110) messages.push("⚠ High heart rate detected");
-  if (spo2 < 94) messages.push("⚠ Low oxygen level");
-  if (temp > 38) messages.push("⚠ Fever detected");
+  if (spo2 < 94) {
+    insights.push("⚠ Oxygen levels dropping. Risk of hypoxia if trend continues.");
+  }
 
-  if (messages.length === 0)
-    return ["✅ Patient is stable"];
+  if (hr > 100 && temp > 37.5) {
+    insights.push("🚨 Elevated heart rate + temperature suggests possible infection.");
+  }
 
-  return messages;
+  if (hr < 60) {
+    insights.push("⚠ Low heart rate detected. Monitor for dizziness or fatigue.");
+  }
+
+  if (temp > 38) {
+    insights.push("🚨 High fever detected. Immediate attention recommended.");
+  }
+
+  if (spo2 >= 95 && hr >= 60 && hr <= 100 && temp < 37.5) {
+    insights.push("✅ All vitals are within normal range. Patient stable.");
+  }
+
+  return insights;
 }
 
 export function getRiskLevel(score) {
