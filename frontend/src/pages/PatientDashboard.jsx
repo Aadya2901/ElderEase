@@ -11,6 +11,7 @@ import {
   XAxis, YAxis,
   Tooltip
 } from "recharts";
+import { useEffect, useState, useRef } from "react";
 
 export default function PatientDashboard() {
   const [data, setData] = useState({
@@ -22,14 +23,20 @@ export default function PatientDashboard() {
   const [history, setHistory] = useState([]);
 
   // 🔥 LIVE SIMULATION
+  const hours = ["00:00","04:00","08:00","12:00","16:00","20:00"];
+  const indexRef = useRef(0);
+
   useEffect(() => {
     const interval = setInterval(() => {
+
       const newData = {
-        time: new Date().toLocaleTimeString().slice(0,5), 
+        time: hours[indexRef.current],
         heartRate: Math.floor(70 + Math.random() * 50),
         spo2: Math.floor(88 + Math.random() * 10),
         temperature: parseFloat((36 + Math.random() * 2).toFixed(1))
       };
+
+      indexRef.current = (indexRef.current + 1) % hours.length;
 
       setData(newData);
       setHistory(prev => [...prev.slice(-9), newData]);
