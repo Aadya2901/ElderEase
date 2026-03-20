@@ -143,7 +143,7 @@ export default function PatientDashboard() {
         {/* ❤️ VITALS */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+          gridTemplateColumns: "repeat(3, 1fr)",
           gap: "20px",
           marginTop: "20px"
         }}>
