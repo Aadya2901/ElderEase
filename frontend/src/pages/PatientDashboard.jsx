@@ -163,21 +163,24 @@ export default function PatientDashboard() {
         {/* 📈 CHART SECTION */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "2fr 1fr",
+          gridTemplateColumns: "1fr 1fr 1fr",
           gap: "20px",
           marginTop: "20px"
         }}>
 
-          {/* 🔥 BIG MAIN CHART */}
           <div style={card}>
-            <h3>Heart Rate Trend</h3>
-            <HeartRateChart data={history} />
+            <h3>Heart Rate</h3>
+            <HeartRateChart data={history} dataKey="heartRate" color="#ef4444" />
           </div>
 
-          {/* 🔥 SECONDARY CHART */}
           <div style={card}>
-            <h3>SpO2 Trend</h3>
-            <HeartRateChart data={history} />
+            <h3>SpO2</h3>
+            <HeartRateChart data={history} dataKey="spo2" color="#3b82f6" />
+          </div>
+
+          <div style={card}>
+            <h3>Temperature</h3>
+            <HeartRateChart data={history} dataKey="temperature" color="#f59e0b" />
           </div>
 
         </div>
