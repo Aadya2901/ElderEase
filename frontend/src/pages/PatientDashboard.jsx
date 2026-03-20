@@ -3,7 +3,6 @@ import VitalCard from "../components/VitalCard";
 import StatusBadge from "../components/StatusBadge";
 import RiskScore from "../components/RiskScore";
 import AlertBanner from "../components/AlertBanner";
-import InsightsPanel from "../components/InsightsPanel";
 import HeartRateChart from "../components/HeartRateChart";
 
 import { predictRisk, generateInsights, getRiskLevel } from "../utils/aiModel";
@@ -113,13 +112,6 @@ export default function PatientDashboard() {
           </div>
         </div>
 
-          <StatusBadge status={status} />
-          <RiskScore score={riskScore} />
-
-          <div>
-            <p><b>AI Risk Level:</b> {riskLevel}</p>
-            <p><b>Probability:</b> {riskScore * 10}%</p>
-          </div>
         </div>
 
         {/* ❤️ VITALS */}
@@ -156,19 +148,18 @@ export default function PatientDashboard() {
           <h3>AI Insights</h3>
 
           {insights.map((msg, i) => (
-  <div key={i} style={{
-    marginTop: "10px",
-    padding: "12px",
-    borderRadius: "10px",
-    background:
-      msg.includes("⚠") ? "#fef3c7" :
-      msg.includes("🚨") ? "#fee2e2" :
-      "#dcfce7"
-  }}>
-    {msg}
-  </div>
-))}
-
+            <div key={i} style={{
+              marginTop: "10px",
+              padding: "12px",
+              borderRadius: "10px",
+              background:
+                msg.includes("⚠") ? "#fef3c7" :
+                msg.includes("🚨") ? "#fee2e2" :
+                "#dcfce7"
+            }}>
+              {msg}
+            </div>
+          ))}
       </div>
     </div>
   );
