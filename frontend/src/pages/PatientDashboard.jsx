@@ -153,10 +153,26 @@ export default function PatientDashboard() {
           <VitalCard title="Temperature" value={temperature} unit="°C" />
         </div>
 
-        {/* 📈 CHART */}
-        <div style={{ ...card, marginTop: "20px" }}>
-          <h3>Heart Rate Trend</h3>
-          <HeartRateChart data={history} />
+        {/* 📈 CHART SECTION */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr",
+          gap: "20px",
+          marginTop: "20px"
+        }}>
+
+          {/* 🔥 BIG MAIN CHART */}
+          <div style={card}>
+            <h3>Heart Rate Trend</h3>
+            <HeartRateChart data={history} />
+          </div>
+
+          {/* 🔥 SECONDARY CHART */}
+          <div style={card}>
+            <h3>SpO2 Trend</h3>
+            <HeartRateChart data={history} />
+          </div>
+
         </div>
 
                 {/* 💡 INSIGHTS */}
