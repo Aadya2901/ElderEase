@@ -116,9 +116,8 @@ export default function PatientDashboard() {
 
         {/* ❤️ VITALS */}
         <div style={{
-          display: "flex",
-          gap: "20px",
-          marginTop: "20px"
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))"
         }}>
           <VitalCard title="Heart Rate" value={heartRate} unit="bpm" />
           <VitalCard title="SpO2" value={spo2} unit="%" />
@@ -126,25 +125,13 @@ export default function PatientDashboard() {
         </div>
 
         {/* 📈 CHART */}
-        <div style={{
-          marginTop: "20px",
-          background: "white",
-          padding: "20px",
-          borderRadius: "12px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.08)"
-        }}>
+        <div style={{ ...card, marginTop: "20px" }}>
           <h3>Heart Rate Trend</h3>
           <HeartRateChart data={history} />
         </div>
 
         {/* 💡 INSIGHTS */}
-        <div style={{
-          marginTop: "20px",
-          background: "white",
-          padding: "20px",
-          borderRadius: "12px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.08)"
-        }}>
+        <div style={{ ...card, marginTop: "20px" }}>
           <h3>AI Insights</h3>
 
           {insights.map((msg, i) => (
