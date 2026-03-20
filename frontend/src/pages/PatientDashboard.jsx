@@ -197,23 +197,42 @@ export default function PatientDashboard() {
           </BarChart>
         </div>
 
-                {/* 💡 INSIGHTS */}
-        <div style={{ ...card, marginTop: "20px" }}>
-          <h3>AI Insights</h3>
+        {/* 🧠 BOTTOM SECTION */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr",
+          gap: "20px",
+          marginTop: "20px"
+        }}>
 
-          {insights.map((msg, i) => (
-            <div key={i} style={{
-              marginTop: "10px",
-              padding: "12px",
-              borderRadius: "10px",
-              background:
-                msg.includes("⚠") ? "#fef3c7" :
-                msg.includes("🚨") ? "#fee2e2" :
-                "#dcfce7"
-            }}>
-              {msg}
-            </div>
-          ))}
+          {/* 📋 RECENT ACTIVITY */}
+          <div style={card}>
+            <h3>Recent Activity</h3>
+
+            <p>Heart rate fluctuating</p>
+            <p>SpO2 slightly low</p>
+            <p>Temperature stable</p>
+          </div>
+
+          {/* 💡 AI INSIGHTS */}
+          <div style={card}>
+            <h3>AI Insights</h3>
+
+            {insights.map((msg, i) => (
+              <div key={i} style={{
+                marginTop: "10px",
+                padding: "12px",
+                borderRadius: "10px",
+                background:
+                  msg.includes("⚠") ? "#fef3c7" :
+                  msg.includes("🚨") ? "#fee2e2" :
+                  "#dcfce7"
+              }}>
+                {msg}
+              </div>
+            ))}
+          </div>
+
         </div>
 
       </div>   
