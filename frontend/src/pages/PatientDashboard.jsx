@@ -94,36 +94,37 @@ export default function PatientDashboard() {
         </h1>
 
         {/* 📊 HEALTH SUMMARY */}
-        {/* 📊 KPI CARDS */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "20px",
-          marginTop: "20px"
-        }}>
+       {/* 📊 KPI CARDS */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: "16px",
+        marginTop: "20px"
+      }}>
 
-          <div style={card}>
-            <h4>Health Score</h4>
-            <h2>{100 - riskScore * 5}</h2>
-          </div>
-
-          <div style={card}>
-            <h4>Risk Score</h4>
-            <h2>{riskScore}/10</h2>
-          </div>
-
-          <div style={card}>
-            <h4>Status</h4>
-            <h2>{status}</h2>
-          </div>
-
-          <div style={card}>
-            <h4>Alerts</h4>
-            <h2>{riskLevel === "HIGH" ? 1 : 0}</h2>
-          </div>
-
+        <div style={{ ...card, padding: "12px" }}>
+          <h4>Health Score</h4>
+          <h2 style={{ marginTop: "8px" }}>{100 - riskScore * 5}</h2>
         </div>
 
+        <div style={{ ...card, padding: "12px" }}>
+          <h4>Risk Score</h4>
+          <h2 style={{ marginTop: "8px" }}>{riskScore}/10</h2>
+        </div>
+
+        <div style={{ ...card, padding: "12px" }}>
+          <h4>Status</h4>
+          <h2 style={{ marginTop: "8px" }}>{status}</h2>
+        </div>
+
+        <div style={{ ...card, padding: "12px" }}>
+          <h4>Alerts</h4>
+          <h2 style={{ marginTop: "8px" }}>
+            {riskLevel === "HIGH" ? 1 : 0}
+          </h2>
+        </div>
+
+      </div>
         {/* 🧠 STATUS + AI */}
         <div style={{
           ...card,
