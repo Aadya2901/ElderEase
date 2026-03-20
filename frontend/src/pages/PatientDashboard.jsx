@@ -69,8 +69,8 @@ export default function PatientDashboard() {
         alignItems: "center",
         boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
       }}>
-        <h2>ElderEase</h2>
-        <p>Patient Dashboard</p>
+        <h2 style={{ fontWeight: "700" }}>ElderEase</h2>
+        <p style={{ color: "gray" }}>Patient Dashboard</p>
       </div>
 
       <div style={{ padding: "20px" }}>
@@ -88,12 +88,34 @@ export default function PatientDashboard() {
         </h1>
 
         {/* 📊 HEALTH SUMMARY */}
-        <div style={{ ...card, marginTop: "20px" }}>
+        {/* 📊 KPI CARDS */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "20px",
+          marginTop: "20px"
+        }}>
 
-          <h3>Daily Health Summary</h3>
-          <p>Health Score: {100 - riskScore * 5}/100</p>
-          <p>Warnings: {riskLevel === "MEDIUM" ? 1 : 0}</p>
-          <p>Emergencies: {riskLevel === "HIGH" ? 1 : 0}</p>
+          <div style={card}>
+            <h4>Health Score</h4>
+            <h2>{100 - riskScore * 5}</h2>
+          </div>
+
+          <div style={card}>
+            <h4>Risk Score</h4>
+            <h2>{riskScore}/10</h2>
+          </div>
+
+          <div style={card}>
+            <h4>Status</h4>
+            <h2>{status}</h2>
+          </div>
+
+          <div style={card}>
+            <h4>Alerts</h4>
+            <h2>{riskLevel === "HIGH" ? 1 : 0}</h2>
+          </div>
+
         </div>
 
         {/* 🧠 STATUS + AI */}
