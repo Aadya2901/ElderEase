@@ -137,7 +137,7 @@ export default function PatientDashboard() {
           <HeartRateChart data={history} />
         </div>
 
-        {/* 💡 INSIGHTS */}
+                {/* 💡 INSIGHTS */}
         <div style={{ ...card, marginTop: "20px" }}>
           <h3>AI Insights</h3>
 
@@ -154,7 +154,9 @@ export default function PatientDashboard() {
               {msg}
             </div>
           ))}
-      </div>
-    </div>
+        </div>
+
+      </div>   
+    </div>     
   );
 }
