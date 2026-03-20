@@ -83,13 +83,8 @@ export default function PatientDashboard() {
         <h1 style={{ marginTop: "20px" }}>My Health Dashboard</h1>
 
         {/* 📊 HEALTH SUMMARY */}
-        <div style={{
-          background: "white",
-          padding: "20px",
-          borderRadius: "12px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-          marginTop: "20px"
-        }}>
+        <div style={{ ...card, marginTop: "20px" }}>
+
           <h3>Daily Health Summary</h3>
           <p>Health Score: {100 - riskScore * 5}/100</p>
           <p>Warnings: {riskLevel === "MEDIUM" ? 1 : 0}</p>
@@ -98,15 +93,26 @@ export default function PatientDashboard() {
 
         {/* 🧠 STATUS + AI */}
         <div style={{
-          display: "flex",
-          gap: "20px",
-          alignItems: "center",
+          ...card,
           marginTop: "20px",
-          background: "white",
-          padding: "20px",
-          borderRadius: "12px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.08)"
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
         }}>
+          <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
+            <StatusBadge status={status} />
+            <RiskScore score={riskScore} />
+          </div>
+
+          <div style={{ textAlign: "right" }}>
+            <p style={{ fontWeight: "600" }}>AI Risk</p>
+            <p>{riskLevel}</p>
+            <p style={{ fontSize: "12px", color: "gray" }}>
+              {riskScore * 10}% probability
+            </p>
+          </div>
+        </div>
+
           <StatusBadge status={status} />
           <RiskScore score={riskScore} />
 
@@ -150,9 +156,18 @@ export default function PatientDashboard() {
           <h3>AI Insights</h3>
 
           {insights.map((msg, i) => (
-            <p key={i}>{msg}</p>
-          ))}
-        </div>
+  <div key={i} style={{
+    marginTop: "10px",
+    padding: "12px",
+    borderRadius: "10px",
+    background:
+      msg.includes("⚠") ? "#fef3c7" :
+      msg.includes("🚨") ? "#fee2e2" :
+      "#dcfce7"
+  }}>
+    {msg}
+  </div>
+))}
 
       </div>
     </div>
