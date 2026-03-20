@@ -110,6 +110,8 @@ export default function PatientDashboard() {
 
       </div>
 
+      <div style={{ padding: "20px" }}>
+
       {showSettings && (
         <div style={{
           ...card,
@@ -123,9 +125,7 @@ export default function PatientDashboard() {
           <p>Temperature Max: 38°C</p>
         </div>
       )}
-
-      <div style={{ padding: "20px" }}>
-
+      
         {/* 🚨 ALERT */}
         <AlertBanner status={status} />
 
