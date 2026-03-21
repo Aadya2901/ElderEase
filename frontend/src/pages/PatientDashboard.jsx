@@ -228,7 +228,7 @@ export default function PatientDashboard() {
       {/* 📊 INPUT GRID */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr 1fr",
+        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
         gap: "20px"
       }}>
 
@@ -336,8 +336,10 @@ export default function PatientDashboard() {
         <div style={{
           marginTop: "20px",
           display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          gap: isMobile ? "12px" : "0",
           justifyContent: "space-between",
-          alignItems: "center"
+          alignItems: isMobile ? "flex-start" : "center"
         }}>
 
         {/* LEFT */}
@@ -387,7 +389,13 @@ export default function PatientDashboard() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <div style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          width: isMobile ? "100%" : "auto",
+          gap: "12px",
+          alignItems: isMobile ? "stretch" : "center"
+        }}>
 
           {/* ⚙ BUTTON */}
           <button
@@ -457,8 +465,9 @@ export default function PatientDashboard() {
           ...card,
           marginTop: "20px",
           display: "flex",
-          alignItems: "center",
-          gap: "30px"
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: isMobile ? "flex-start" : "center",
+          gap: "20px"
         }}>
 
           {/* 🔴 CIRCLE SCORE */}
@@ -521,7 +530,9 @@ export default function PatientDashboard() {
 {/* ❤️ VITALS */}
 <div style={{
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+  gridTemplateColumns: isMobile
+    ? "1fr"
+    : "repeat(auto-fit, minmax(280px, 1fr))",
   gap: "20px",
   marginTop: "20px"
 }}>
@@ -601,7 +612,9 @@ export default function PatientDashboard() {
         {/* 📈 CHART SECTION */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gridTemplateColumns: isMobile
+            ? "1fr"
+            : "repeat(auto-fit, minmax(280px, 1fr))",
           gap: "20px",
           marginTop: "20px"
         }}>
