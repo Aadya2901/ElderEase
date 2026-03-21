@@ -136,8 +136,8 @@ export default function PatientDashboard() {
     }, []);
     
   return (
-    <div style={{ 
-      padding: "30px",
+    <div style={{
+      padding: isMobile ? "20px" : "30px",
       background: "#f3f4f6",
       minHeight: "100vh"
     }}>
@@ -352,7 +352,7 @@ export default function PatientDashboard() {
         {/* LEFT */}
         <div>
           <h1 style={{
-            fontSize: "28px",
+            fontSize: isMobile ? "24px" : "28px",
             fontWeight: "700",
             margin: 0
           }}>
@@ -384,6 +384,7 @@ export default function PatientDashboard() {
               display: "flex",
               alignItems: "center",
               gap: "6px",
+              flexWrap: "wrap",
               padding: "4px 10px",
               borderRadius: "999px",
               background: "#dcfce7",
@@ -400,7 +401,7 @@ export default function PatientDashboard() {
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
           width: isMobile ? "100%" : "auto",
-          gap: "12px",
+          gap: isMobile ? "14px" : "12px",
           alignItems: isMobile ? "stretch" : "center"
         }}>
 
@@ -413,6 +414,7 @@ export default function PatientDashboard() {
               border: "none",
               background: "#e5e7eb",
               cursor: "pointer",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
               fontWeight: "500"
             }}
           >
@@ -436,6 +438,7 @@ export default function PatientDashboard() {
               fontWeight: "600",
               display: "flex",
               alignItems: "center",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
               gap: "6px"
             }}
           >
@@ -449,7 +452,7 @@ export default function PatientDashboard() {
             borderRadius: "6px",
             fontSize: "14px",
             fontWeight: "700",
-            minWidth: "120px",
+            width: isMobile ? "100%" : "auto",
             textAlign: "center",
             background:
               status === "EMERGENCY" ? "#fee2e2" :
@@ -471,6 +474,7 @@ export default function PatientDashboard() {
         <div style={{
           ...card,
           marginTop: "20px",
+          padding: isMobile ? "14px" : "18px",
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
           alignItems: isMobile ? "flex-start" : "center",
@@ -632,7 +636,8 @@ export default function PatientDashboard() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "12px"
+              marginBottom: "12px",
+              padding: isMobile ? "14px" : "18px",
             }}>
               <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
                 Heart Rate
@@ -662,7 +667,8 @@ export default function PatientDashboard() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "12px"
+              marginBottom: "12px",
+              padding: isMobile ? "14px" : "18px",
             }}>
               <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
                 SpO2
@@ -692,7 +698,8 @@ export default function PatientDashboard() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "12px"
+              marginBottom: "12px",
+              padding: isMobile ? "14px" : "18px",
             }}>
               <h3 style={{ fontSize: "16px", fontWeight: "600", margin: 0 }}>
                 Temperature
