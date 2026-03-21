@@ -45,7 +45,7 @@ export function generateInsights(hr, spo2, temp, history, thresholds) {
   ) {
     insights.push("🚨 Persistent low oxygen → contact caregiver immediately");
   }
-  
+
   // 📈 Trends (only if no emergency)
   if (insights.length === 0 && history.length >= 3) {
     const last = history[history.length - 1];
@@ -60,6 +60,10 @@ export function generateInsights(hr, spo2, temp, history, thresholds) {
     }
   }
 
+  if (score > 7) {
+    insights.push("📩 Caregiver has been notified");
+  }
+  
   // ✅ fallback
   if (insights.length === 0) {
     insights.push("✅ All vitals stable.");
