@@ -4,9 +4,9 @@ export default function VitalCard({ title, value, unit, icon, style }) {
       style={{
         padding: "16px",
         borderRadius: "14px",
-        background: "#f9fafb",
+        background: "#fff",
         border: "1px solid #e5e7eb",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -24,6 +24,8 @@ export default function VitalCard({ title, value, unit, icon, style }) {
       {/* RIGHT ICON */}
       <div
         style={{
+          background: "#f3f4f6",
+          borderRadius: "12px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center"
