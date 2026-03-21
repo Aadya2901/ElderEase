@@ -14,6 +14,15 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
+import WarningIcon from "@mui/icons-material/Warning";
+import ErrorIcon from "@mui/icons-material/Error";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import LogoutIcon from "@mui/icons-material/Logout";
+import SaveIcon from "@mui/icons-material/Save";
+import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
 
 export default function PatientDashboard() {
   const [data, setData] = useState({
@@ -96,6 +105,25 @@ export default function PatientDashboard() {
     cursor: "pointer"
   };
 
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    marginTop: "6px",
+    borderRadius: "10px",
+    border: "1px solid #e5e7eb",
+    fontSize: "14px"
+  };
+
+   const getIcon = (msg) => {
+      if (msg.includes("🚨")) return <ErrorIcon style={{ color: "#ef4444", fontSize: "22px" }} />;
+      if (msg.includes("⚠")) return <WarningIcon style={{ color: "#f59e0b", fontSize: "22px" }} />;
+      if (msg.includes("📈")) return <TrendingUpIcon style={{ color: "#3b82f6", fontSize: "22px" }} />;
+      if (msg.includes("📉")) return <TrendingDownIcon style={{ color: "#3b82f6", fontSize: "22px" }} />;
+      if (msg.includes("📩")) return <NotificationsActiveIcon style={{ color: "#8b5cf6", fontSize: "22px" }} />;
+      return <CheckCircleIcon style={{ color: "#10b981", fontSize: "22px" }} />;
+    };
+
+
   return (
     <div style={{ 
       padding: "30px",
@@ -114,150 +142,287 @@ export default function PatientDashboard() {
       }}>
         <h2 style={{ fontWeight: "700" }}>ElderEase</h2>
         
-        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            style={{
-              padding: "6px 12px",
-              borderRadius: "8px",
-              border: "none",
-              background: "#e5e7eb",
-              cursor: "pointer"
-            }}
+        <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+
+        {/* 👤 Patient Info */}
+        <div style={{ textAlign: "right" }}>
+          <div style={{ fontWeight: "600" }}>
+            {localStorage.getItem("userName") || "Margaret Johnson"}
+          </div>
+          <div style={{ fontSize: "12px", color: "#6b7280" }}>
+            Patient
+          </div>
+        </div>
+
+        {/* 🚪 Logout ICON button */}
+        <button
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = "/";
+          }}
+          style={{
+            padding: "8px",
+            borderRadius: "8px",
+            border: "none",
+            background: "#e5e7eb",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
         >
-          ⚙ Custom Thresholds
+          <LogoutIcon style={{ fontSize: "20px", color: "#374151" }} />
         </button>
 
-        </div>
+      </div>
 
       </div>
 
       <div style={{ padding: "20px" }}>
 
-      {showSettings && (
-        <div style={{
-          ...card,
-          marginTop: "20px",
-          marginBottom: "10px"
-        }}>
-          <h3>Custom Thresholds</h3>
+        {showSettings && (
+  <div style={{
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "20px"
+  }}>
+    <div style={{
+      ...card,
+      width: "70%",
+      maxWidth: "900px",
+      padding: "24px",
+      borderRadius: "16px",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.08)"
+    }}>
 
-          {/* ❤️ Heart Rate */}
-          <div style={{ marginTop: "10px" }}>
-            <label>Heart Rate Max</label>
-            <input
-              type="number"
-              min={60}
-              max={200}
-              value={thresholds.heartRate}
-              onChange={(e) =>
-                setThresholds({ ...thresholds, heartRate: Number(e.target.value) })
-              }
-              style={{
-                width: "100%",
-                padding: "6px",
-                marginTop: "4px",
-                borderRadius: "6px",
-                border: "1px solid #e5e7eb"
-              }}
-            />
-          </div>
+      {/* 🔝 HEADER */}
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "20px"
+      }}>
+        <h3 style={{ margin: 0 }}>Personalized Thresholds</h3>
 
-          {/* 🔵 SpO2 */}
-          <div style={{ marginTop: "10px" }}>
-            <label>SpO2 Min</label>
-            <input
-              type="number"
-              min={80}
-              max={100}
-              value={thresholds.spo2}
-              onChange={(e) =>
-                setThresholds({ ...thresholds, spo2: Number(e.target.value) })
-              }
-              style={{
-                width: "100%",
-                padding: "6px",
-                marginTop: "4px",
-                borderRadius: "6px",
-                border: "1px solid #e5e7eb"
-              }}
-            />
-          </div>
+        <span
+          onClick={() => setShowSettings(false)}
+          style={{ cursor: "pointer", fontSize: "18px" }}
+        >
+          ✕
+        </span>
+      </div>
 
-          {/* 🟡 Temperature */}
-          <div style={{ marginTop: "10px" }}>
-            <label>Temperature Max</label>
-            <input
-              type="number"
-              min={34}
-              max={42}
-              value={thresholds.temperature}
-              onChange={(e) =>
-                setThresholds({ ...thresholds, temperature: Number(e.target.value) })
-              }
-              style={{
-                width: "100%",
-                padding: "6px",
-                marginTop: "4px",
-                borderRadius: "6px",
-                border: "1px solid #e5e7eb"
-              }}
-            />
-          </div>
+      {/* 📊 INPUT GRID */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr 1fr",
+        gap: "20px"
+      }}>
 
+        {/* ❤️ Heart Rate */}
+        <div>
+          <label>Heart Rate Max</label>
+          <input
+            type="number"
+            value={thresholds.heartRate}
+            onChange={(e) =>
+              setThresholds({ ...thresholds, heartRate: Number(e.target.value) })
+            }
+            style={inputStyle}
+          />
         </div>
-      )}
+
+        {/* 🔵 SpO2 */}
+        <div>
+          <label>SpO2 Min (%)</label>
+          <input
+            type="number"
+            value={thresholds.spo2}
+            onChange={(e) =>
+              setThresholds({ ...thresholds, spo2: Number(e.target.value) })
+            }
+            style={inputStyle}
+          />
+        </div>
+
+        {/* 🌡 Temperature */}
+        <div>
+          <label>Temperature Max (°C)</label>
+          <input
+            type="number"
+            value={thresholds.temperature}
+            onChange={(e) =>
+              setThresholds({ ...thresholds, temperature: Number(e.target.value) })
+            }
+            style={inputStyle}
+          />
+        </div>
+
+      </div>
+
+      {/* 🔘 BUTTONS */}
+      <div style={{
+        marginTop: "20px",
+        display: "flex",
+        gap: "12px"
+      }}>
+
+        {/*  SAVE */}
+        <button 
+          onClick={() => {
+            setShowSettings(false);
+            alert("Thresholds saved!");
+          }}
+          onMouseOver={(e) => e.currentTarget.style.background = "#059669"}
+          onMouseOut={(e) => e.currentTarget.style.background = "#10b981"}
+          style={{
+            padding: "10px 16px",
+            borderRadius: "10px",
+            border: "none",
+            background: "#10b981",
+            color: "white",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            cursor: "pointer",
+            fontWeight: "600"
+          }}>
+            <SaveIcon style={{ fontSize: "18px" }} />
+            Save
+        </button>
+
+        {/* 🔄 RESET */}
+        <button
+          onClick={() =>
+            setThresholds({
+              heartRate: 110,
+              spo2: 92,
+              temperature: 38
+            })
+          }
+          style={{
+            padding: "10px 16px",
+            borderRadius: "10px",
+            border: "1px solid #e5e7eb",
+            background: "#f9fafb",
+            cursor: "pointer"
+          }}
+        >
+          Reset Defaults
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+)}
 
         {/* 🚨 ALERT */}
         <AlertBanner status={status} />
 
-        {/* 🏥 TITLE */}
-        <h1 style={{
-          marginTop: "20px",
-          fontSize: "28px",
-          fontWeight: "700"
-        }}>
-          My Health Dashboard
-        </h1>
-
         <div style={{
-          marginTop: "8px",
+          marginTop: "20px",
           display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          fontSize: "13px",
-          color: "#6b7280"
+          justifyContent: "space-between",
+          alignItems: "center"
         }}>
-          <span>
-            Last Updated: <strong style={{ color: "#111827" }}>{lastUpdated}</strong>
-          </span>
 
-          <span style={{
+        {/* LEFT */}
+        <div>
+          <h1 style={{
+            fontSize: "28px",
+            fontWeight: "700",
+            margin: 0
+          }}>
+            My Health Dashboard
+          </h1>
+
+          <p style={{
+            color: "#6b7280",
+            marginTop: "4px",
+            fontSize: "14px"
+          }}>
+            Real-time health monitoring
+          </p>
+
+          {/* 🔽 below line */}
+          <div style={{
+            marginTop: "6px",
             display: "flex",
             alignItems: "center",
-            gap: "6px",
-            padding: "4px 10px",
-            borderRadius: "999px",
-            background: "#dcfce7",
-            color: "#065f46",
-            fontWeight: "500"
+            gap: "10px",
+            fontSize: "13px",
+            color: "#6b7280"
           }}>
-            ● Live Monitoring
-          </span>
+            <span>
+              Last Updated: <strong style={{ color: "#111827" }}>{lastUpdated}</strong>
+            </span>
+
+            <span style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "4px 10px",
+              borderRadius: "999px",
+              background: "#dcfce7",
+              color: "#065f46",
+              fontWeight: "500"
+            }}>
+              ● Live Monitoring
+            </span>
+          </div>
         </div>
 
-        {/* PATIENT STATUS */}
-        <h2 style={{
-          fontSize: "20px",
-          fontWeight: "600",
-          marginTop: "8px",
-          color: "#374151"
-        }}>
-          Patient Status:
-          <span style={{
-            marginLeft: "8px",
-            padding: "4px 10px",
-            borderRadius: "999px",
+        {/* RIGHT SIDE */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+
+          {/* ⚙ BUTTON */}
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            style={{
+              padding: "8px 14px",
+              borderRadius: "10px",
+              border: "none",
+              background: "#e5e7eb",
+              cursor: "pointer",
+              fontWeight: "500"
+            }}
+          >
+            ⚙ Custom Thresholds
+          </button>
+
+          {/* 🚨 SIMULATE EMERGENCY */}
+          <button
+            onMouseOver={(e) => e.currentTarget.style.background = "#dc2626"}
+            onMouseOut={(e) => e.currentTarget.style.background = "#ef4444"}
+            onClick={() =>
+              setData({ heartRate: 140, spo2: 85, temperature: 39 })
+            }
+            style={{
+              padding: "8px 14px",
+              borderRadius: "10px",
+              border: "none",
+              background: "#ef4444",
+              color: "white",
+              cursor: "pointer",
+              fontWeight: "600",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px"
+            }}
+          >
+            <CrisisAlertIcon style={{ fontSize: "18px" }} />
+            Simulate
+          </button>
+
+          {/* 🟢 STATUS */}
+          <div style={{
+            padding: "10px 20px",
+            borderRadius: "6px",
+            fontSize: "14px",
+            fontWeight: "700",
+            minWidth: "120px",
+            textAlign: "center",
             background:
               status === "EMERGENCY" ? "#fee2e2" :
               status === "WARNING" ? "#fef3c7" :
@@ -268,8 +433,11 @@ export default function PatientDashboard() {
               "#065f46"
           }}>
             {status}
-          </span>
-        </h2>
+          </div>
+
+        </div>
+
+      </div>
 
         {/* 📊 HEALTH SUMMARY */}
         <div style={{
@@ -310,26 +478,29 @@ export default function PatientDashboard() {
               Daily Health Summary
             </h3>
 
-            <p style={{ margin: "6px 0" }}>
-              📈 Health Score:{" "}
-              <span style={{ color: "#ef4444", fontWeight: "600" }}>
-                {100 - riskScore * 5}/100
-              </span>
-            </p>
+            <p style={{ margin: "6px 0", display: "flex", alignItems: "center", gap: "8px" }}>
+            <TrendingUpIcon style={{ fontSize: "18px", color: "#3b82f6" }} />
+            Health Score:
+            <span style={{ color: "#ef4444", fontWeight: "600" }}>
+              {100 - riskScore * 5}/100
+            </span>
+          </p>
 
-            <p style={{ margin: "6px 0" }}>
-              ⚠ Warnings detected:{" "}
-              <span style={{ fontWeight: "600" }}>
-                {riskLevel === "MEDIUM" ? 1 : 0}
-              </span>
-            </p>
+          <p style={{ margin: "6px 0", display: "flex", alignItems: "center", gap: "8px" }}>
+            <WarningIcon style={{ fontSize: "18px", color: "#f59e0b" }} />
+            Warnings detected:
+            <span style={{ fontWeight: "600" }}>
+              {riskLevel === "MEDIUM" ? 1 : 0}
+            </span>
+          </p>
 
-            <p style={{ margin: "6px 0" }}>
-              🚨 Emergencies:{" "}
-              <span style={{ fontWeight: "600" }}>
-                {riskLevel === "HIGH" ? 1 : 0}
-              </span>
-            </p>
+          <p style={{ margin: "6px 0", display: "flex", alignItems: "center", gap: "8px" }}>
+            <ErrorIcon style={{ fontSize: "18px", color: "#ef4444" }} />
+            Emergencies:
+            <span style={{ fontWeight: "600" }}>
+              {riskLevel === "HIGH" ? 1 : 0}
+            </span>
+          </p>
           </div>
 
         </div>
@@ -524,7 +695,7 @@ export default function PatientDashboard() {
 
           {/* 💡 AI INSIGHTS */}
           <div style={card}>
-            <h3 style={{ marginBottom: "10px" }}>AI Insights</h3>
+            <h3 style={{ marginBottom: "10px" }}>Insights</h3>
 
             {insights.map((msg, i) => {
               const isDanger = msg.includes("🚨");
@@ -559,12 +730,17 @@ export default function PatientDashboard() {
                         : "1px solid #a7f3d0",
                   }}
                 >
-                  <span style={{ fontSize: "18px" }}>
-                    {isDanger ? "🚨" : isWarning ? "⚠" : "✅"}
-                  </span>
+                  {getIcon(msg)}
 
                   <span style={{ fontWeight: "500" }}>
-                    {msg.replace(/[🚨⚠📉📈✅]/g, "")}
+                    {msg
+                      .replace("🚨", "")
+                      .replace("⚠", "")
+                      .replace("📉", "")
+                      .replace("📈", "")
+                      .replace("📩", "")
+                      .replace("✅", "")
+                    }
                   </span>
                 </div>
               );

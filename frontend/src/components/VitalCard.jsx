@@ -10,10 +10,11 @@ export default function VitalCard({ title, value, unit, icon, style }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        transition: "all 0.2s ease",
         ...style
       }}
     >
-      {/* LEFT SIDE */}
+      {/* LEFT */}
       <div>
         <p style={{ color: "#6b7280", fontSize: "14px" }}>{title}</p>
         <h2 style={{ fontSize: "28px", fontWeight: "700" }}>
@@ -25,6 +26,7 @@ export default function VitalCard({ title, value, unit, icon, style }) {
       <div
         style={{
           background: "#f3f4f6",
+          padding: "10px",
           borderRadius: "12px",
           display: "flex",
           alignItems: "center",

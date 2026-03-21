@@ -61,17 +61,23 @@ export function generateInsights(hr, spo2, temp, history, thresholds, score) {
   }
 
   if (score > 7) {
-    insights.push("📩 Caregiver has been notified");
-  }
-
-  if (score > 7) {
     insights.push("🚨 Critical condition → seek immediate medical help.");
+    insights.push("📩 Caregiver has been notified.");
   }
 
   // ✅ fallback
   if (insights.length === 0) {
     insights.push("✅ All vitals stable.");
   }
+
+  // 🔥 PRIORITY SORT (ADD HERE)
+  const priorityOrder = { "🚨": 1, "⚠": 2, "📈": 3, "📉": 3, "📩": 4, "✅": 5 };
+
+  insights.sort((a, b) => {
+    const aKey = Object.keys(priorityOrder).find(k => a.includes(k)) || "✅";
+    const bKey = Object.keys(priorityOrder).find(k => b.includes(k)) || "✅";
+    return priorityOrder[aKey] - priorityOrder[bKey];
+  });
 
   return insights;
 }
