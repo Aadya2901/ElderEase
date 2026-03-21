@@ -39,6 +39,13 @@ export function generateInsights(hr, spo2, temp, history, thresholds) {
     insights.push("⚠ Low heart rate.");
   }
 
+  if (
+    history.length >= 3 &&
+    history.slice(-3).every(d => d.spo2 < thresholds?.spo2)
+  ) {
+    insights.push("🚨 Persistent low oxygen → contact caregiver immediately");
+  }
+  
   // 📈 Trends (only if no emergency)
   if (insights.length === 0 && history.length >= 3) {
     const last = history[history.length - 1];
