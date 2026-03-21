@@ -69,9 +69,19 @@ export default function PatientDashboard() {
     spo2, 
     temperature, 
     history,
-    thresholds
+    thresholds,
+    riskScore
   );
 
+  let trend = "Stable";
+
+  if (history.length >= 2) {
+    const last = history[history.length - 1];
+    const prev = history[history.length - 2];
+
+    if (last.heartRate > prev.heartRate) trend = "Deteriorating";
+    if (last.heartRate < prev.heartRate) trend = "Improving";
+  }
   const status =
     riskLevel === "HIGH"
       ? "EMERGENCY"
@@ -121,22 +131,6 @@ export default function PatientDashboard() {
           ⚙ Custom Thresholds
         </button>
 
-          {/* <span style={{
-            padding: "4px 10px",
-            borderRadius: "10px",
-            fontSize: "12px",
-            fontWeight: "500",
-            background:
-              status === "EMERGENCY" ? "#fee2e2" :
-              status === "WARNING" ? "#fef3c7" :
-              "#dcfce7",
-            color:
-              status === "EMERGENCY" ? "#991b1b" :
-              status === "WARNING" ? "#92400e" :
-              "#065f46"
-          }}>
-            {status}
-          </span> */}
         </div>
 
       </div>
@@ -228,6 +222,30 @@ export default function PatientDashboard() {
         }}>
           My Health Dashboard
         </h1>
+
+        <div style={{ marginTop: "6px" }}>
+          <span style={{ fontSize: "14px", color: "#6b7280" }}>
+            Health Trend:
+          </span>
+
+          <span style={{
+            marginLeft: "6px",
+            padding: "2px 8px",
+            borderRadius: "6px",
+            background:
+              trend === "Deteriorating" ? "#fee2e2" :
+              trend === "Improving" ? "#dcfce7" :
+              "#f3f4f6",
+            color:
+              trend === "Deteriorating" ? "#991b1b" :
+              trend === "Improving" ? "#065f46" :
+              "#374151",
+            fontSize: "12px",
+            fontWeight: "500"
+          }}>
+            {trend}
+          </span>
+        </div>
 
         {/* PATIENT STATUS */}
         <h2 style={{

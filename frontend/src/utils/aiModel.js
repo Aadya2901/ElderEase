@@ -14,7 +14,7 @@ export function predictRisk(hr, spo2, temp, thresholds) {
   return Math.max(0, Math.min(10, Math.round(score)));
 }
 
-export function generateInsights(hr, spo2, temp, history, thresholds) {
+export function generateInsights(hr, spo2, temp, history, thresholds, score) {
   const insights = [];
 
   // 🚨 Priority conditions (top importance)
@@ -63,7 +63,11 @@ export function generateInsights(hr, spo2, temp, history, thresholds) {
   if (score > 7) {
     insights.push("📩 Caregiver has been notified");
   }
-  
+
+  if (score > 7) {
+    insights.push("🚨 Critical condition → seek immediate medical help.");
+  }
+
   // ✅ fallback
   if (insights.length === 0) {
     insights.push("✅ All vitals stable.");
