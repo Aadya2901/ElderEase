@@ -367,9 +367,38 @@ export default function PatientDashboard() {
           marginTop: "20px"
         }}>
           
-          <VitalCard title="Heart Rate" value={heartRate} unit="bpm" />
-          <VitalCard title="SpO2" value={spo2} unit="%" />
-          <VitalCard title="Temperature" value={temperature} unit="°C" />
+        <VitalCard
+          title="Heart Rate"
+          value={heartRate}
+          unit="bpm"
+          style={{
+            border: heartRate > thresholds.heartRate
+              ? "2px solid #ef4444"
+              : "1px solid #e5e7eb"
+          }}
+        />
+
+        <VitalCard
+          title="SpO2"
+          value={spo2}
+          unit="%"
+          style={{
+            border: spo2 < thresholds.spo2
+              ? "2px solid #ef4444"
+              : "1px solid #e5e7eb"
+          }}
+        />
+
+        <VitalCard
+          title="Temperature"
+          value={temperature}
+          unit="°C"
+          style={{
+            border: temperature > thresholds.temperature
+              ? "2px solid #ef4444"
+              : "1px solid #e5e7eb"
+          }}
+        />
         </div>
 
         {/* 📈 CHART SECTION */}
