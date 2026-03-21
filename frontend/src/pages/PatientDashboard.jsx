@@ -123,7 +123,8 @@ export default function PatientDashboard() {
       return <CheckCircleIcon style={{ color: "#10b981", fontSize: "22px" }} />;
     };
 
-
+    const isMobile = window.innerWidth < 768;
+    
   return (
     <div style={{ 
       padding: "30px",
@@ -134,12 +135,15 @@ export default function PatientDashboard() {
       {/* 🔷 NAVBAR */}
       <div style={{
         background: "white",
-        padding: "15px 30px",
+        padding: isMobile ? "12px 16px" : "15px 30px",
         display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        gap: isMobile ? "10px" : "0",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: isMobile ? "flex-start" : "center",
         boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
       }}>
+
         <h2 style={{ fontWeight: "700" }}>ElderEase</h2>
         
         <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
