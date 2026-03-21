@@ -72,7 +72,9 @@ export default function PatientDashboard() {
     thresholds,
     riskScore
   );
-  
+
+  const lastUpdated = new Date().toLocaleTimeString();
+
   const status =
     riskLevel === "HIGH"
       ? "EMERGENCY"
@@ -213,6 +215,10 @@ export default function PatientDashboard() {
         }}>
           My Health Dashboard
         </h1>
+
+        <p style={{ fontSize: "12px", color: "#6b7280", marginTop: "6px" }}>
+          Last Updated: {lastUpdated} • 🟢 Live Monitoring
+        </p>
 
         {/* PATIENT STATUS */}
         <h2 style={{
