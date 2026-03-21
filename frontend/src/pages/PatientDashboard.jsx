@@ -80,11 +80,11 @@ export default function PatientDashboard() {
       : "NORMAL";
 
   const card = {
-    background: "#ffffff",
+    background: "#f9fafb",
     padding: "18px",
     borderRadius: "14px",
-    border: "1px solid #f1f5f9",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+    border: "1px solid #e5e7eb",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
     transition: "all 0.2s ease",
     cursor: "pointer"
   };
@@ -121,14 +121,22 @@ export default function PatientDashboard() {
           ⚙ Custom Thresholds
         </button>
 
-          <span style={{
-            background: "#f59e0b",
+          {/* <span style={{
             padding: "4px 10px",
             borderRadius: "10px",
-            fontSize: "12px"
+            fontSize: "12px",
+            fontWeight: "500",
+            background:
+              status === "EMERGENCY" ? "#fee2e2" :
+              status === "WARNING" ? "#fef3c7" :
+              "#dcfce7",
+            color:
+              status === "EMERGENCY" ? "#991b1b" :
+              status === "WARNING" ? "#92400e" :
+              "#065f46"
           }}>
-            Warning
-          </span>
+            {status}
+          </span> */}
         </div>
 
       </div>
@@ -221,6 +229,7 @@ export default function PatientDashboard() {
           My Health Dashboard
         </h1>
 
+        {/* PATIENT STATUS */}
         <h2 style={{
           fontSize: "20px",
           fontWeight: "600",
@@ -246,6 +255,68 @@ export default function PatientDashboard() {
         </h2>
 
         {/* 📊 HEALTH SUMMARY */}
+        <div style={{
+          ...card,
+          marginTop: "20px",
+          display: "flex",
+          alignItems: "center",
+          gap: "30px"
+        }}>
+
+          {/* 🔴 CIRCLE SCORE */}
+          <div style={{
+            width: "100px",
+            height: "100px",
+            borderRadius: "50%",
+            border: `6px solid ${
+              (100 - riskScore * 5) < 50 ? "#ef4444" :
+              (100 - riskScore * 5) < 75 ? "#f59e0b" :
+              "#10b981"
+            }`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: "700"
+          }}>
+            <span style={{ fontSize: "28px" }}>
+              {100 - riskScore * 5}
+            </span>
+            <span style={{ fontSize: "12px", color: "#6b7280" }}>
+              /100
+            </span>
+          </div>
+
+          {/* 📊 TEXT SECTION */}
+          <div>
+            <h3 style={{ marginBottom: "10px" }}>
+              Daily Health Summary
+            </h3>
+
+            <p style={{ margin: "6px 0" }}>
+              📈 Health Score:{" "}
+              <span style={{ color: "#ef4444", fontWeight: "600" }}>
+                {100 - riskScore * 5}/100
+              </span>
+            </p>
+
+            <p style={{ margin: "6px 0" }}>
+              ⚠ Warnings detected:{" "}
+              <span style={{ fontWeight: "600" }}>
+                {riskLevel === "MEDIUM" ? 1 : 0}
+              </span>
+            </p>
+
+            <p style={{ margin: "6px 0" }}>
+              🚨 Emergencies:{" "}
+              <span style={{ fontWeight: "600" }}>
+                {riskLevel === "HIGH" ? 1 : 0}
+              </span>
+            </p>
+          </div>
+
+        </div>
+
        {/* 📊 KPI CARDS */}
           <div style={{
             display: "grid",
