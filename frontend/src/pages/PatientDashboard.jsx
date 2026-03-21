@@ -130,8 +130,7 @@ export default function PatientDashboard() {
         setIsMobile(window.innerWidth < 768);
       };
 
-      handleResize();
-
+      handleResize(); // 👈 add this
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }, []);
@@ -157,7 +156,13 @@ export default function PatientDashboard() {
 
         <h2 style={{ fontWeight: "700" }}>ElderEase</h2>
         
-        <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "15px",
+          width: isMobile ? "100%" : "auto",
+          justifyContent: isMobile ? "space-between" : "flex-end"
+        }}>
 
         {/* 👤 Patient Info */}
         <div style={{ textAlign: "right" }}>
@@ -203,9 +208,9 @@ export default function PatientDashboard() {
   }}>
     <div style={{
       ...card,
-      width: "70%",
+      width: isMobile ? "100%" : "70%",
+      padding: isMobile ? "16px" : "24px",
       maxWidth: "900px",
-      padding: "24px",
       borderRadius: "16px",
       boxShadow: "0 10px 25px rgba(0,0,0,0.08)"
     }}>

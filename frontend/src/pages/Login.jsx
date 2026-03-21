@@ -6,13 +6,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 export default function Login() {
   const [role, setRole] = useState("patient");
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
+    handleResize(); // 👈 important
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -22,10 +23,20 @@ export default function Login() {
       
       {/* LOGO */}
       <div style={styles.logoBox}>
-        <div style={styles.logoIcon}>
+        <div style={{
+          ...styles.logoIcon,
+          width: isMobile ? "50px" : "60px",
+          height: isMobile ? "50px" : "60px"
+        }}>
           <FavoriteIcon style={{ fontSize: 28, color: "white" }} />
         </div>
-        <h1 style={styles.title}>ElderEase</h1>
+        <h1 style={{
+          margin: 0,
+          fontSize: isMobile ? "22px" : "26px",
+          fontWeight: "700"
+        }}>
+          ElderEase
+        </h1>
         <p style={styles.subtitle}>
           Smart Elderly Health Monitoring
         </p>
@@ -44,6 +55,7 @@ export default function Login() {
             onClick={() => setRole("patient")}
             style={{
               ...styles.toggleBtn,
+              width: isMobile ? "100%" : "auto",
               ...(role === "patient" && styles.activeBtn)
             }}
           >
@@ -55,6 +67,7 @@ export default function Login() {
             onClick={() => setRole("caregiver")}
             style={{
               ...styles.toggleBtn,
+              width: isMobile ? "100%" : "auto",
               ...(role === "caregiver" && styles.activeBtn)
             }}
           >
@@ -210,7 +223,8 @@ const styles = {
     marginTop: "12px",
     fontWeight: "600",
     cursor: "pointer",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
+    transition: "0.2s"
   },
 
   demoText: {
