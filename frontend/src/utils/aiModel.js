@@ -19,7 +19,7 @@ export function generateInsights(hr, spo2, temp, history, thresholds) {
 
   // 🚨 Priority conditions (top importance)
   if (spo2 < thresholds.spo2) {
-    insights.push("🚨 Oxygen level below safe limit.");
+    insights.push("🚨 Oxygen level below safe limit. Take immediate action.");
   }
 
   if (hr > thresholds.heartRate) {

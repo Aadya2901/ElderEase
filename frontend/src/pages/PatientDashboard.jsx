@@ -221,14 +221,38 @@ export default function PatientDashboard() {
           My Health Dashboard
         </h1>
 
+        <h2 style={{
+          fontSize: "20px",
+          fontWeight: "600",
+          marginTop: "8px",
+          color: "#374151"
+        }}>
+          Patient Status:
+          <span style={{
+            marginLeft: "8px",
+            padding: "4px 10px",
+            borderRadius: "999px",
+            background:
+              status === "EMERGENCY" ? "#fee2e2" :
+              status === "WARNING" ? "#fef3c7" :
+              "#dcfce7",
+            color:
+              status === "EMERGENCY" ? "#991b1b" :
+              status === "WARNING" ? "#92400e" :
+              "#065f46"
+          }}>
+            {status}
+          </span>
+        </h2>
+
         {/* 📊 HEALTH SUMMARY */}
        {/* 📊 KPI CARDS */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        gap: "16px",
-        marginTop: "20px"
-      }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "16px",
+            marginTop: "20px"
+          }}>
 
         <div
           style={{ ...card, padding: "12px" }}
