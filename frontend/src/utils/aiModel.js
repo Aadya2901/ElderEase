@@ -18,16 +18,16 @@ export function generateInsights(hr, spo2, temp, history, thresholds) {
   const insights = [];
 
   // 🚨 Priority conditions (top importance)
-  if (spo2 < thresholds.spo2) {
-    insights.push("🚨 Oxygen level below safe limit. Take immediate action.");
+  if (spo2 < thresholds?.spo2) {
+    insights.push("⚠ Low oxygen → Ask patient to sit upright and monitor breathing.");
   }
 
-  if (hr > thresholds.heartRate) {
-    insights.push("🚨 Heart rate above your set threshold.");
+  if (hr > thresholds?.heartRate) {
+    insights.push("🚨 High heart rate → Ensure patient rests and stays hydrated.");
   }
 
-  if (temp > thresholds.temperature) {
-    insights.push("🚨 High temperature detected.");
+  if (temp > thresholds?.temperature) {
+    insights.push("🚨 High temperature → Give paracetamol and monitor closely.");
   }
 
   // ⚠ Secondary conditions
