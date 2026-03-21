@@ -11,6 +11,10 @@ import {
   Tooltip
 } from "recharts";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import OpacityIcon from "@mui/icons-material/Opacity";
+import ThermostatIcon from "@mui/icons-material/Thermostat";
+
 export default function PatientDashboard() {
   const [data, setData] = useState({
     heartRate: 82,
@@ -216,9 +220,31 @@ export default function PatientDashboard() {
           My Health Dashboard
         </h1>
 
-        <p style={{ fontSize: "12px", color: "#6b7280", marginTop: "6px" }}>
-          Last Updated: {lastUpdated} • 🟢 Live Monitoring
-        </p>
+        <div style={{
+          marginTop: "8px",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          fontSize: "13px",
+          color: "#6b7280"
+        }}>
+          <span>
+            Last Updated: <strong style={{ color: "#111827" }}>{lastUpdated}</strong>
+          </span>
+
+          <span style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            padding: "4px 10px",
+            borderRadius: "999px",
+            background: "#dcfce7",
+            color: "#065f46",
+            fontWeight: "500"
+          }}>
+            ● Live Monitoring
+          </span>
+        </div>
 
         {/* PATIENT STATUS */}
         <h2 style={{
@@ -308,98 +334,85 @@ export default function PatientDashboard() {
 
         </div>
 
-       {/* 📊 KPI CARDS */}
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "16px",
-            marginTop: "20px"
-          }}>
+{/* ❤️ VITALS */}
+<div style={{
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+  gap: "20px",
+  marginTop: "20px"
+}}>
 
-        <div
-          style={{ ...card, padding: "12px" }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-4px)"}
-          onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0px)"}
-        >
-          <h4>Health Score</h4>
-          <h2 style={{ marginTop: "8px" }}>{100 - riskScore * 5}</h2>
-        </div>
+  {/* ❤️ Heart Rate */}
+  <VitalCard
+    title="Heart Rate"
+    value={heartRate}
+    unit="bpm"
+    icon={
+      <FavoriteIcon
+        style={{
+          fontSize: "28px",
+          color: heartRate > thresholds.heartRate ? "#ef4444" : "#10b981"
+        }}
+      />
+    }
+    style={{
+      border:
+        heartRate > thresholds.heartRate
+          ? "2px solid #ef4444"
+          : "1px solid #e5e7eb",
+      background:
+        heartRate > thresholds.heartRate ? "#fef2f2" : "#f9fafb"
+    }}
+  />
 
-        <div
-          style={{ ...card, padding: "12px" }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-4px)"}
-          onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0px)"}
-        >
-          <h4>Risk Score</h4>
-          <h2 style={{ marginTop: "8px" }}>{riskScore}/10</h2>
-        </div>
+  {/* 🔵 SpO2 */}
+  <VitalCard
+    title="SpO2"
+    value={spo2}
+    unit="%"
+    icon={
+      <OpacityIcon
+        style={{
+          fontSize: "28px",
+          color: spo2 < thresholds.spo2 ? "#f59e0b" : "#10b981"
+        }}
+      />
+    }
+    style={{
+      border:
+        spo2 < thresholds.spo2
+          ? "2px solid #f59e0b"
+          : "1px solid #e5e7eb",
+      background:
+        spo2 < thresholds.spo2 ? "#fff7ed" : "#f9fafb"
+    }}
+  />
 
-        <div style={{
-          ...card,
-          padding: "12px",
-          border:
-            status === "EMERGENCY" ? "2px solid #ef4444" :
-            status === "WARNING" ? "2px solid #f59e0b" :
-            "2px solid #10b981"
-        }}>
-          <h4>Status</h4>
-          <h2 style={{ marginTop: "8px" }}>{status}</h2>
-        </div>
+  {/* 🌡 Temperature */}
+  <VitalCard
+    title="Temperature"
+    value={temperature}
+    unit="°C"
+    icon={
+      <ThermostatIcon
+        style={{
+          fontSize: "28px",
+          color:
+            temperature > thresholds.temperature ? "#ef4444" : "#10b981"
+        }}
+      />
+    }
+    style={{
+      border:
+        temperature > thresholds.temperature
+          ? "2px solid #ef4444"
+          : "1px solid #e5e7eb",
+      background:
+        temperature > thresholds.temperature ? "#fef2f2" : "#f9fafb"
+    }}
+  />
 
-        <div
-          style={{ ...card, padding: "12px" }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-4px)"}
-          onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0px)"}
-        >
-          <h4>Alerts</h4>
-          <h2 style={{ marginTop: "8px" }}>
-            {riskLevel === "HIGH" ? 1 : 0}
-          </h2>
-        </div>
-
-      </div>
-
-        {/* ❤️ VITALS */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "20px",
-          marginTop: "20px"
-        }}>
-          
-        <VitalCard
-          title="Heart Rate"
-          value={heartRate}
-          unit="bpm"
-          style={{
-            border: heartRate > thresholds.heartRate
-              ? "2px solid #ef4444"
-              : "1px solid #e5e7eb"
-          }}
-        />
-
-        <VitalCard
-          title="SpO2"
-          value={spo2}
-          unit="%"
-          style={{
-            border: spo2 < thresholds.spo2
-              ? "2px solid #ef4444"
-              : "1px solid #e5e7eb"
-          }}
-        />
-
-        <VitalCard
-          title="Temperature"
-          value={temperature}
-          unit="°C"
-          style={{
-            border: temperature > thresholds.temperature
-              ? "2px solid #ef4444"
-              : "1px solid #e5e7eb"
-          }}
-        />
-        </div>
+</div>
 
         {/* 📈 CHART SECTION */}
         <div style={{

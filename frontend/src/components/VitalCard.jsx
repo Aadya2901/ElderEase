@@ -1,15 +1,36 @@
-export default function VitalCard({ title, value, unit }) {
+export default function VitalCard({ title, value, unit, icon, style }) {
   return (
-    <div style={{
-      padding: "20px",
-      borderRadius: "12px",
-      background: "#f3f4f6",
-      width: "180px",
-      textAlign: "center",
-      boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
-    }}>
-      <h3>{title}</h3>
-      <h1>{value} {unit}</h1>
+    <div
+      style={{
+        padding: "16px",
+        borderRadius: "14px",
+        background: "#f9fafb",
+        border: "1px solid #e5e7eb",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        ...style
+      }}
+    >
+      {/* LEFT SIDE */}
+      <div>
+        <p style={{ color: "#6b7280", fontSize: "14px" }}>{title}</p>
+        <h2 style={{ fontSize: "28px", fontWeight: "700" }}>
+          {value} <span style={{ fontSize: "16px" }}>{unit}</span>
+        </h2>
+      </div>
+
+      {/* RIGHT ICON */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        {icon}
+      </div>
     </div>
   );
 }
