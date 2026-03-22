@@ -42,6 +42,8 @@ export default function PatientDashboard() {
       spo2: patient.spo2,
       temperature: patient.temperature
     });
+
+    localStorage.removeItem("selectedPatient"); // ✅ move here
   }
 }, []);
 
@@ -154,6 +156,8 @@ export default function PatientDashboard() {
       return () => window.removeEventListener("resize", handleResize);
     }, []);
     
+    const selected = JSON.parse(localStorage.getItem("selectedPatient") || "null");
+
   return (
     <div style={{
       padding: isMobile ? "20px" : "30px",
@@ -186,7 +190,6 @@ export default function PatientDashboard() {
         {/* 👤 Patient Info */}
         <div style={{ textAlign: "right" }}>
           <div style={{ fontWeight: "600" }}>
-            const selected = JSON.parse(localStorage.getItem("selectedPatient") || "null");
 
             {selected?.name || localStorage.getItem("userName") || "Margaret Johnson"}
           </div>
