@@ -11,7 +11,7 @@
 
 # 📄 Abstract
 
-ElderEase is a modular, real-time health monitoring system designed to simulate and analyze vital health parameters of elderly individuals.  
+ElderEase is an intelligent IoT-based health monitoring system designed to provide real-time tracking and proactive care for elderly individuals.
 
 Phase 1 establishes a rule-based monitoring architecture using Node-RED, enabling structured health data simulation, validation, classification, and logging.  
 
@@ -87,182 +87,157 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 
 ---
 
+# 📸 Product Screenshots
+
+## 🔐 Authentication System
+
+### 👤 Patient Login
+![Patient Login](docs/images/patient-login.png)
+
+A simple and intuitive login interface for patients.  
+Users can securely access their personal health dashboard with role-based authentication.
+
+---
+
+### 🛡️ Caregiver Login
+![Caregiver Login](docs/images/caregiver-login.png)
+
+Dedicated login for caregivers, enabling access to multiple patient profiles and real-time monitoring capabilities.
+
+---
+
+## 👩‍⚕️ Caregiver Dashboard
+
+![Caregiver Dashboard](docs/images/caregiver-dashboard.png)
+
+Provides a centralized view for caregivers to monitor multiple patients in real-time.
+
+- Displays a list of all patients with their current health status  
+- Color-coded indicators for **NORMAL / WARNING / EMERGENCY** conditions  
+- Quick overview of each patient’s vitals and risk level  
+- Enables seamless navigation to individual patient dashboards  
+- Designed for efficient monitoring and faster decision-making  
+
+---
+
+## 🧓 Patient Dashboard
+
+### ✅ Normal Health State
+![Dashboard Normal](docs/images/dashboard-normal.png)
+
+- Displays real-time vital signs  
+- Shows overall health score and daily summary  
+- Indicates stable condition (**NORMAL**)  
+- Provides live monitoring with last updated timestamp  
+
+---
+
+## 📊 Real-Time Health Monitoring
+
+### 📈 Vital Trends Dashboard
+![Vitals Charts](docs/images/vitals-charts.png)
+
+Displays real-time trends of key health parameters:
+
+- ❤️ Heart Rate  
+- 🫁 SpO₂  
+- 🌡 Temperature  
+
+Supports 24-hour visualization with scalable weekly/monthly views for future expansion.
+
+---
+
+## 🧠 Smart Insights & Alerts
+
+### 🚨 Health Insights Panel
+![Insights](docs/images/insights.png)
+
+Provides intelligent health insights and actionable recommendations:
+
+- 🔴 Critical alerts for emergency conditions  
+- 🟡 Warning indicators for abnormal vitals  
+- 🟢 Informational updates for caregivers  
+
+Enhances decision-making and enables early intervention.
+
+---
+
+## 🚨 Emergency Detection
+
+### ⚠️ Emergency State Dashboard
+![Dashboard Emergency](docs/images/dashboard-emergency.png)
+
+- Prominent emergency alert banner for critical conditions  
+- Real-time detection of abnormal health parameters  
+- Updated risk score and alert indicators  
+- Enables immediate caregiver response  
+
+---
+
+## ⚙️ Customization & Controls
+
+### 🎛️ Thresholds & Simulation
+![Controls](docs/images/controls.png)
+
+- Customize health thresholds for personalized monitoring  
+- Simulate emergency scenarios for testing system behavior  
+- Helps validate alert mechanisms and system responsiveness  
+
+---
+
 # 🏗️ System Architecture 
 
-```
-                ┌────────────────────────────┐
-                │ Vital Data Generation      │
-                │ (Node-RED Simulation)      │
-                │ Phase 1                    │
-                └─────────────┬──────────────┘
-                              │
-                              ▼
-                ┌────────────────────────────┐
-                │ Data Validation Module     │
-                │ Physiological Range Check  │
-                │ Phase 1                    │
-                └─────────────┬──────────────┘
-                              │
-                              ▼
-                ┌────────────────────────────┐
-                │ Decision Engine            │
-                │ Rule-Based Health Status   │
-                │ Phase 1                    │
-                └─────────────┬──────────────┘
-                              │
-                              ▼
-                ┌────────────────────────────┐
-                │ Backend API Layer          │
-                │ Node.js + Express          │
-                │ Phase 2                    │
-                └─────────────┬──────────────┘
-                              │
-                              ▼
-                ┌────────────────────────────┐
-                │ Database Layer             │
-                │ MongoDB Health Records     │
-                │ Phase 3                    │
-                └─────────────┬──────────────┘
-                              │
-                              ▼
-                ┌────────────────────────────┐
-                │ Frontend Monitoring UI     │
-                │ Web Dashboard (React)      │
-                │ Phase 4                    │
-                └─────────────┬──────────────┘
-                              │
-                              ▼
-                ┌────────────────────────────┐
-                │ AI / ML Health Analytics   │
-                │ Anomaly Detection          │
-                │ Predictive Health Scoring  │
-                │ Phase 5                    │
-                └─────────────┬──────────────┘
-                              │
-                              ▼
-                ┌────────────────────────────┐
-                │ Future IoT Hardware Layer  │
-                │ Sensors + ESP32            │
-                │ (Future Extension)         │
-                └────────────────────────────┘
-```
+![ElderEase System Architecture](docs/images/system-architecture.png)
 
-The following layered architecture illustrates both the current prototype (Phase 1) and the planned scalable system evolution across future development phases.
+### ⚙️ System Overview
 
-### Architecture Characteristics:
+ElderEase is designed as a **real-time IoT-based health monitoring system** that enables continuous tracking of elderly patients.
 
-- Event-driven system
-- Flow-based processing using Node-RED
-- API-driven backend architecture
-- Modular layered design
-- Scalable for AI-based analytics
-- Designed for future IoT sensor integration
-
----
-
-### System Workflow
-
-## 🔄 Current Prototype Workflow (Phase 1)
-
-### 1️⃣ Vital Data Simulation
-- Node-RED generates simulated health data  
-- Includes heart rate, SpO₂, and temperature readings  
-
-### 2️⃣ Data Validation
-- Physiological range checks ensure data reliability  
-- Prevents unrealistic sensor values from entering the system  
-
-### 3️⃣ Decision Engine
-- Rule-based health classification  
-- Determines **NORMAL / WARNING / EMERGENCY** health states  
-
-### 4️⃣ Monitoring & Logging
-- Tracks system metrics and emergency events  
-- Maintains runtime monitoring statistics  
-
-### 5️⃣ Dashboard Visualization
-- Displays real-time health data using the **Node-RED dashboard**  
-- Provides live monitoring of patient vitals
-
----
-
-## 🔄 Future IoT Workflow (Planned Extension) 
+### 🔄 System Workflow
 
 1. **Health Sensors**
-   - MAX30102 sensor measures heart rate and SpO₂
-   - Temperature sensor measures body temperature
+   - Wearable sensors capture vital parameters:
+     - Heart Rate  
+     - SpO₂  
+     - Temperature  
 
 2. **IoT Microcontroller**
-   - ESP32 collects sensor readings
-   - Handles data acquisition and preprocessing
+   - ESP32 collects and processes sensor data  
+   - Prepares data for transmission  
 
-3. **Wireless Data Transmission**
-   - Sensor readings are transmitted via Wi-Fi using HTTP APIs
+3. **Wireless Communication**
+   - Data is transmitted via Wi-Fi using HTTP APIs  
 
-4. **Backend Server**
-   - Node.js + Express processes incoming health data
-   - Performs system-level health analysis
+4. **Backend Processing**
+   - Node.js + Express processes incoming data  
+   - Applies health logic and risk evaluation  
 
-5. **Database Storage**
-   - MongoDB stores patient health records
-   - Enables historical health analytics
+5. **Data Storage**
+   - MongoDB stores patient health records  
+   - Enables historical tracking and analytics  
 
-6. **Caregiver Monitoring Dashboard**
-   - Displays real-time patient health metrics
-   - Generates alerts for abnormal conditions
+6. **Monitoring Dashboard**
+   - Caregivers can:
+     - View patient vitals in real-time  
+     - Receive alerts  
+     - Monitor trends and risk scores  
+
+7. **AI Insights Layer**
+   - Generates health insights and recommendations  
+   - Provides predictive risk scoring  
 
 ---
 
-⚠ **Note:**  
-The current Phase 1 prototype uses simulated health data through Node-RED.  
-The IoT hardware layer shown in the architecture diagram represents a **future system extension** and is not part of the current prototype implementation.
+⚠ **Implementation Note**
 
----
+The system is fully designed for real IoT hardware integration.
 
-## 🧩 Future IoT Hardware Integration (Proposed)
+Currently, the prototype uses **Node-RED-based simulation** to generate real-time health data, allowing:
+- Rapid development and testing  
+- Validation of system behavior  
+- Demonstration without physical hardware  
 
-Although Phase 1 uses simulated health data through Node-RED, the architecture is designed to support integration with real IoT health sensors in future phases.
-
-### Proposed Hardware Pipeline
-
-```
-          Health Sensors  
-          (MAX30102 – Heart Rate & SpO₂  
-          Temperature Sensor)
-
-                  ↓
-
-          ESP32 / NodeMCU  
-          IoT Microcontroller
-
-                  ↓
-
-          WiFi / HTTP Transmission
-
-                  ↓
-
-          Backend API Server  
-          (Node.js + Express)
-
-                  ↓
-
-          MongoDB Database
-
-                  ↓
-
-          Caregiver Monitoring Dashboard
-```
-
-### Design Objective
-
-The hardware integration layer will enable:
-
-- Real-time physiological data acquisition
-- Wireless transmission of vital health data
-- Integration with backend health analytics systems
-- Remote caregiver monitoring
-
-Hardware integration is planned as a **future system extension** and is not part of the current prototype implementation.
+The architecture is ready for direct integration with real sensors in future phases.
 
 ---
 
@@ -279,445 +254,6 @@ Hardware integration is planned as a **future system extension** and is not part
 | UI              | Node-RED Dashboard / React (Phase 4) | Monitoring interface                  |
 | Version Control |             Git + GitHub             | Project version management            |
 ```
----
-
-## 🔧 Node-RED Setup
-
-1. Install Node.js (v18+ recommended)
-2. Install Node-RED:
-   npm install -g --unsafe-perm node-red
-3. Start Node-RED:
-   node-red
-4. Open: http://localhost:1880
-
-### 📸 Node-RED Welcome Screen
-
-![Node-RED Welcome](docs/images/node-red-welcome.png)
-
-### 📸 Node-RED Editor Interface
-
-![Node-RED Editor](docs/images/node-red-editor.png)
-
----
-# 📦 Module Breakdown
-
----
-
-## 🔹 1. Vital Data Simulation Module
-
-Simulates real-time wearable sensor data.
-
-Generated Fields:
-
-- `userId`
-- `deviceId`
-- `heartRate`
-- `spo2`
-- `temperature`
-- `timestamp`
-- `systemVersion`
-
-Example Output:
-
-```
-{
-  "userId": "ELD001",
-  "deviceId": "SIM001",
-  "heartRate": 87,
-  "spo2": 96,
-  "temperature": 36.8,
-  "timestamp": "2026-03-01T14:00:00",
-  "systemVersion": "v1.0"
-}
-```
-
-### 📸 Live Simulation Output
-
-The following screenshot shows real-time vital data being generated every 5 seconds using the simulation module.
-
-![Phase 1 Vital Simulation](docs/images/phase1-vital-simulation-output.png)
-
----
-
-## 🔹 2. Data Validation Module
-
-The **Data Validation Module** ensures that all simulated health readings fall within realistic physiological ranges before further processing.
-
-### Validation Ranges
-
-- **Heart Rate:** 40–180 bpm  
-- **SpO₂:** 70–100 %  
-- **Temperature:** 34–42 °C  
-
-### Functionality
-
-- Verifies each incoming reading.
-- Flags invalid or out-of-range values.
-- Logs invalid readings for monitoring.
-- Appends `valid` and `error` fields.
-- Preserves structured payload integrity.
-- Prevents corrupted data from entering the decision engine.
-
-### Example (Invalid Flagged Output)
-
-```
-{
-  "heartRate": 220,
-  "spo2": 95,
-  "temperature": 36.9,
-  "valid": false,
-  "error": "Heart Rate out of realistic range"
-}
-```
-
-📸 Live Validation Output
-![Validation Output](docs/images/phase1-validation-output.png)
-
----
-
-## 🔹 3. Decision Engine Module
-
-The **Decision Engine Module** performs rule-based classification of validated health readings.
-
-It analyzes processed data and determines the real-time health status of the monitored individual.
-
----
-
-### 📊 Status Categories
-
-- NORMAL
-- WARNING
-- EMERGENCY
-
----
-
-### ⚙️ Rule Logic (Phase 1)
-
-- heartRate > 110 → EMERGENCY
-- spo2 < 90 → EMERGENCY
-- temperature > 38°C → EMERGENCY
-- Borderline conditions → WARNING
-- Otherwise → NORMAL
-
----
-
-### 🧠 Decision Output Structure
-
-```json
-{
-  "status": "EMERGENCY",
-  "reason": "Low Oxygen Level",
-  "riskLevel": 3,
-  "timestamp": "2026-03-01T14:00:00"
-}
-```
-
-### 🚦 Risk Level Mapping
-
-| Risk Level | Status |
-|------------|---------|
-| 1 | NORMAL |
-| 2 | WARNING |
-| 3 | EMERGENCY |
-
----
-
-### 🔮 Design Advantages
-
-- Clear separation of validation and classification logic
-- Easy rule modification
-- Expandable to ML-based prediction models
-- Compatible with database persistence in Phase 2
-
-📸 Decision Engine Output
-![Decision Output](docs/images/phase1-decision-output.png)
-
-
----
-
-## 🔹 4. Monitoring & Logging Module
-
-The **Monitoring & Logging Module** enhances system transparency, reliability, and observability.
-
-It tracks system-level metrics and emergency events for operational monitoring.
-
----
-
-### 📈 Metrics Tracked
-
-- Total readings processed
-- Emergency event count
-- Last emergency timestamp
-- Recent reading history (last N records)
-
----
-
-### 💾 Storage Mechanism
-
-- Uses Node-RED flow/global context storage
-- Maintains temporary in-memory logs
-- No external database dependency (Phase 1)
-- Structured for future database integration
-
----
-
-### 📝 Example Logged Record
-
-```json
-{
-  "timestamp": "2026-03-01T14:00:00",
-  "status": "EMERGENCY",
-  "reason": "High Heart Rate",
-  "riskLevel": 3
-}
-```
-
----
-
-### ✅ Architectural Benefits
-
-- Improves system reliability
-- Enables audit-style monitoring
-- Makes prototype production-ready
-- Simplifies transition to persistent storage
-
----
-
-## 🔹 5. Manual Emergency Injection
-
-Testing capability for controlled demo scenarios.
-
-### 🎯 Supported Simulations
-
-- Simulate High Heart Rate
-- Simulate Low SpO₂
-- Simulate Fever
-
-Allows controlled validation of the Decision Engine and edge-case testing without modifying core simulation logic.
-
-### 📸 Manual Emergency Simulation
-Manual injection nodes allow testing emergency conditions instantly.
-
-![Manual Emergency Simulation](docs/images/manual-emergency-injection.png)
----
-
-## 🔹 6. Real-Time Dashboard Module
-
-The **Dashboard Module** provides live visualization of simulated health data using `node-red-dashboard`.
-
-It operates as a dedicated UI layer, separated from core simulation and decision logic.
-
-### 🖥️ Dashboard Features
-
-### 🖥️ Dashboard Features
-
-- Real-time Heart Rate Gauge  
-- Real-time SpO₂ Gauge  
-- Real-time Temperature Gauge  
-- Color-coded Health Status Indicator  
-- Health Risk Score Indicator  
-- Actionable Health Insights Panel  
-- Emergency Alert Banner  
-- Daily Health Summary Counter  
-- Live Heart Rate Monitoring Chart  
-- Vital Trend Analysis (increasing/decreasing patterns)  
-- Manual Emergency Simulation Controls  
-
-### 🔄 Data Flow for Dashboard
-
-```
-Vital Simulation Module
-↓
-Extract Heart Rate Function
-↓
-Heart Rate Gauge (UI)
-```
-
-### 📸 Live Dashboard Output
-The screenshot below demonstrates the real-time dashboard updating dynamically based on simulated vital data.
-
-![Phase 1 Dashboard Output](docs/images/dashboard-live.png)
-
-### 📸 Vital Monitoring Dashboard
-The dashboard displays real-time vital health parameters through interactive gauges.
-
-![Dashboard Gauges](docs/images/dashboard-gauges.png)
-
----
-
-## 🔹 7. Emergency Alert Module
-
-The **Emergency Alert Module** detects abnormal health conditions classified by the Decision Engine and generates visual alerts on the monitoring dashboard.
-
-### Features
-
-* Detects **EMERGENCY** health states
-* Displays alert messages with vital details
-* Enables rapid identification of critical conditions
-* Designed for future integration with notification services
-
-### Example Alert
-
-```
-⚠ EMERGENCY DETECTED
-HR: 121 | SpO₂: 86 | Temp: 37.3
-```
-
-### 📸 Emergency Alert Display
-The dashboard immediately highlights critical health events when abnormal vitals are detected.
-
-![Emergency Alert](docs/images/emergency-alert.png)
-
----
-
-## 🔹 8. Daily Health Summary Module
-
-Tracks system activity and health events during runtime.
-
-### Metrics Displayed
-
-* Total warnings detected
-* Total emergency events
-* Continuous monitoring statistics
-
-### Example Summary
-
-```
-Warnings Today: 87
-Emergencies Today: 212
-```
-
----
-
-## 📊 JSON Schema (Phase 1)
-
-```json
-{
-  "userId": "string",
-  "deviceId": "string",
-  "heartRate": "number",
-  "spo2": "number",
-  "temperature": "number",
-  "status": "string",
-  "reason": "string",
-  "riskLevel": "number",
-  "timestamp": "ISO Date",
-  "systemVersion": "string"
-}
-```
-
-Designed with structured extensibility for database persistence and ML-based analytics in future phases.
-
-### 📸 Daily Health Monitoring Summary
-The system tracks warning and emergency events during runtime.
-
-![Daily Health Summary](docs/images/daily-health-summary.png)
-
----
-
-## 🔹 9. Live Vital Monitoring Chart
-
-A **real-time line chart** visualizes heart rate fluctuations over time.
-
-### Capabilities
-
-* Displays last N heart rate readings
-* Updates automatically every 5 seconds
-* Provides trend visualization for patient monitoring
-
-### Example Visualization
-
-```
-Heart Rate Trend Over Time
-```
-
-### 📸 Live Heart Rate Monitoring Chart
-The chart visualizes heart rate trends over time for continuous monitoring.
-
-![Heart Rate Chart](docs/images/heart-rate-chart.png)
-
---- 
-
-## 🧪 Testing Strategy
-
-| Test Case | Input | Expected Output |
-|------------|--------|----------------|
-| Normal HR | 85 bpm | NORMAL |
-| High HR | 125 bpm | EMERGENCY |
-| Low SpO₂ | 82 % | EMERGENCY |
-| High Temp | 39 °C | EMERGENCY |
-
-Manual inject nodes validate all boundary and emergency conditions.
-
----
-
----
-
-## 🔹 10. Health Risk Score Module
-
-The Health Risk Score Module computes a numerical risk score based on real-time vital readings.
-
-### Functionality
-
-- Aggregates multiple vital parameters into a single score
-- Provides simplified health assessment for caregivers
-- Enhances decision-making capability
-
-### Example
-
-Risk Score: 7 / 10  
-Status: EMERGENCY  
-
----
-
-## 🔹 11. Actionable Health Insights Module
-
-This module transforms raw health data into meaningful recommendations for caregivers.
-
-### Features
-
-- Generates real-time health insights
-- Provides recommended actions based on vitals
-- Supports early intervention and decision support
-
-### Example Insights
-
-⚠ Low Oxygen Level → Check breathing immediately  
-⚠ High Heart Rate → Ask patient to rest  
-
----
-
-## 🔹 12. Emergency Alert Module
-
-Detects critical health conditions and displays real-time emergency alerts.
-
-### Features
-
-- Identifies EMERGENCY states from decision engine
-- Displays prominent alert banner on dashboard
-- Shows detailed vital information
-
-### Example
-
-🚨 EMERGENCY DETECTED  
-HR: 121 | SpO₂: 86 | Temp: 38.2  
-
----
-
-## 🔹 13. Trend Analysis Module
-
-Analyzes recent vital readings to detect patterns over time.
-
-### Features
-
-- Identifies increasing or decreasing trends
-- Provides early warning signals
-- Enhances monitoring intelligence
-
-### Example
-
-📈 Heart Rate Increasing → Possible stress  
-📉 Heart Rate Decreasing → Returning to normal  
 
 ---
 
