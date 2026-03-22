@@ -130,16 +130,22 @@ function PatientCard({ patient }) {
       </div>
 
       {/* BUTTON */}
-      <button style={{
-        marginTop: "15px",
-        width: "100%",
-        padding: "10px",
-        borderRadius: "10px",
-        border: "none",
-        background: "#3b82f6",
-        color: "white",
-        cursor: "pointer"
-      }}>
+      <button
+        onClick={() => {
+          localStorage.setItem("selectedPatient", JSON.stringify(patient));
+          window.location.href = "/dashboard";
+        }}
+        style={{
+          marginTop: "15px",
+          width: "100%",
+          padding: "10px",
+          borderRadius: "10px",
+          border: "none",
+          background: "#3b82f6",
+          color: "white",
+          cursor: "pointer"
+        }}
+      >
         View Details
       </button>
 
