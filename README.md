@@ -34,6 +34,59 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 
 ---
 
+# 🚀 Current Features
+
+### 👩‍⚕️ For Caregivers
+- View all patients in a centralized dashboard  
+- Select a patient and monitor their health instantly  
+- Real-time health status: **NORMAL / WARNING / EMERGENCY**  
+- Quick alerts for abnormal conditions  
+
+### 🧓 For Patients
+- Live health monitoring dashboard  
+- Real-time vitals:
+  - ❤️ Heart Rate  
+  - 🫁 SpO₂  
+  - 🌡 Temperature  
+- Health score and daily summary  
+- AI-powered insights and recommendations  
+
+### 📊 Smart Monitoring
+- Real-time data simulation (auto-updating)  
+- Live charts for vitals trends  
+- Trend detection (increasing / decreasing patterns)  
+- Emergency simulation for testing  
+
+### ⚙️ Customization
+- Set personalized health thresholds  
+- Dynamic alerts based on user-specific limits  
+
+### 📱 UI/UX
+- Fully responsive (mobile + desktop)  
+- Clean and intuitive dashboard design  
+- Interactive components and alerts  
+
+---
+
+# 🎥 Demo
+
+🚀 **Live Demo:**  
+👉 [ElderEase Live App](https://elder-ease-rose.vercel.app/)
+
+📹 **Demo Video:** Coming Soon!
+
+---
+
+### Demo Flow
+1. Open caregiver dashboard  
+2. Select a patient  
+3. View real-time vitals  
+4. Observe alerts & risk score  
+5. Simulate emergency  
+6. Customize thresholds  
+
+---
+
 # 🏗️ System Architecture 
 
 ```
@@ -105,10 +158,7 @@ The following layered architecture illustrates both the current prototype (Phase
 - Scalable for AI-based analytics
 - Designed for future IoT sensor integration
 
-### 📊 System Architecture Diagram
-The following diagram illustrates the complete scalable architecture of the ElderEase monitoring system.
-
-![ElderEase System Architecture](docs/images/hardware-system-architecture.png)
+---
 
 ### System Workflow
 
@@ -876,6 +926,21 @@ Stores medical appointments and reminders.
 ✔ Implemented trend analysis for vital monitoring  
 ```
 
+### Week 3 (Completed)
+```
+✔ Developed Caregiver Dashboard with patient overview  
+✔ Implemented patient selection and navigation to patient dashboard  
+✔ Integrated localStorage for passing selected patient data  
+✔ Initialized dashboard vitals dynamically from selected patient  
+✔ Fixed data override issues between simulation and selected patient  
+✔ Displayed selected patient name on dashboard dynamically  
+✔ Added responsive UI improvements for mobile devices  
+✔ Implemented customizable health thresholds UI  
+✔ Enhanced real-time charts for heart rate, SpO₂, and temperature  
+✔ Improved overall UI/UX and component structure  
+✔ Cleaned up state management for selectedPatient handling  
+✔ Structured commits following conventional commit standards  
+```
 ---
 
 ## 🔐 FOSS Compliance
