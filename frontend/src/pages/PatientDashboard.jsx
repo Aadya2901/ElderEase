@@ -186,7 +186,9 @@ export default function PatientDashboard() {
         {/* 👤 Patient Info */}
         <div style={{ textAlign: "right" }}>
           <div style={{ fontWeight: "600" }}>
-            {localStorage.getItem("userName") || "Margaret Johnson"}
+            const selected = JSON.parse(localStorage.getItem("selectedPatient") || "null");
+
+            {selected?.name || localStorage.getItem("userName") || "Margaret Johnson"}
           </div>
           <div style={{ fontSize: "12px", color: "#6b7280" }}>
             Patient
