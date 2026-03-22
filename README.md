@@ -1,5 +1,7 @@
 # 💖 ElderEase – Intelligent Senior Health Monitoring System
 
+> Real-time IoT-based elderly health monitoring with proactive alerts and caregiver support.
+
 ![Version](https://img.shields.io/badge/version-v1.1-blue)
 ![Architecture](https://img.shields.io/badge/architecture-modular-success)
 ![Phase](https://img.shields.io/badge/phase-2-orange)
@@ -40,7 +42,7 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 - View all patients in a centralized dashboard  
 - Select a patient and monitor their health instantly  
 - Real-time health status: **NORMAL / WARNING / EMERGENCY**  
-- Quick alerts for abnormal conditions  
+- Instant alerts for abnormal health conditions
 
 ### 🧓 For Patients
 - Live health monitoring dashboard  
@@ -49,7 +51,7 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
   - 🫁 SpO₂  
   - 🌡 Temperature  
 - Health score and daily summary  
-- AI-powered insights and recommendations  
+- Smart health insights and recommendations
 
 ### 📊 Smart Monitoring
 - Real-time data simulation (auto-updating)  
@@ -71,7 +73,7 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 # 🎥 Demo
 
 🚀 **Live Demo:**  
-👉 [ElderEase Live App](https://elder-ease-rose.vercel.app/)
+👉 [Visit the ElderEase App](https://elder-ease-rose.vercel.app/)
 
 📹 **Demo Video:** Coming Soon!
 
@@ -192,6 +194,8 @@ Enhances decision-making and enables early intervention.
 ### ⚙️ System Overview
 
 ElderEase is designed as a **real-time IoT-based health monitoring system** that enables continuous tracking of elderly patients.
+
+This architecture represents a scalable, real-world deployment of ElderEase with IoT integration.
 
 ### 🔄 System Workflow
 
