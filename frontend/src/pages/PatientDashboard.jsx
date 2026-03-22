@@ -79,6 +79,8 @@ export default function PatientDashboard() {
 
     }, 3000);
 
+    localStorage.removeItem("selectedPatient");
+
     return () => clearInterval(interval);
   }, []);
 
