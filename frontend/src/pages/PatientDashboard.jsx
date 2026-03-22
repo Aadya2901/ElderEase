@@ -30,6 +30,20 @@ export default function PatientDashboard() {
     spo2: 95,
     temperature: 36.8
   });
+  
+  useEffect(() => {
+  const saved = localStorage.getItem("selectedPatient");
+
+  if (saved) {
+    const patient = JSON.parse(saved);
+
+    setData({
+      heartRate: patient.heartRate,
+      spo2: patient.spo2,
+      temperature: patient.temperature
+    });
+  }
+}, []);
 
   const [thresholds, setThresholds] = useState({
     heartRate: 110,
@@ -57,7 +71,10 @@ export default function PatientDashboard() {
 
       indexRef.current = (indexRef.current + 1) % hours.length;
 
-      setData(newData);
+      setData(prev => ({
+        ...prev,
+        ...newData
+      }));
       setHistory(prev => [...prev.slice(-9), newData]);
 
     }, 3000);
