@@ -108,7 +108,8 @@ export default function Login() {
                 "userName",
                 role === "patient" ? "Margaret Johnson" : "Sarah Johnson"
               );
-              window.location.href = "/dashboard";
+              window.location.href =
+                role === "patient" ? "/dashboard" : "/caregiver";
             }}
           >
             Sign In
