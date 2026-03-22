@@ -30,6 +30,8 @@ export default function PatientDashboard() {
     spo2: 95,
     temperature: 36.8
   });
+
+  const [selectedPatient, setSelectedPatient] = useState(null);
   
   useEffect(() => {
   const saved = localStorage.getItem("selectedPatient");
@@ -43,7 +45,9 @@ export default function PatientDashboard() {
       temperature: patient.temperature
     });
 
-    localStorage.removeItem("selectedPatient"); // ✅ move here
+    setSelectedPatient(patient);
+
+    localStorage.removeItem("selectedPatient"); 
   }
 }, []);
 
@@ -80,8 +84,6 @@ export default function PatientDashboard() {
       setHistory(prev => [...prev.slice(-9), newData]);
 
     }, 3000);
-
-    localStorage.removeItem("selectedPatient");
 
     return () => clearInterval(interval);
   }, []);
@@ -146,17 +148,21 @@ export default function PatientDashboard() {
 
     const [isMobile, setIsMobile] = useState(false);
 
-    useEffect(() => {
+      useEffect(() => {
       const handleResize = () => {
         setIsMobile(window.innerWidth < 768);
       };
 
-      handleResize(); // 👈 add this
+      handleResize(); 
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }, []);
-    
-    const selected = JSON.parse(localStorage.getItem("selectedPatient") || "null");
+
+    const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+      setUserName(localStorage.getItem("userName"));
+    }, []);
 
   return (
     <div style={{
@@ -191,7 +197,7 @@ export default function PatientDashboard() {
         <div style={{ textAlign: "right" }}>
           <div style={{ fontWeight: "600" }}>
 
-            {selected?.name || localStorage.getItem("userName") || "Margaret Johnson"}
+            {selectedPatient?.name || userName || "Margaret Johnson"}
           </div>
           <div style={{ fontSize: "12px", color: "#6b7280" }}>
             Patient
