@@ -1,29 +1,20 @@
 import { useEffect, useState, useRef } from "react";
 import VitalCard from "../components/dashboard/VitalCard";
-import StatusBadge from "../components/StatusBadge";
-import RiskScore from "../components/RiskScore";
 import AlertBanner from "../components/dashboard/AlertBanner";
 import HeartRateChart from "../components/dashboard/HeartRateChart";
 import AIInsightsCard from "../components/dashboard/AIInsightsCard";
+import HeaderSection from "../components/dashboard/HeaderSection";
 import { predictRisk, generateInsights, getRiskLevel } from "../utils/aiModel";
-import {
-  LineChart, Line,
-  XAxis, YAxis,
-  Tooltip
-} from "recharts";
+import { getAIResponse } from "../services/aiService";
+import Navbar from "../components/common/Navbar";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
 import WarningIcon from "@mui/icons-material/Warning";
 import ErrorIcon from "@mui/icons-material/Error";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-import LogoutIcon from "@mui/icons-material/Logout";
 import SaveIcon from "@mui/icons-material/Save";
-import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
 
 import { colors } from "../styles/colors";
 
@@ -34,9 +25,29 @@ export default function PatientDashboard() {
     temperature: 36.8
   });
 
+  const { heartRate, spo2, temperature } = data;
+
   const [selectedPatient, setSelectedPatient] = useState(null);
   
-  
+  const [fallDetected, setFallDetected] = useState(false);
+
+  const [aiData, setAIData] = useState(null);
+
+  useEffect(() => {
+  const fetchAI = async () => {
+    const res = await getAIResponse({
+      heartRate,
+      spo2,
+      temperature,
+      fallDetected
+    });
+
+    setAIData(res);
+  };
+
+    fetchAI();
+  }, [heartRate, spo2, temperature, fallDetected]);
+
   useEffect(() => {
   const saved = localStorage.getItem("selectedPatient");
 
@@ -73,7 +84,7 @@ export default function PatientDashboard() {
     const interval = setInterval(() => {
 
       const newData = {
-        time: hours[indexRef.current], // ✅ stable labels
+        time: hours[indexRef.current], 
         heartRate: Math.floor(70 + Math.random() * 50),
         spo2: Math.floor(88 + Math.random() * 10),
         temperature: parseFloat((36 + Math.random() * 2).toFixed(1))
@@ -92,8 +103,6 @@ export default function PatientDashboard() {
     return () => clearInterval(interval);
   }, []);
 
-  const { heartRate, spo2, temperature } = data;
-
   // 🧠 AI LOGIC
   const riskScore = predictRisk(
     heartRate,
@@ -105,19 +114,12 @@ export default function PatientDashboard() {
   const riskLevel = getRiskLevel(riskScore);
   const healthScore = 100 - riskScore * 5;
 
-  const insights = generateInsights(
-    heartRate, 
-    spo2, 
-    temperature, 
-    history,
-    thresholds,
-    riskScore
-  );
-
   const lastUpdated = new Date().toLocaleTimeString();
 
   const status =
-    riskLevel === "HIGH"
+    fallDetected
+      ? "EMERGENCY"
+      : riskLevel === "HIGH"
       ? "EMERGENCY"
       : riskLevel === "MEDIUM"
       ? "WARNING"
@@ -140,30 +142,6 @@ export default function PatientDashboard() {
     borderRadius: "10px",
     border: `1px solid ${colors.ui.borderLight}`,
     fontSize: "14px"
-  };
-
-   const getIcon = (msg) => {
-    if (msg.includes("🚨")) {
-      return <ErrorIcon style={{ color: colors.status.danger, fontSize: "22px" }} />;
-    }
-
-    if (msg.includes("⚠")) {
-      return <WarningIcon style={{ color: colors.status.warning, fontSize: "22px" }} />;
-    }
-
-    if (msg.includes("📈")) {
-      return <TrendingUpIcon style={{ color: colors.brand.secondary, fontSize: "22px" }} />;
-    }
-
-    if (msg.includes("📉")) {
-      return <TrendingDownIcon style={{ color: colors.brand.secondary, fontSize: "22px" }} />;
-    }
-
-    if (msg.includes("📩")) {
-      return <NotificationsActiveIcon style={{ color: colors.brand.primary, fontSize: "22px" }} />;
-    }
-
-    return <CheckCircleIcon style={{ color: colors.status.success, fontSize: "22px" }} />;
   };
 
     const [isMobile, setIsMobile] = useState(false);
@@ -192,62 +170,11 @@ export default function PatientDashboard() {
       minHeight: "100vh"
     }}>
       
-      {/* 🔷 NAVBAR */}
-      <div style={{
-        background: colors.background.card,
-        boxShadow: colors.ui.shadowCard,
-        padding: isMobile ? "12px 16px" : "15px 30px",
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        gap: isMobile ? "10px" : "0",
-        justifyContent: "space-between",
-        alignItems: isMobile ? "flex-start" : "center",
-        }}>
-
-        <h2 style={{ fontWeight: "700" }}>ElderEase</h2>
-        
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "15px",
-          width: isMobile ? "100%" : "auto",
-          justifyContent: isMobile ? "space-between" : "flex-end"
-        }}>
-
-        {/* 👤 Patient Info */}
-        <div style={{ textAlign: "right" }}>
-          <div style={{ fontWeight: "600" }}>
-
-            {selectedPatient?.name || userName || "Margaret Johnson"}
-          </div>
-          <div style={{ fontSize: "12px", color: colors.text.secondary }}>
-            Patient
-          </div>
-        </div>
-
-        {/* 🚪 Logout ICON button */}
-        <button
-          onClick={() => {
-            localStorage.clear();
-            window.location.href = "/";
-          }}
-          style={{
-            padding: "8px",
-            borderRadius: "8px",
-            border: "none",
-            background: colors.background.hover,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
-          <LogoutIcon style={{ fontSize: "20px", color: colors.text.primary }} />
-        </button>
-
-      </div>
-
-      </div>
+    <Navbar
+      isMobile={isMobile}
+      userName={userName}
+      selectedPatient={selectedPatient}
+    />
 
       <div style={{ padding: "20px" }}>
 
@@ -395,140 +322,28 @@ export default function PatientDashboard() {
         {/* 🚨 ALERT */}
         <AlertBanner status={status} />
 
-        <div style={{
-          marginTop: "20px",
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          gap: isMobile ? "12px" : "0",
-          justifyContent: "space-between",
-          alignItems: isMobile ? "flex-start" : "center"
-        }}>
-
-        {/* LEFT */}
-        <div>
-          <h1 style={{
-            fontSize: isMobile ? "24px" : "28px",
-            fontWeight: "700",
-            margin: 0
-          }}>
-            My Health Dashboard
-          </h1>
-
-          <p style={{
-            color: colors.text.secondary,
-            marginTop: "4px",
-            fontSize: "14px"
-          }}>
-            Real-time health monitoring
-          </p>
-
-          {/* 🔽 below line */}
+        {fallDetected && (
           <div style={{
-            marginTop: "6px",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            fontSize: "13px",
-            color: colors.text.secondary
+            marginTop: "12px",
+            padding: "12px",
+            background: colors.status.dangerBg,
+            color: colors.status.danger,
+            border: `1px solid ${colors.status.danger}`,
+            borderRadius: "10px"
           }}>
-            <span>
-              Last Updated: <strong style={{ color: colors.text.primary }}>{lastUpdated}</strong>
-            </span>
-
-            <span style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              flexWrap: "wrap",
-              padding: "4px 10px",
-              borderRadius: "999px",
-              background: colors.status.successBg,
-              color: colors.status.success,
-              fontWeight: "500"
-            }}>
-              ● Live Monitoring
-            </span>
+            🚨 Fall detected! Immediate attention required.
           </div>
-        </div>
+        )}
 
-        {/* RIGHT SIDE */}
-        <div style={{
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          width: isMobile ? "100%" : "auto",
-          gap: isMobile ? "14px" : "12px",
-          alignItems: isMobile ? "stretch" : "center"
-        }}>
-
-          {/* ⚙ BUTTON */}
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            style={{
-              padding: "8px 14px",
-              borderRadius: "10px",
-              border: "none",
-              background: colors.background.hover,
-              cursor: "pointer",
-              boxShadow: colors.ui.shadowCard,
-              fontWeight: "500"
-            }}
-          >
-            ⚙ Custom Thresholds
-          </button>
-
-          {/* 🚨 SIMULATE EMERGENCY */}
-          <button
-            onMouseOver={(e) =>
-              e.currentTarget.style.background = colors.status.danger
-            }
-            onMouseOut={(e) =>
-              e.currentTarget.style.background = colors.status.danger
-            }
-            onClick={() =>
-              setData({ heartRate: 140, spo2: 85, temperature: 39 })
-            }
-            style={{
-              padding: "8px 14px",
-              borderRadius: "10px",
-              border: "none",
-              background: colors.status.danger,
-              color: "white",
-              cursor: "pointer",
-              fontWeight: "600",
-              display: "flex",
-              alignItems: "center",
-              boxShadow: colors.ui.shadowCard,
-              gap: "6px"
-            }}
-          >
-            <CrisisAlertIcon style={{ fontSize: "18px" }} />
-            Simulate
-          </button>
-
-          {/* 🟢 STATUS */}
-          <div style={{
-            padding: "10px 20px",
-            borderRadius: "6px",
-            fontSize: "14px",
-            fontWeight: "700",
-            width: isMobile ? "100%" : "auto",
-            textAlign: "center",
-            background:
-              status === "EMERGENCY" ? colors.status.dangerBg :
-              status === "WARNING" ? colors.status.warningBg :
-              colors.status.successBg,
-
-            color:
-              status === "EMERGENCY" ? colors.status.danger :
-              status === "WARNING" ? colors.status.warning :
-              colors.status.success
-          }}>
-            {status}
-          </div>
-
-        </div>
-
-      </div>
+        <HeaderSection
+          isMobile={isMobile}
+          lastUpdated={lastUpdated}
+          status={status}
+          setShowSettings={setShowSettings}
+          setData={setData}
+          setFallDetected={setFallDetected}
+          fallDetected={fallDetected}
+        />
 
         {/* 📊 HEALTH SUMMARY */}
         <div style={{
@@ -695,10 +510,16 @@ export default function PatientDashboard() {
 </div>
 
         {/* 📈 AI INSIGHTS */}
-        <AIInsightsCard 
-          riskLevel={riskLevel}
-          insights={insights}
-        />
+        {!aiData ? (
+          <p style={{ marginTop: "20px" }}>🧠 Analyzing patient data...</p>
+        ) : (
+          <AIInsightsCard
+            riskLevel={aiData.riskLevel}
+            explanation={aiData.explanation}
+            medical={aiData.medical}
+            actions={aiData.actions}
+          />
+        )}
 
         {/* 📈 CHART SECTION */}
         <div style={{
