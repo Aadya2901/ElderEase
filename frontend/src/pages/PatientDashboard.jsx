@@ -1,16 +1,13 @@
 import { useEffect, useState, useRef } from "react";
-import VitalCard from "../components/dashboard/VitalCard";
 import AlertBanner from "../components/dashboard/AlertBanner";
 import HeartRateChart from "../components/dashboard/HeartRateChart";
+import VitalsGrid from "../components/dashboard/VitalsGrid";
 import AIInsightsCard from "../components/dashboard/AIInsightsCard";
 import HeaderSection from "../components/dashboard/HeaderSection";
-import { predictRisk, generateInsights, getRiskLevel } from "../utils/aiModel";
+import { predictRisk, getRiskLevel } from "../utils/aiModel";
 import { getAIResponse } from "../services/aiService";
 import Navbar from "../components/common/Navbar";
 
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import OpacityIcon from "@mui/icons-material/Opacity";
-import ThermostatIcon from "@mui/icons-material/Thermostat";
 import WarningIcon from "@mui/icons-material/Warning";
 import ErrorIcon from "@mui/icons-material/Error";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
@@ -413,101 +410,14 @@ export default function PatientDashboard() {
 
         </div>
 
-{/* ❤️ VITALS */}
-<div style={{
-  display: "grid",
-  gridTemplateColumns: isMobile
-    ? "1fr"
-    : "repeat(auto-fit, minmax(280px, 1fr))",
-  gap: "20px",
-  marginTop: "20px"
-}}>
+        <VitalsGrid
+          heartRate={heartRate}
+          spo2={spo2}
+          temperature={temperature}
+          thresholds={thresholds}
+          isMobile={isMobile}
+        />
 
-  {/* ❤️ Heart Rate */}
-  <VitalCard
-    title="Heart Rate"
-    value={heartRate}
-    unit="bpm"
-    icon={
-      <FavoriteIcon
-        style={{
-          fontSize: "28px",
-          color: heartRate > thresholds.heartRate
-            ? colors.status.danger 
-            : colors.status.success
-        }}
-      />
-    }
-    style={{
-  border:
-    heartRate > thresholds.heartRate
-      ? `2px solid ${colors.status.danger}`
-      : `1px solid ${colors.ui.borderLight}`,
-
-  background:
-    heartRate > thresholds.heartRate
-      ? colors.status.dangerBg
-      : colors.background.card
-}}
-  />
-
-  {/* 🔵 SpO2 */}
-  <VitalCard
-    title="SpO2"
-    value={spo2}
-    unit="%"
-    icon={
-      <OpacityIcon
-        style={{
-          fontSize: "28px",
-          color: spo2 < thresholds.spo2
-            ? colors.status.warning
-            : colors.status.success
-        }}
-      />
-    }
-    style={{
-      border:
-        spo2 < thresholds.spo2
-          ? `2px solid ${colors.status.warning}`
-          : `1px solid ${colors.ui.borderLight}`,
-
-      background:
-        spo2 < thresholds.spo2
-          ? colors.status.warningBg
-          : colors.background.card
-    }}
-  />
-
-  {/* 🌡 Temperature */}
-  <VitalCard
-    title="Temperature"
-    value={temperature}
-    unit="°C"
-    icon={
-      <ThermostatIcon
-        style={{
-          fontSize: "28px",
-          color:
-            temperature > thresholds.temperature
-              ? colors.status.danger
-              : colors.status.success
-        }}
-      />
-    }
-    style={{
-      border:
-        temperature > thresholds.temperature
-          ? `2px solid ${colors.status.danger}`
-          : `1px solid ${colors.ui.borderLight}`,
-
-      background:
-        temperature > thresholds.temperature
-          ? colors.status.dangerBg
-          : colors.background.card
-    }}
-  />
-</div>
 
         {/* 📈 AI INSIGHTS */}
         {!aiData ? (
