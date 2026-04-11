@@ -6,6 +6,7 @@ import AIInsightsCard from "../components/dashboard/AIInsightsCard";
 import HeaderSection from "../components/dashboard/HeaderSection";
 import SettingsModal from "../components/dashboard/SettingsModal";
 import { predictRisk, getRiskLevel } from "../utils/aiModel";
+import MedicationCard from "../components/dashboard/MedicationCard";
 import { getAIResponse } from "../services/aiService";
 import Navbar from "../components/common/Navbar";
 
@@ -255,7 +256,7 @@ export default function PatientDashboard() {
             <TrendingUpIcon style={{ fontSize: "18px", color: colors.brand.secondary }} />
             Health Score:
             <span style={{ color: colors.status.danger, fontWeight: "600" }}>
-              {100 - riskScore * 5}/100
+              {healthScore}/100
             </span>
           </p>
 
@@ -299,6 +300,9 @@ export default function PatientDashboard() {
           />
         )}
 
+        {/* NEDICATION SECTION */}
+        <MedicationCard />
+        
         {/* 📈 CHART SECTION */}
         <div style={{
           display: "grid",
