@@ -4,6 +4,7 @@ import HeartRateChart from "../components/dashboard/HeartRateChart";
 import VitalsGrid from "../components/dashboard/VitalsGrid";
 import AIInsightsCard from "../components/dashboard/AIInsightsCard";
 import HeaderSection from "../components/dashboard/HeaderSection";
+import SettingsModal from "../components/dashboard/SettingsModal";
 import { predictRisk, getRiskLevel } from "../utils/aiModel";
 import { getAIResponse } from "../services/aiService";
 import Navbar from "../components/common/Navbar";
@@ -11,7 +12,6 @@ import Navbar from "../components/common/Navbar";
 import WarningIcon from "@mui/icons-material/Warning";
 import ErrorIcon from "@mui/icons-material/Error";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import SaveIcon from "@mui/icons-material/Save";
 
 import { colors } from "../styles/colors";
 
@@ -175,146 +175,14 @@ export default function PatientDashboard() {
 
       <div style={{ padding: "20px" }}>
 
-        {showSettings && (
-  <div style={{
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "20px"
-  }}>
-    <div style={{
-      ...card,
-      width: isMobile ? "100%" : "70%",
-      padding: isMobile ? "16px" : "24px",
-      maxWidth: "900px",
-      borderRadius: "16px",
-      boxShadow: colors.ui.shadowHover
-    }}>
-
-      {/* 🔝 HEADER */}
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "20px"
-      }}>
-        <h3 style={{ margin: 0 }}>Personalized Thresholds</h3>
-
-        <span
-          onClick={() => setShowSettings(false)}
-          style={{ cursor: "pointer", fontSize: "18px" }}
-        >
-          ✕
-        </span>
-      </div>
-
-      {/* 📊 INPUT GRID */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
-        gap: "20px"
-      }}>
-
-        {/* ❤️ Heart Rate */}
-        <div>
-          <label>Heart Rate Max</label>
-          <input
-            type="number"
-            value={thresholds.heartRate}
-            onChange={(e) =>
-              setThresholds({ ...thresholds, heartRate: Number(e.target.value) })
-            }
-            style={inputStyle}
-          />
-        </div>
-
-        {/* 🔵 SpO2 */}
-        <div>
-          <label>SpO2 Min (%)</label>
-          <input
-            type="number"
-            value={thresholds.spo2}
-            onChange={(e) =>
-              setThresholds({ ...thresholds, spo2: Number(e.target.value) })
-            }
-            style={inputStyle}
-          />
-        </div>
-
-        {/* 🌡 Temperature */}
-        <div>
-          <label>Temperature Max (°C)</label>
-          <input
-            type="number"
-            value={thresholds.temperature}
-            onChange={(e) =>
-              setThresholds({ ...thresholds, temperature: Number(e.target.value) })
-            }
-            style={inputStyle}
-          />
-        </div>
-
-      </div>
-
-      {/* 🔘 BUTTONS */}
-      <div style={{
-        marginTop: "20px",
-        display: "flex",
-        gap: "12px"
-      }}>
-
-        {/*  SAVE */}
-        <button 
-          onClick={() => {
-            setShowSettings(false);
-            alert("Thresholds saved!");
-          }}
-          onMouseOver={(e) =>
-            e.currentTarget.style.background = colors.brand.primaryHover
-          }
-          onMouseOut={(e) =>
-            e.currentTarget.style.background = colors.status.success
-          }
-          style={{
-            padding: "10px 16px",
-            borderRadius: "10px",
-            border: "none",
-            background: colors.status.success,
-            color: colors.text.white,
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            cursor: "pointer",
-            fontWeight: "600"
-          }}>
-            <SaveIcon style={{ fontSize: "18px" }} />
-            Save
-        </button>
-
-        {/* 🔄 RESET */}
-        <button
-          onClick={() =>
-            setThresholds({
-              heartRate: 110,
-              spo2: 92,
-              temperature: 38
-            })
-          }
-          style={{
-            padding: "10px 16px",
-            borderRadius: "10px",
-            border: `1px solid ${colors.ui.borderLight}`,
-            background: colors.background.card,
-            cursor: "pointer"
-          }}
-        >
-          Reset Defaults
-        </button>
-
-      </div>
-
-    </div>
-  </div>
-)}
+      {showSettings && (
+      <SettingsModal
+        isMobile={isMobile}
+        thresholds={thresholds}
+        setThresholds={setThresholds}
+        setShowSettings={setShowSettings}
+      />
+    )}
 
         {/* 🚨 ALERT */}
         <AlertBanner status={status} />
