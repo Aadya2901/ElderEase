@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+  
   const [role, setRole] = useState("patient");
 
   const [isMobile, setIsMobile] = useState(false);
@@ -108,8 +111,8 @@ export default function Login() {
                 "userName",
                 role === "patient" ? "Margaret Johnson" : "Sarah Johnson"
               );
-              window.location.href =
-                role === "patient" ? "/dashboard" : "/caregiver";
+
+              navigate(role === "patient" ? "/dashboard" : "/caregiver");
             }}
           >
             Sign In

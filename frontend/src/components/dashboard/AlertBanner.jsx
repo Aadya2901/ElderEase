@@ -6,7 +6,9 @@ export default function AlertBanner({ status }) {
   return (
     <div style={{
       display: "flex",
-      alignItems: "center",   // ✅ vertical alignment FIX
+      marginTop: "20px",
+      marginBottom: "10px",
+      alignItems: "center",   
       justifyContent: "center",
       gap: "10px",
       background: "#ef4444",
