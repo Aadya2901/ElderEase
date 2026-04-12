@@ -41,3 +41,31 @@ export default function ProfileInfoCard({ profile, setProfile }) {
     </div>
   );
 }
+
+const card = {
+  background: "white",
+  padding: "20px",
+  borderRadius: "14px",
+  marginTop: "20px",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+};
+
+const field = {
+  marginBottom: "14px"
+};
+
+const label = {
+  fontSize: "13px",
+  fontWeight: "600",
+  color: "#6b7280",
+  display: "block",
+  marginBottom: "4px"
+};
+
+const input = {
+  width: "100%",
+  padding: "10px",
+  borderRadius: "8px",
+  border: "1px solid #ddd",
+  outline: "none"
+};
