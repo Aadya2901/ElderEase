@@ -140,15 +140,16 @@ export default function Login() {
             Sign In
           </button>
           
-          <p style={styles.demoText}>
+          <p style={{ marginTop: "10px", fontSize: "14px", textAlign: "center" }}>
             Don’t have an account?{" "}
             <span
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/signup")}
               style={{ color: "#10b981", cursor: "pointer" }}
             >
               Sign up
             </span>
           </p>
+    
         </div>
 
       </div>

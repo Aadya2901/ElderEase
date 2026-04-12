@@ -16,7 +16,7 @@ function App() {
         <Route path="/dashboard" element={<PatientDashboard />} />
         <Route path="/caregiver" element={<CaregiverDashboard />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/" element={<Signup />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
