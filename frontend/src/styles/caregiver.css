@@ -1,0 +1,137 @@
+.caregiver {
+  padding: 100px 20px;
+  background: #f9fafb;
+}
+
+.caregiver-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .caregiver-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* LEFT SIDE */
+.caregiver-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #dbeafe;
+  color: #2563eb;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.caregiver-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.caregiver-desc {
+  margin-top: 10px;
+  color: #6b7280;
+}
+
+/* LIST */
+.caregiver-list {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.caregiver-item {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  background: #dbeafe;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-title {
+  font-weight: 600;
+}
+
+.item-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* RIGHT DASHBOARD */
+.dashboard {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.dashboard-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* PATIENT CARD */
+.patient {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 14px;
+  background: #f3f4f6;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.patient:hover {
+  background: #e5e7eb;
+}
+
+.patient-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0e7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.status.stable {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
