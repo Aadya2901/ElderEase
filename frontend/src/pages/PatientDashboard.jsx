@@ -4,7 +4,7 @@ import HeartRateChart from "../components/dashboard/HeartRateChart";
 import VitalsGrid from "../components/dashboard/VitalsGrid";
 import AIInsightsCard from "../components/dashboard/AIInsightsCard";
 import HeaderSection from "../components/dashboard/HeaderSection";
-import SettingsModal from "../components/dashboard/SettingsModal";
+import { downloadReport } from "../utils/report";
 import { predictRisk, getRiskLevel } from "../utils/aiModel";
 import MedicationCard from "../components/dashboard/MedicationCard";
 import { getAIResponse } from "../services/aiService";
@@ -196,13 +196,9 @@ export default function PatientDashboard() {
           isMobile={isMobile}
           lastUpdated={lastUpdated}
           status={status}
-          setShowSettings={setShowSettings}
           setData={setData}
           setFallDetected={setFallDetected}
           fallDetected={fallDetected}
-          showSettings={showSettings}        
-          thresholds={thresholds}            
-          setThresholds={setThresholds}
         />
 
         {/* 📊 HEALTH SUMMARY */}
@@ -286,15 +282,48 @@ export default function PatientDashboard() {
         {!aiData ? (
           <p style={{ marginTop: "20px" }}>🧠 Analyzing patient data...</p>
         ) : (
-          <AIInsightsCard
-            riskLevel={aiData.riskLevel}
-            explanation={aiData.explanation}
-            medical={aiData.medical}
-            actions={aiData.actions}
-          />
+          <>
+            <AIInsightsCard
+              riskLevel={aiData?.riskLevel || riskLevel}
+              explanation={aiData?.explanation}
+              medical={aiData?.medical}
+              actions={aiData?.actions}
+            />
+
+            {/* 📄 DOWNLOAD REPORT */}
+            <div style={{
+              display: "flex",
+              justifyContent: "center"
+            }}>
+              <button
+                onClick={() =>
+                  downloadReport({
+                    userName,
+                    heartRate,
+                    spo2,
+                    temperature,
+                    riskLevel,
+                    aiData
+                  })
+                }
+                style={{
+                  padding: "10px 16px",
+                  borderRadius: "10px",
+                  border: "none",
+                  background: colors.brand.primary,
+                  color: "white",
+                  cursor: "pointer",
+                  fontWeight: "600",
+                  marginTop: "20px"
+                }}
+              >
+                📄 Download Health Report
+              </button>
+            </div>
+          </>
         )}
 
-        {/* NEDICATION SECTION */}
+        {/* MEDICATION SECTION */}
         <MedicationCard />
 
         {/* 📈 CHART SECTION */}
