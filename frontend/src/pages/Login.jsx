@@ -10,7 +10,7 @@ export default function Login() {
   const [role, setRole] = useState("patient");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -86,8 +86,6 @@ export default function Login() {
         <div style={{ marginTop: "20px" }}>
           
           <label style={styles.label}>Email</label>
-          const [email, setEmail] = useState("");
-          const [password, setPassword] = useState("");
           <input
             type="email"
             value={email}
