@@ -176,15 +176,6 @@ export default function PatientDashboard() {
 
       <div style={{ padding: "20px" }}>
 
-      {showSettings && (
-      <SettingsModal
-        isMobile={isMobile}
-        thresholds={thresholds}
-        setThresholds={setThresholds}
-        setShowSettings={setShowSettings}
-      />
-    )}
-
         {/* 🚨 ALERT */}
         <AlertBanner status={status} />
 
@@ -209,6 +200,9 @@ export default function PatientDashboard() {
           setData={setData}
           setFallDetected={setFallDetected}
           fallDetected={fallDetected}
+          showSettings={showSettings}        
+          thresholds={thresholds}            
+          setThresholds={setThresholds}
         />
 
         {/* 📊 HEALTH SUMMARY */}
@@ -302,7 +296,7 @@ export default function PatientDashboard() {
 
         {/* NEDICATION SECTION */}
         <MedicationCard />
-        
+
         {/* 📈 CHART SECTION */}
         <div style={{
           display: "grid",

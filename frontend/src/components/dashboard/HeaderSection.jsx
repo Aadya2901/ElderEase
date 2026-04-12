@@ -8,7 +8,10 @@ export default function HeaderSection({
   setShowSettings,
   setData,
   setFallDetected,
-  fallDetected
+  fallDetected,
+  showSettings,        
+  thresholds,  
+  setThresholds
 }) {
   return (
     <div style={{
@@ -37,6 +40,63 @@ export default function HeaderSection({
         }}>
           Real-time health monitoring
         </p>
+        
+        {/* ⚙ INLINE THRESHOLDS */}
+        {showSettings && (
+          <div style={{
+            marginTop: "10px",
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+            flexWrap: "wrap"
+          }}>
+
+            <span style={{ fontWeight: "600", fontSize: "13px" }}>
+              Thresholds:
+            </span>
+
+            <input
+              type="number"
+              value={thresholds.heartRate}
+              onChange={(e) =>
+                setThresholds({ ...thresholds, heartRate: Number(e.target.value) })
+              }
+              style={{ width: "70px", padding: "6px" }}
+            />
+
+            <input
+              type="number"
+              value={thresholds.spo2}
+              onChange={(e) =>
+                setThresholds({ ...thresholds, spo2: Number(e.target.value) })
+              }
+              style={{ width: "70px", padding: "6px" }}
+            />
+
+            <input
+              type="number"
+              value={thresholds.temperature}
+              onChange={(e) =>
+                setThresholds({ ...thresholds, temperature: Number(e.target.value) })
+              }
+              style={{ width: "70px", padding: "6px" }}
+            />
+
+            <button
+              onClick={() => setShowSettings(false)}
+              style={{
+                padding: "6px 10px",
+                background: colors.status.success,
+                color: "white",
+                border: "none",
+                borderRadius: "6px"
+              }}
+            >
+              Save
+            </button>
+
+          </div>
+        )}
 
         <div style={{
           marginTop: "6px",
