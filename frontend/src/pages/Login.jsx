@@ -8,7 +8,9 @@ export default function Login() {
   const navigate = useNavigate();
   
   const [role, setRole] = useState("patient");
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -84,8 +86,12 @@ export default function Login() {
         <div style={{ marginTop: "20px" }}>
           
           <label style={styles.label}>Email</label>
+          const [email, setEmail] = useState("");
+          const [password, setPassword] = useState("");
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder={
               role === "patient"
                 ? "margaret@example.com"
@@ -94,10 +100,11 @@ export default function Login() {
             style={styles.input}
           />
 
-          <label style={styles.label}>Password</label>
           <input
             type="password"
-            placeholder="Enter any password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
             style={styles.input}
           />
 
@@ -107,17 +114,43 @@ export default function Login() {
             onMouseOver={(e) => e.currentTarget.style.background = "#059669"}
             onMouseOut={(e) => e.currentTarget.style.background = "#10b981"}
             onClick={() => {
-              localStorage.setItem(
-                "userName",
-                role === "patient" ? "Margaret Johnson" : "Sarah Johnson"
-              );
+              const savedProfile = JSON.parse(localStorage.getItem("profile"));
 
-              navigate(role === "patient" ? "/dashboard" : "/caregiver");
+              if (!savedProfile) {
+                alert("No account found. Please sign up.");
+                return;
+              }
+
+              if (
+                email === savedProfile.email &&
+                password === savedProfile.password
+              ) {
+                localStorage.setItem("userName", savedProfile.name);
+
+                alert("Login successful!");
+
+                navigate(
+                  localStorage.getItem("role") === "caregiver"
+                    ? "/caregiver"
+                    : "/dashboard"
+                );
+              } else {
+                alert("Invalid credentials");
+              }
             }}
           >
             Sign In
           </button>
-
+          
+          <p style={styles.demoText}>
+            Don’t have an account?{" "}
+            <span
+              onClick={() => navigate("/")}
+              style={{ color: "#10b981", cursor: "pointer" }}
+            >
+              Sign up
+            </span>
+          </p>
         </div>
 
       </div>
