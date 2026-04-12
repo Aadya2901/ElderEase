@@ -22,23 +22,22 @@ export default function Signup() {
   };
 
   const handleSignup = () => {
+    if (!form.name || !form.email || !form.password) {
+      alert("Please fill all required fields");
+      return;
+    }
+
     if (form.password !== form.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
 
-    // 🔥 store locally (temporary)
     localStorage.setItem("role", role);
     localStorage.setItem("profile", JSON.stringify(form));
 
     alert("Signup successful!");
 
-    // 🔁 redirect
-    if (role === "caregiver") {
-      window.location.href = "/caregiver";
-    } else {
-      window.location.href = "/dashboard";
-    }
+    window.location.href = "/login";
   };
 
   return (
@@ -104,6 +103,17 @@ export default function Signup() {
         >
           Sign Up
         </button>
+
+        {/* LOGIN */}
+        <p style={{ marginTop: "10px", fontSize: "14px", textAlign: "center" }}>
+          Already have an account?{" "}
+          <span
+            onClick={() => window.location.href = "/login"}
+            style={{ color: colors.brand.primary, cursor: "pointer" }}
+          >
+            Login
+          </span>
+        </p>
 
       </div>
     </div>
