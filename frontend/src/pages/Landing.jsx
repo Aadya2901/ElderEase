@@ -6,6 +6,7 @@ import ProblemSolutionSection from "../components/landing/ProblemSolutionSection
 import CaregiversSection from "../components/landing/CaregiversSection";
 import ImpactSection from "../components/landing/ImpactSection";
 import CTASection from "../components/landing/CTASection";
+import Footer from "../components/landing/Footer";
 
 export default function Landing() {
   return (
