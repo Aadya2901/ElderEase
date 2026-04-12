@@ -4,6 +4,8 @@ import CaregiverDashboard from "./pages/CaregiverDashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route path="/dashboard" element={<PatientDashboard />} />
         <Route path="/caregiver" element={<CaregiverDashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
