@@ -43,3 +43,18 @@ export default function ThresholdCard({ thresholds, setThresholds }) {
     </div>
   );
 }
+
+const card = {
+  background: "white",
+  padding: "20px",
+  borderRadius: "14px",
+  marginTop: "20px",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+};
+
+const inputSmall = {
+  padding: "10px",
+  borderRadius: "8px",
+  border: "1px solid #ddd",
+  width: "100px"
+};
