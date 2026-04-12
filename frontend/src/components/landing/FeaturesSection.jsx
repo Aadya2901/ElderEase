@@ -51,7 +51,7 @@ const features = [
   }
 ]
 
-export function FeaturesSection() {
+export default function FeaturesSection() {
   return (
     <section id="features" className="py-28 sm:py-32 px-6 lg:px-8 bg-muted/50">
       <div className="max-w-7xl mx-auto">
