@@ -5,13 +5,9 @@ export default function HeaderSection({
   isMobile,
   lastUpdated,
   status,
-  setShowSettings,
   setData,
   setFallDetected,
-  fallDetected,
-  showSettings,        
-  thresholds,  
-  setThresholds
+  fallDetected
 }) {
   return (
     <div style={{
@@ -40,63 +36,6 @@ export default function HeaderSection({
         }}>
           Real-time health monitoring
         </p>
-        
-        {/* ⚙ INLINE THRESHOLDS */}
-        {showSettings && (
-          <div style={{
-            marginTop: "10px",
-            display: "flex",
-            gap: "10px",
-            alignItems: "center",
-            flexWrap: "wrap"
-          }}>
-
-            <span style={{ fontWeight: "600", fontSize: "13px" }}>
-              Thresholds:
-            </span>
-
-            <input
-              type="number"
-              value={thresholds.heartRate}
-              onChange={(e) =>
-                setThresholds({ ...thresholds, heartRate: Number(e.target.value) })
-              }
-              style={{ width: "70px", padding: "6px" }}
-            />
-
-            <input
-              type="number"
-              value={thresholds.spo2}
-              onChange={(e) =>
-                setThresholds({ ...thresholds, spo2: Number(e.target.value) })
-              }
-              style={{ width: "70px", padding: "6px" }}
-            />
-
-            <input
-              type="number"
-              value={thresholds.temperature}
-              onChange={(e) =>
-                setThresholds({ ...thresholds, temperature: Number(e.target.value) })
-              }
-              style={{ width: "70px", padding: "6px" }}
-            />
-
-            <button
-              onClick={() => setShowSettings(false)}
-              style={{
-                padding: "6px 10px",
-                background: colors.status.success,
-                color: "white",
-                border: "none",
-                borderRadius: "6px"
-              }}
-            >
-              Save
-            </button>
-
-          </div>
-        )}
 
         <div style={{
           marginTop: "6px",
@@ -134,33 +73,15 @@ export default function HeaderSection({
         alignItems: isMobile ? "stretch" : "center"
       }}>
 
-        {/* ⚙ SETTINGS */}
-        <button
-          onClick={() => setShowSettings(prev => !prev)}
-          style={{
-            padding: "8px 14px",
-            borderRadius: "10px",
-            border: "none",
-            background: colors.background.hover,
-            cursor: "pointer",
-            boxShadow: colors.ui.shadowCard,
-            fontWeight: "500"
-          }}
-        >
-          ⚙ Custom Thresholds
-        </button>
-
         {/* 🚨 SIMULATE */}
         <button
-          onMouseOver={(e) =>
-            e.currentTarget.style.background = "#dc2626"
-          }
-          onMouseOut={(e) =>
-            e.currentTarget.style.background = colors.status.danger
-          }
+          onMouseOver={(e) => e.currentTarget.style.opacity = "0.9"}
+          onMouseOut={(e) => e.currentTarget.style.opacity = "1"}
+
           onClick={() =>
             setData({ heartRate: 140, spo2: 85, temperature: 39 })
           }
+
           style={{
             padding: "8px 14px",
             borderRadius: "10px",
@@ -172,7 +93,8 @@ export default function HeaderSection({
             display: "flex",
             alignItems: "center",
             gap: "6px",
-            boxShadow: colors.ui.shadowCard
+            boxShadow: colors.ui.shadowCard,
+            transition: "all 0.2s ease"   // 🔥 IMPORTANT
           }}
         >
           <CrisisAlertIcon style={{ fontSize: "18px" }} />
@@ -181,30 +103,45 @@ export default function HeaderSection({
 
         {/* 🚨 FALL */}
         <button
+          onMouseOver={(e) => e.currentTarget.style.opacity = "0.9"}
+          onMouseOut={(e) => e.currentTarget.style.opacity = "1"}
+
           onClick={() => setFallDetected(true)}
+
           style={{
-            padding: "10px 14px",
+            padding: "8px 14px",
             background: colors.status.danger,
             color: "white",
             border: "none",
-            borderRadius: "8px",
-            cursor: "pointer"
+            borderRadius: "10px",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            boxShadow: colors.ui.shadowCard,
+            transition: "all 0.2s ease"
           }}
         >
-          🚨 Simulate Fall
+          <CrisisAlertIcon style={{ fontSize: "18px" }} />
+          Simulate Fall
         </button>
 
         {/* ✅ RESET */}
         {fallDetected && (
           <button
+            onMouseOver={(e) => e.currentTarget.style.opacity = "0.9"}
+            onMouseOut={(e) => e.currentTarget.style.opacity = "1"}
+
             onClick={() => setFallDetected(false)}
+
             style={{
               padding: "8px 12px",
               background: colors.status.success,
               color: "white",
               border: "none",
               borderRadius: "8px",
-              cursor: "pointer"
+              cursor: "pointer",
+              transition: "all 0.2s ease"
             }}
           >
             ✅ Reset Fall
@@ -229,7 +166,23 @@ export default function HeaderSection({
             status === "WARNING" ? colors.status.warning :
             colors.status.success
         }}>
-          {status}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "6px",
+
+            boxShadow:
+              status === "EMERGENCY"
+                ? "0 0 12px rgba(239,68,68,0.5)"
+                : "none",
+          }}>
+            {status === "EMERGENCY" && "🚨"}
+            {status === "WARNING" && "⚠️"}
+            {status === "NORMAL" && "✅"}
+
+            {status}
+          </div>
         </div>
 
       </div>

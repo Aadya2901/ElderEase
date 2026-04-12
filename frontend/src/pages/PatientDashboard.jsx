@@ -4,6 +4,7 @@ import HeartRateChart from "../components/dashboard/HeartRateChart";
 import VitalsGrid from "../components/dashboard/VitalsGrid";
 import AIInsightsCard from "../components/dashboard/AIInsightsCard";
 import HeaderSection from "../components/dashboard/HeaderSection";
+import AppointmentCard from "../components/dashboard/AppointmentCard";
 import { downloadReport } from "../utils/report";
 import { predictRisk, getRiskLevel } from "../utils/aiModel";
 import MedicationCard from "../components/dashboard/MedicationCard";
@@ -325,6 +326,9 @@ export default function PatientDashboard() {
 
         {/* MEDICATION SECTION */}
         <MedicationCard />
+
+        {/* APPOINTMENT SECTION */}
+        <AppointmentCard />
 
         {/* 📈 CHART SECTION */}
         <div style={{
