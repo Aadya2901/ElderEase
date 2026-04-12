@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { colors } from "../styles/colors";
 import ProfileInfoCard from "../components/profile/ProfileInfoCard";
 import ThresholdCard from "../components/profile/ThresholdCard";
 
