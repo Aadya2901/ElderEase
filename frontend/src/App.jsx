@@ -1,3 +1,4 @@
+import Profile from "./pages/Profile";
 import PatientDashboard from "./pages/PatientDashboard";
 import CaregiverDashboard from "./pages/CaregiverDashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -12,6 +13,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<PatientDashboard />} />
         <Route path="/caregiver" element={<CaregiverDashboard />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

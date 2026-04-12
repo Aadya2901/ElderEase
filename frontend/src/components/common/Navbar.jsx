@@ -34,6 +34,19 @@ export default function Navbar({ isMobile, userName, selectedPatient }) {
           </div>
         </div>
 
+        {/* Profile */}
+        <button
+          onClick={() => window.location.href = "/profile"}
+          style={{
+            padding: "8px 12px",
+            borderRadius: "8px",
+            border: "none",
+            background: "#eee",
+            cursor: "pointer"
+          }}
+        >
+          👤 Profile
+        </button>
         {/* 🚪 Logout */}
         <button
           onClick={() => {

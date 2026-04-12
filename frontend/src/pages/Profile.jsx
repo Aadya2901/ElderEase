@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProfileInfoCard from "../components/profile/ProfileInfoCard";
 import ThresholdCard from "../components/profile/ThresholdCard";
 
