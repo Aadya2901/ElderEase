@@ -1,0 +1,77 @@
+.impact {
+  padding: 100px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.impact-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* ICON */
+.impact-icon {
+  width: 80px;
+  height: 80px;
+  background: #dbeafe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+/* QUOTES */
+.impact-quote-main {
+  font-size: 36px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.impact-divider {
+  width: 120px;
+  height: 5px;
+  background: linear-gradient(to right, #2563eb, #22c55e);
+  margin: 20px auto;
+  border-radius: 999px;
+}
+
+.impact-quote-sub {
+  font-size: 24px;
+  color: #6b7280;
+}
+
+/* STATS GRID */
+.impact-stats {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.stat-card {
+  background: #f9fafb;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+/* NUMBERS */
+.stat-number {
+  font-size: 40px;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.stat-text {
+  margin-top: 5px;
+  color: #6b7280;
+}

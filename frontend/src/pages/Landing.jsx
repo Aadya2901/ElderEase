@@ -3,6 +3,9 @@ import Navbar from "../components/landing/Navbar";
 import FeaturesSection from "../components/landing/FeaturesSection";
 import HowItWorksSection from "../components/landing/HowItWorksSection";
 import ProblemSolutionSection from "../components/landing/ProblemSolutionSection";
+import CaregiversSection from "../components/landing/CaregiversSection";
+import ImpactSection from "../components/landing/ImpactSection";
+import CTASection from "../components/landing/CTASection";
 
 export default function Landing() {
   return (
