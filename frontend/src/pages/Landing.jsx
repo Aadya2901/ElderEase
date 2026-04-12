@@ -11,15 +11,22 @@ export default function Landing() {
         <h2 style={styles.logo}>ElderEase</h2>
 
         <div style={styles.navLinks}>
-          <span>Home</span>
-          <span>Features</span>
+          <span
+            onMouseOver={(e) => e.currentTarget.style.color = "#10b981"}
+            onMouseOut={(e) => e.currentTarget.style.color = "#1A202C"}
+          >
+            Home
+          </span>
+          <span onClick={() => window.scrollTo({ top: 600, behavior: "smooth" })}>
+            Features
+          </span>
           <span>How It Works</span>
 
           <button style={styles.loginBtn} onClick={() => navigate("/login")}>
             Login
           </button>
 
-          <button style={styles.signupBtn} onClick={() => navigate("/login")}>
+          <button style={styles.signupBtn} onClick={() => navigate("/")}>
             Sign Up
           </button>
         </div>
@@ -36,7 +43,12 @@ export default function Landing() {
         </p>
 
         <div style={styles.btnGroup}>
-          <button style={styles.primaryBtn} onClick={() => navigate("/login")}>
+          <button
+            style={styles.primaryBtn}
+            onMouseOver={(e) => e.currentTarget.style.opacity = "0.85"}
+            onMouseOut={(e) => e.currentTarget.style.opacity = "1"}
+            onClick={() => navigate("/login")}
+          >
             Get Started
           </button>
 
@@ -47,6 +59,26 @@ export default function Landing() {
 
         <p style={styles.liveText}>🟢 128 elders monitored live</p>
       </div>
+      
+      <img
+        src="https://images.unsplash.com/photo-1581595219315-a187dd40c322"
+        alt="health dashboard"
+        style={{
+          width: "100%",
+          maxWidth: "600px",
+          marginTop: "30px",
+          borderRadius: "12px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+        }}
+      />
+
+      <p style={{
+        marginTop: "10px",
+        fontSize: "13px",
+        color: "#6b7280"
+      }}>
+        Trusted by caregivers for safer elderly monitoring ❤️
+      </p>
 
       {/* PROBLEM / SOLUTION */}
       <div style={styles.section}>
@@ -72,7 +104,14 @@ export default function Landing() {
         <h2>Features</h2>
 
         <div style={styles.grid3}>
-          <div style={styles.featureCard}>❤️ Vitals Monitoring</div>
+          <div
+            style={styles.featureCard}
+            onMouseOver={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
+            onMouseOut={(e) => e.currentTarget.style.transform = "translateY(0px)"}
+          >
+            ❤️ Vitals Monitoring
+          </div>
+
           <div style={styles.featureCard}>🚨 Emergency Alerts</div>
           <div style={styles.featureCard}>🧠 AI Insights</div>
           <div style={styles.featureCard}>📊 Health Trends</div>
@@ -116,7 +155,7 @@ export default function Landing() {
         <h2>Start Monitoring Today</h2>
 
         <div style={styles.btnGroup}>
-          <button style={styles.primaryBtn} onClick={() => navigate("/login")}>
+          <button style={styles.primaryBtn} onClick={() => navigate("/")}>
             Sign Up
           </button>
 
@@ -258,7 +297,9 @@ const styles = {
     background: "#FFFFFF",
     padding: "15px",
     borderRadius: "10px",
-    border: "1px solid #A7D3E0"
+    border: "1px solid #A7D3E0",
+    transition: "0.2s",
+    cursor: "pointer"
   },
 
   flow: {
