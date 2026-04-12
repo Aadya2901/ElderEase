@@ -18,10 +18,30 @@ export default function Profile() {
     temperature: 38
   });
 
+    useEffect(() => {
+      const savedProfile = localStorage.getItem("profile");
+      const savedThresholds = localStorage.getItem("thresholds");
+
+      if (savedProfile) setProfile(JSON.parse(savedProfile));
+      if (savedThresholds) setThresholds(JSON.parse(savedThresholds));
+    }, []);
+
   return (
-    <div style={{ padding: "30px" }}>
+    <div style={{ 
+      padding: "30px",
+      background: colors.background.section,
+      minHeight: "100vh"
+    }}>
 
       <h2>👤 Profile</h2>
+
+      <div style={{
+        marginTop: "6px",
+        fontSize: "14px",
+        color: colors.text.secondary
+      }}>
+        Role: <strong>{localStorage.getItem("role") || "Patient"}</strong>
+      </div>
 
       <ProfileInfoCard
         profile={profile}
@@ -42,19 +62,22 @@ export default function Profile() {
         <button
           onMouseOver={(e) => e.currentTarget.style.opacity = "0.9"}
           onMouseOut={(e) => e.currentTarget.style.opacity = "1"}
+
           onClick={() => {
             localStorage.setItem("profile", JSON.stringify(profile));
             localStorage.setItem("thresholds", JSON.stringify(thresholds));
-            alert("Saved!");
+            alert("Profile saved successfully!");
           }}
+
           style={{
             padding: "10px 18px",
             borderRadius: "10px",
             border: "none",
-            background: "#22c55e",
+            background: colors.status.success,
             color: "white",
             fontWeight: "600",
-            cursor: "pointer"
+            cursor: "pointer",
+            transition: "all 0.2s ease"
           }}
         >
           💾 Save Changes
