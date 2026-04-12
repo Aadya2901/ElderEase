@@ -1,0 +1,132 @@
+.how {
+  padding: 100px 20px;
+  background: #ffffff;
+}
+
+.how-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* HEADER */
+.how-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.how-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #f3e8ff;
+  color: #7c3aed;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.how-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.how-desc {
+  margin-top: 10px;
+  color: #6b7280;
+}
+
+/* GRID */
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  position: relative;
+}
+
+/* CARD */
+.how-card {
+  position: relative;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.how-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* STEP NUMBER */
+.step-number {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #2563eb, #22c55e);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* ICON */
+.how-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px auto 15px;
+  transition: 0.3s;
+}
+
+.how-card:hover .how-icon {
+  transform: scale(1.1);
+}
+
+/* TEXT */
+.how-step-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.how-step-text {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ARROW */
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: -18px;
+  transform: translateY(-50%);
+}
+
+.arrow-circle {
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* HIDE ARROWS MOBILE */
+@media (max-width: 768px) {
+  .arrow {
+    display: none;
+  }
+}
