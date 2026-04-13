@@ -1,25 +1,18 @@
-import "../../styles/footer.css";
+import '../../styles/Footer.css';
 
-export default function Footer() {
+function Footer() {
+  const currentYear = new Date().getFullYear()
+  
   return (
-    <footer className="footer section">
-
-      <div className="footer-container">
-
-        <div className="footer-row">
-
-          {/* BRAND */}
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-content">
           <div className="footer-brand">
-            <span className="brand-name">ElderEase</span>
-
-            <span className="brand-divider">|</span>
-
-            <span className="brand-sub">
-              Remote Care Platform
-            </span>
+            <span className="footer-logo">ElderEase</span>
+            <span className="footer-divider">|</span>
+            <span className="footer-tagline">Remote Care Platform</span>
           </div>
 
-          {/* NAV */}
           <nav className="footer-nav">
             <a href="#" className="footer-link">About</a>
             <a href="#" className="footer-link">Contact</a>
@@ -27,15 +20,13 @@ export default function Footer() {
             <a href="#" className="footer-link">Terms</a>
           </nav>
 
-          {/* COPYRIGHT */}
-          <p className="footer-copy">
-            © {new Date().getFullYear()} ElderEase. All rights reserved.
+          <p className="footer-copyright">
+            &copy; {currentYear} ElderEase. All rights reserved.
           </p>
-
         </div>
-
       </div>
-
     </footer>
-  );
+  )
 }
+
+export default Footer

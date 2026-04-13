@@ -1,25 +1,24 @@
-import HeroSection from "../components/landing/HeroSection";
+import Hero from "../components/landing/Hero";
 import Navbar from "../components/landing/Navbar";
-import FeaturesSection from "../components/landing/FeaturesSection";
-import HowItWorksSection from "../components/landing/HowItWorksSection";
-import ProblemSolutionSection from "../components/landing/ProblemSolutionSection";
-import CaregiversSection from "../components/landing/CaregiversSection";
-import ImpactSection from "../components/landing/ImpactSection";
-import CTASection from "../components/landing/CTASection";
+import Features from "../components/landing/Features";
+import HowItWorks from "../components/landing/HowItWorks";
+import ProblemSolution from "../components/landing/ProblemSolution";
+import Caregivers from "../components/landing/Caregivers";
+import Impact from "../components/landing/Impact";
+import CTA from "../components/landing/CTA";
 import Footer from "../components/landing/Footer";
 
 export default function Landing() {
   return (
     <div>
-
       <Navbar />
-      <HeroSection />
-      <ProblemSolutionSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <CaregiversSection />
-      <ImpactSection />
-      <CTASection />
+      <Hero />
+      <ProblemSolution />
+      <Features />
+      <HowItWorks />
+      <Caregivers />
+      <Impact />
+      <CTA />
       <Footer />
 
     </div>
