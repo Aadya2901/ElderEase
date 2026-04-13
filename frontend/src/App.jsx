@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+import "./styles/global.css";
 
 function App() {
   return (

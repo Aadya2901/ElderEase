@@ -1,21 +1,27 @@
 import "../../styles/cta.css";
 import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 export default function CTASection() {
 
   const navigate = useNavigate();
 
   return (
-    <section className="cta">
+    <section className="cta section">
+
+      {/* 🔥 Glow Background */}
+      <div className="cta-bg"></div>
 
       <div className="cta-container">
+
+        <span className="cta-tag">Get Started Today</span>
 
         <h2 className="cta-title">
           Start Monitoring Your Loved Ones Today
         </h2>
 
         <p className="cta-text">
-          Take the first step towards smarter, safer elderly care.
+          Join caregivers who trust ElderEase to keep loved ones safe.
         </p>
 
         <div className="cta-buttons">
@@ -25,6 +31,7 @@ export default function CTASection() {
             onClick={() => navigate("/signup")}
           >
             Sign Up
+            <ArrowRight className="arrow" size={18} />
           </button>
 
           <button

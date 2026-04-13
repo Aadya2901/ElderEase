@@ -28,80 +28,84 @@ export default function CaregiverSection() {
   ];
 
   return (
-    <section className="caregiver">
+    <section className="caregiver section">
 
-      <div className="caregiver-container">
+    <div className="caregiver-container">
 
-        {/* LEFT */}
-        <div>
-          <span className="caregiver-tag">
-            For Healthcare Professionals
-          </span>
+      {/* LEFT */}
+      <div className="caregiver-left">
 
-          <h2 className="caregiver-title">
-            Built for Caregivers
-          </h2>
+        <span className="caregiver-tag">
+          For Healthcare Professionals
+        </span>
 
-          <p className="caregiver-desc">
-            Streamline remote patient monitoring and take faster decisions.
-          </p>
+        <h2 className="title caregiver-title">
+          Built for Caregivers
+        </h2>
 
-          <div className="caregiver-list">
-            {points.map((p, i) => {
-              const Icon = p.icon;
+        <p className="subtitle caregiver-desc">
+          Designed to streamline remote monitoring and enable faster, smarter care decisions.
+        </p>
 
-              return (
-                <div key={i} className="caregiver-item">
-                  <div className="icon-box">
-                    <Icon size={20} color="#2563eb" />
-                  </div>
+        <div className="caregiver-list">
+          {points.map((p, i) => {
+            const Icon = p.icon;
 
-                  <div>
-                    <div className="item-title">{p.title}</div>
-                    <div className="item-text">{p.description}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+            return (
+              <div key={i} className="caregiver-item">
 
-        {/* RIGHT DASHBOARD */}
-        <div className="dashboard">
-
-          <div className="dashboard-header">
-            <Users />
-            <div>
-              <div>Active Patients</div>
-              <small>Real-time overview</small>
-            </div>
-          </div>
-
-          {patients.map((p, i) => (
-            <div key={i} className="patient">
-
-              <div className="patient-left">
-                <div className="avatar">
-                  {p.name.split(" ").map(n => n[0]).join("")}
+                <div className="icon-box">
+                  <Icon size={22} />
                 </div>
 
                 <div>
-                  <div>{p.name}</div>
-                  <small>Age {p.age}</small>
+                  <div className="item-title">{p.title}</div>
+                  <div className="item-text">{p.description}</div>
                 </div>
+
               </div>
-
-              <div className={`status ${p.status}`}>
-                {p.status === "stable" ? "Stable" : "Attention"}
-              </div>
-
-            </div>
-          ))}
-
+            );
+          })}
         </div>
 
       </div>
 
-    </section>
+      {/* RIGHT */}
+      <div className="dashboard card">
+
+        <div className="dashboard-header">
+          <Users size={20} />
+          <div>
+            <div className="dash-title">Active Patients</div>
+            <small>Real-time overview</small>
+          </div>
+        </div>
+
+        {patients.map((p, i) => (
+          <div key={i} className="patient">
+
+            <div className="patient-left">
+              <div className="avatar">
+                {p.name.split(" ").map(n => n[0]).join("")}
+              </div>
+
+              <div>
+                <div className="patient-name">{p.name}</div>
+                <small>Age {p.age}</small>
+              </div>
+            </div>
+
+            <div className={`status ${p.status}`}>
+              {p.status === "stable" ? "Stable" : "Attention"}
+            </div>
+
+          </div>
+        ))}
+
+      </div>
+
+    </div>
+
+  </section>
   );
 }

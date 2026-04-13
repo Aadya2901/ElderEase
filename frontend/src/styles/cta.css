@@ -61,3 +61,123 @@
 .cta-secondary:hover {
   background: rgba(255,255,255,0.1);
 }
+
+.cta {
+  position: relative;
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2563eb, #22c55e);
+}
+
+/* 🔥 GLOW EFFECT */
+.cta-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.cta-bg::before,
+.cta-bg::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: white;
+  opacity: 0.1;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.cta-bg::before {
+  top: -100px;
+  left: -100px;
+}
+
+.cta-bg::after {
+  bottom: -100px;
+  right: -100px;
+}
+
+/* CONTAINER */
+.cta-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* TAG */
+.cta-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* TITLE */
+.cta-title {
+  font-size: 42px;
+  font-weight: 600;
+}
+
+/* TEXT */
+.cta-text {
+  margin-top: 10px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* BUTTONS */
+.cta-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* BUTTON BASE */
+.cta-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* PRIMARY */
+.cta-primary {
+  background: white;
+  color: #2563eb;
+}
+
+.cta-primary:hover {
+  transform: scale(1.05);
+}
+
+/* SECONDARY */
+.cta-secondary {
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+}
+
+.cta-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  transform: scale(1.05);
+}
+
+/* ARROW ANIMATION */
+.arrow {
+  transition: transform 0.3s;
+}
+
+.cta-primary:hover .arrow {
+  transform: translateX(5px);
+}

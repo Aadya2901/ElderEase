@@ -35,7 +35,7 @@ export default function HowItWorksSection() {
   ];
 
   return (
-    <section id="how" className="how">
+    <section id="how section" className="how">
 
       <div className="how-container">
 

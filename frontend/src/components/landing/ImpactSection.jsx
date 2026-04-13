@@ -10,7 +10,7 @@ export default function ImpactSection() {
   ];
 
   return (
-    <section className="impact">
+    <section className="impact section">
 
       <div className="impact-container">
 

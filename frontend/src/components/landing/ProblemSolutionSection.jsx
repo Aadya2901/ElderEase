@@ -4,7 +4,7 @@ import { AlertTriangle, Eye, Clock, Activity, Bell, LayoutDashboard } from "luci
 export default function ProblemSolutionSection() {
 
   return (
-    <section className="ps-section">
+    <section className="ps-section  section">
 
       <div className="ps-container">
 
