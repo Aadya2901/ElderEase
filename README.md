@@ -191,7 +191,7 @@ Enhances decision-making and enables early intervention.
 
 ![ElderEase System Architecture](docs/images/system-architecture.png)
 
-### ⚙️ System Overview
+    ### ⚙️ System Overview
 
 ElderEase is designed as a **real-time IoT-based health monitoring system** that enables continuous tracking of elderly patients.
 
@@ -305,100 +305,7 @@ Primary Responsibilities
 - All members contribute commits regularly following conventional commit standards.
 
 ---
-###  Phase 2 ###
----
 
-# 🗄️ Database Architecture (MongoDB) – Phase 2
-
-Phase 2 introduces persistent data storage using MongoDB, enabling long-term tracking, analysis, and scalability of health data.
-
----
-
-## 📌 Database Overview
-
-- Database Name: `ElderEase`
-- Collections:
-  - `alerts`
-  - `patients`
-  - `thresholds`
-   - `vitals`
-
-
----
-
-## 🧱 Collection Design
-
-### 1. users
-Stores basic user information.
-
-```json
-{
-  "userId": "ELD001",
-  "name": "string",
-  "age": "number",
-  "gender": "string"
-}
-```
-
----
-
-### 2. health_records
-Stores continuous health monitoring data.
-
-```json
-{
-  "userId": "ELD001",
-  "heartRate": 85,
-  "spo2": 96,
-  "temperature": 36.7,
-  "status": "NORMAL",
-  "riskLevel": 1,
-  "timestamp": "ISO Date"
-}
-```
-
----
-
-### 3. appointments
-Stores medical appointments and reminders.
-
-```json
-{
-  "userId": "ELD001",
-  "doctorName": "string",
-  "date": "ISO Date",
-  "status": "upcoming"
-}
-```
-
----
-
-## ⚙️ Setup Process
-
-1. Install MongoDB
-2. Open MongoDB Compass
-3. Create database: `ElderEase`
-4. Create required collections
-5. Verify document insertion
-
----
-
-## 🔗 Integration Plan
-
-- MongoDB will connect with Express backend (Phase 2)
-- Health records will be stored in real-time
-- Logging module will transition from in-memory → database persistence
-
----
-
-## 🎯 Benefits
-
-- Persistent health history
-- Scalable architecture
-- Enables analytics & ML (Phase 4)
-- Supports real-world deployment
-
----
 
 # 🚀 Development Roadmap
 
@@ -436,53 +343,6 @@ Stores medical appointments and reminders.
 
 ---
 
-## 📈 Weekly Progress Tracking
-
-### Week 1 (Completed)
-
-```
-✔ Implemented real-time vital simulation module  
-✔ Added structured JSON payload with ISO timestamp  
-✔ Configured 5-second automated data trigger  
-✔ Integrated Node-RED dashboard for live visualization  
-✔ Implemented Extract Heart Rate UI processing layer  
-✔ Deployed real-time heart rate gauge interface  
-```
-
-### Week 2 (Completed)
-
-```
-✔ Implemented multi-vital dashboard with gauges  
-✔ Added SpO₂ and Temperature monitoring visualization  
-✔ Implemented color-coded health status indicator  
-✔ Built emergency alert detection and display system  
-✔ Added daily health summary counter  
-✔ Implemented manual emergency simulation controls  
-✔ Integrated live heart rate monitoring chart  
-✔ Refactored dashboard architecture for modular UI components  
-✔ Added health risk score system  
-✔ Implemented actionable health insights panel  
-✔ Added real-time emergency alert banner  
-✔ Implemented trend analysis for vital monitoring  
-```
-
-### Week 3 (Completed)
-```
-✔ Developed Caregiver Dashboard with patient overview  
-✔ Implemented patient selection and navigation to patient dashboard  
-✔ Integrated localStorage for passing selected patient data  
-✔ Initialized dashboard vitals dynamically from selected patient  
-✔ Fixed data override issues between simulation and selected patient  
-✔ Displayed selected patient name on dashboard dynamically  
-✔ Added responsive UI improvements for mobile devices  
-✔ Implemented customizable health thresholds UI  
-✔ Enhanced real-time charts for heart rate, SpO₂, and temperature  
-✔ Improved overall UI/UX and component structure  
-✔ Cleaned up state management for selectedPatient handling  
-✔ Structured commits following conventional commit standards  
-```
----
-
 ## 🔐 FOSS Compliance
 
 - No proprietary APIs
@@ -497,6 +357,7 @@ Stores medical appointments and reminders.
 This project is licensed under the **MIT License**.
 
 ---
+
 ## 🌱 Future Vision
 
 ElderEase aims to evolve into a predictive, scalable elderly healthcare monitoring ecosystem integrating IoT, full-stack architecture, and machine learning.

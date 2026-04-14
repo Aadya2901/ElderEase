@@ -66,7 +66,7 @@ export default function AIInsightsCard({ riskLevel, explanation, medical, action
         marginBottom: "4px"
       }}>
         <PsychologyIcon style={iconStyle} />
-        AI POWERED ANALYSIS
+        SMART HEALTH ANALYSIS
       </div>
 
       {/* TITLE */}
@@ -74,7 +74,7 @@ export default function AIInsightsCard({ riskLevel, explanation, medical, action
         fontWeight: "700",
         marginBottom: "14px"
       }}>
-        🧠 AI Health Analysis
+        🧠 Health Risk Analysis
       </h3>
 
       <div style={{
@@ -82,7 +82,7 @@ export default function AIInsightsCard({ riskLevel, explanation, medical, action
         color: colors.text.muted,
         marginBottom: "14px"
       }}>
-        Real-time AI-powered patient analysis
+        Based on real-time patient vitals
       </div>
 
       {/* 🔴 RISK LEVEL */}
@@ -106,15 +106,23 @@ export default function AIInsightsCard({ riskLevel, explanation, medical, action
         </span>
       </div>
 
+      <div style={{
+        fontSize: "12px",
+        color: colors.text.muted,
+        marginBottom: "10px"
+      }}>
+        Live monitoring active
+      </div>
+
       {/* 🧠 EXPLANATION */}
       <div style={{ marginBottom: "14px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
           <PsychologyIcon style={iconStyle} />
-          <strong>AI Explanation</strong>
+          <strong>Assessment</strong>
         </div>
 
         <p style={{ marginTop: "4px", color: colors.text.secondary }}>
-          {explanation || "Analyzing patient condition..."}
+          {explanation || "Analyzing current vitals..."}
         </p>
       </div>
 
