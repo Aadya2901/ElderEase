@@ -32,17 +32,43 @@ export default function PatientDashboard() {
 
   const [aiData, setAIData] = useState(null);
 
-  useEffect(() => {
-  const fetchAI = async () => {
-    const res = await getAIResponse({
-      heartRate,
-      spo2,
-      temperature,
-      fallDetected
-    });
+  const prevVitals = useRef({
+    spo2: null,
+    heartRate: null,
+    temperature: null
+  });
 
-    setAIData(res);
-  };
+  useEffect(() => {
+    const fetchAI = async () => {
+
+      // 🚫 PREVENT UNNECESSARY API CALLS
+      if (
+        prevVitals.current.spo2 !== null &&
+        Math.abs(prevVitals.current.spo2 - spo2) < 1 &&
+        Math.abs(prevVitals.current.heartRate - heartRate) < 3 &&
+        Math.abs(prevVitals.current.temperature - temperature) < 0.2
+      ) {
+        return;
+      }
+      
+      // 🔥 CALL AI
+      const res = await getAIResponse({
+        heartRate,
+        spo2,
+        temperature,
+        fallDetected,
+        prevVitals: prevVitals.current
+      });
+
+      setAIData(res);
+
+      // 🔁 UPDATE PREVIOUS VALUES
+      prevVitals.current = {
+        spo2,
+        heartRate,
+        temperature
+      };
+    };
 
     fetchAI();
   }, [heartRate, spo2, temperature, fallDetected]);
