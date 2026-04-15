@@ -1,0 +1,122 @@
+.impact {
+  background-color: var(--color-background);
+}
+
+.impact-content {
+  max-width: 64rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.impact-quote-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  margin-bottom: 2.5rem;
+  color: var(--color-primary);
+}
+
+.impact-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.impact-quote-main {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .impact-quote-main {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .impact-quote-main {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .impact-quote-main {
+    font-size: 3.75rem;
+  }
+}
+
+.impact-divider {
+  width: 8rem;
+  height: 0.375rem;
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  margin: 0 auto;
+  border-radius: var(--radius-full);
+}
+
+.impact-quote-secondary {
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .impact-quote-secondary {
+    font-size: 1.875rem;
+  }
+}
+
+.impact-stats {
+  display: grid;
+  gap: 2rem;
+  margin-top: 5rem;
+}
+
+@media (min-width: 640px) {
+  .impact-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+.impact-stat {
+  padding: 2rem;
+  border: 1px solid rgba(199, 234, 187, 0.5);
+}
+
+.impact-stat:hover {
+  box-shadow: 0 4px 12px rgba(199, 234, 187, 0.3);
+}
+
+.impact-stat-value {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 1024px) {
+  .impact-stat-value {
+    font-size: 3.75rem;
+  }
+}
+
+.stat-primary {
+  color: var(--color-primary);
+}
+
+.stat-secondary {
+  color: var(--color-secondary);
+}
+
+.impact-stat-label {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+}
