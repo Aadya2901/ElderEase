@@ -1,0 +1,197 @@
+.caregivers {
+  background-color: rgba(199, 234, 187, 0.2);
+}
+
+.caregivers-grid {
+  display: grid;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .caregivers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.caregivers-content {
+  order: 2;
+}
+
+@media (min-width: 1024px) {
+  .caregivers-content {
+    order: 1;
+  }
+}
+
+.caregivers-description {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .caregivers-description {
+    font-size: 1.25rem;
+  }
+}
+
+.caregivers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.caregivers-list-item {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.caregivers-list-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.caregivers-list-title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.caregivers-list-description {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.caregivers-dashboard-wrapper {
+  position: relative;
+  order: 1;
+}
+
+@media (min-width: 1024px) {
+  .caregivers-dashboard-wrapper {
+    order: 2;
+  }
+}
+
+.caregivers-dashboard {
+  padding: 2rem;
+  border: 1px solid rgba(199, 234, 187, 0.5);
+}
+
+.dashboard-shadow {
+  position: absolute;
+  z-index: -1;
+  top: 2rem;
+  left: 2rem;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(199, 234, 187, 0.3), rgba(232, 245, 189, 0.3));
+  border-radius: var(--radius-lg);
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-icon {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.dashboard-title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-text-dark);
+}
+
+.dashboard-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.patient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.patient-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  background-color: var(--color-background);
+  border-radius: var(--radius-lg);
+  transition: background-color var(--transition-normal);
+}
+
+.patient-item:hover {
+  background-color: rgba(232, 245, 189, 0.3);
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patient-avatar {
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba(199, 234, 187, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+}
+
+.patient-name {
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+.patient-age {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.patient-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-stable {
+  background-color: var(--color-accent);
+  color: var(--color-primary-dark);
+}
+
+.status-attention {
+  background-color: var(--color-warning-light);
+  color: #B45309;
+}

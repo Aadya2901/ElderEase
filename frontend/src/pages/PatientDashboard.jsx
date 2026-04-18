@@ -1,28 +1,21 @@
 import { useEffect, useState, useRef } from "react";
-import VitalCard from "../components/VitalCard";
-import StatusBadge from "../components/StatusBadge";
-import RiskScore from "../components/RiskScore";
-import AlertBanner from "../components/AlertBanner";
-import HeartRateChart from "../components/HeartRateChart";
-import { predictRisk, generateInsights, getRiskLevel } from "../utils/aiModel";
-import {
-  LineChart, Line,
-  XAxis, YAxis,
-  Tooltip
-} from "recharts";
+import AlertBanner from "../components/dashboard/AlertBanner";
+import HeartRateChart from "../components/dashboard/HeartRateChart";
+import VitalsGrid from "../components/dashboard/VitalsGrid";
+import AIInsightsCard from "../components/dashboard/AIInsightsCard";
+import HeaderSection from "../components/dashboard/HeaderSection";
+import AppointmentCard from "../components/dashboard/AppointmentCard";
+import { downloadReport } from "../utils/report";
+import { predictRisk, getRiskLevel } from "../utils/aiModel";
+import MedicationCard from "../components/dashboard/MedicationCard";
+import { getAIResponse } from "../services/aiService";
+import Navbar from "../components/common/Navbar";
 
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import OpacityIcon from "@mui/icons-material/Opacity";
-import ThermostatIcon from "@mui/icons-material/Thermostat";
 import WarningIcon from "@mui/icons-material/Warning";
 import ErrorIcon from "@mui/icons-material/Error";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-import LogoutIcon from "@mui/icons-material/Logout";
-import SaveIcon from "@mui/icons-material/Save";
-import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
+
+import { colors } from "../styles/colors";
 
 export default function PatientDashboard() {
   const [data, setData] = useState({
@@ -31,8 +24,55 @@ export default function PatientDashboard() {
     temperature: 36.8
   });
 
+  const { heartRate, spo2, temperature } = data;
+
   const [selectedPatient, setSelectedPatient] = useState(null);
   
+  const [fallDetected, setFallDetected] = useState(false);
+
+  const [aiData, setAIData] = useState(null);
+
+  const prevVitals = useRef({
+    spo2: null,
+    heartRate: null,
+    temperature: null
+  });
+
+  useEffect(() => {
+    const fetchAI = async () => {
+
+      // 🚫 PREVENT UNNECESSARY API CALLS
+      if (
+        prevVitals.current.spo2 !== null &&
+        Math.abs(prevVitals.current.spo2 - spo2) < 1 &&
+        Math.abs(prevVitals.current.heartRate - heartRate) < 3 &&
+        Math.abs(prevVitals.current.temperature - temperature) < 0.2
+      ) {
+        return;
+      }
+      
+      // 🔥 CALL AI
+      const res = await getAIResponse({
+        heartRate,
+        spo2,
+        temperature,
+        fallDetected,
+        prevVitals: prevVitals.current
+      });
+
+      setAIData(res);
+
+      // 🔁 UPDATE PREVIOUS VALUES
+      prevVitals.current = {
+        spo2,
+        heartRate,
+        temperature
+      };
+    };
+
+    fetchAI();
+  }, [heartRate, spo2, temperature, fallDetected]);
+
   useEffect(() => {
   const saved = localStorage.getItem("selectedPatient");
 
@@ -69,7 +109,7 @@ export default function PatientDashboard() {
     const interval = setInterval(() => {
 
       const newData = {
-        time: hours[indexRef.current], // ✅ stable labels
+        time: hours[indexRef.current], 
         heartRate: Math.floor(70 + Math.random() * 50),
         spo2: Math.floor(88 + Math.random() * 10),
         temperature: parseFloat((36 + Math.random() * 2).toFixed(1))
@@ -88,8 +128,6 @@ export default function PatientDashboard() {
     return () => clearInterval(interval);
   }, []);
 
-  const { heartRate, spo2, temperature } = data;
-
   // 🧠 AI LOGIC
   const riskScore = predictRisk(
     heartRate,
@@ -99,31 +137,25 @@ export default function PatientDashboard() {
   );
 
   const riskLevel = getRiskLevel(riskScore);
-
-  const insights = generateInsights(
-    heartRate, 
-    spo2, 
-    temperature, 
-    history,
-    thresholds,
-    riskScore
-  );
+  const healthScore = 100 - riskScore * 5;
 
   const lastUpdated = new Date().toLocaleTimeString();
 
   const status =
-    riskLevel === "HIGH"
+    fallDetected
+      ? "EMERGENCY"
+      : riskLevel === "HIGH"
       ? "EMERGENCY"
       : riskLevel === "MEDIUM"
       ? "WARNING"
       : "NORMAL";
 
   const card = {
-    background: "#f9fafb",
+    background: colors.background.card,
+    border: `1px solid ${colors.ui.borderLight}`,
+    boxShadow: colors.ui.shadowCard,
     padding: "18px",
     borderRadius: "14px",
-    border: "1px solid #e5e7eb",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
     transition: "all 0.2s ease",
     cursor: "pointer"
   };
@@ -133,18 +165,9 @@ export default function PatientDashboard() {
     padding: "10px",
     marginTop: "6px",
     borderRadius: "10px",
-    border: "1px solid #e5e7eb",
+    border: `1px solid ${colors.ui.borderLight}`,
     fontSize: "14px"
   };
-
-   const getIcon = (msg) => {
-      if (msg.includes("🚨")) return <ErrorIcon style={{ color: "#ef4444", fontSize: "22px" }} />;
-      if (msg.includes("⚠")) return <WarningIcon style={{ color: "#f59e0b", fontSize: "22px" }} />;
-      if (msg.includes("📈")) return <TrendingUpIcon style={{ color: "#3b82f6", fontSize: "22px" }} />;
-      if (msg.includes("📉")) return <TrendingDownIcon style={{ color: "#3b82f6", fontSize: "22px" }} />;
-      if (msg.includes("📩")) return <NotificationsActiveIcon style={{ color: "#8b5cf6", fontSize: "22px" }} />;
-      return <CheckCircleIcon style={{ color: "#10b981", fontSize: "22px" }} />;
-    };
 
     const [isMobile, setIsMobile] = useState(false);
 
@@ -167,338 +190,43 @@ export default function PatientDashboard() {
   return (
     <div style={{
       padding: isMobile ? "20px" : "30px",
-      background: "#f3f4f6",
+
+      background: colors.background.section,
       minHeight: "100vh"
     }}>
       
-      {/* 🔷 NAVBAR */}
-      <div style={{
-        background: "white",
-        padding: isMobile ? "12px 16px" : "15px 30px",
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        gap: isMobile ? "10px" : "0",
-        justifyContent: "space-between",
-        alignItems: isMobile ? "flex-start" : "center",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
-      }}>
-
-        <h2 style={{ fontWeight: "700" }}>ElderEase</h2>
-        
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "15px",
-          width: isMobile ? "100%" : "auto",
-          justifyContent: isMobile ? "space-between" : "flex-end"
-        }}>
-
-        {/* 👤 Patient Info */}
-        <div style={{ textAlign: "right" }}>
-          <div style={{ fontWeight: "600" }}>
-
-            {selectedPatient?.name || userName || "Margaret Johnson"}
-          </div>
-          <div style={{ fontSize: "12px", color: "#6b7280" }}>
-            Patient
-          </div>
-        </div>
-
-        {/* 🚪 Logout ICON button */}
-        <button
-          onClick={() => {
-            localStorage.clear();
-            window.location.href = "/";
-          }}
-          style={{
-            padding: "8px",
-            borderRadius: "8px",
-            border: "none",
-            background: "#e5e7eb",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
-          <LogoutIcon style={{ fontSize: "20px", color: "#374151" }} />
-        </button>
-
-      </div>
-
-      </div>
+    <Navbar
+      isMobile={isMobile}
+      userName={userName}
+      selectedPatient={selectedPatient}
+    />
 
       <div style={{ padding: "20px" }}>
-
-        {showSettings && (
-  <div style={{
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "20px"
-  }}>
-    <div style={{
-      ...card,
-      width: isMobile ? "100%" : "70%",
-      padding: isMobile ? "16px" : "24px",
-      maxWidth: "900px",
-      borderRadius: "16px",
-      boxShadow: "0 10px 25px rgba(0,0,0,0.08)"
-    }}>
-
-      {/* 🔝 HEADER */}
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "20px"
-      }}>
-        <h3 style={{ margin: 0 }}>Personalized Thresholds</h3>
-
-        <span
-          onClick={() => setShowSettings(false)}
-          style={{ cursor: "pointer", fontSize: "18px" }}
-        >
-          ✕
-        </span>
-      </div>
-
-      {/* 📊 INPUT GRID */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
-        gap: "20px"
-      }}>
-
-        {/* ❤️ Heart Rate */}
-        <div>
-          <label>Heart Rate Max</label>
-          <input
-            type="number"
-            value={thresholds.heartRate}
-            onChange={(e) =>
-              setThresholds({ ...thresholds, heartRate: Number(e.target.value) })
-            }
-            style={inputStyle}
-          />
-        </div>
-
-        {/* 🔵 SpO2 */}
-        <div>
-          <label>SpO2 Min (%)</label>
-          <input
-            type="number"
-            value={thresholds.spo2}
-            onChange={(e) =>
-              setThresholds({ ...thresholds, spo2: Number(e.target.value) })
-            }
-            style={inputStyle}
-          />
-        </div>
-
-        {/* 🌡 Temperature */}
-        <div>
-          <label>Temperature Max (°C)</label>
-          <input
-            type="number"
-            value={thresholds.temperature}
-            onChange={(e) =>
-              setThresholds({ ...thresholds, temperature: Number(e.target.value) })
-            }
-            style={inputStyle}
-          />
-        </div>
-
-      </div>
-
-      {/* 🔘 BUTTONS */}
-      <div style={{
-        marginTop: "20px",
-        display: "flex",
-        gap: "12px"
-      }}>
-
-        {/*  SAVE */}
-        <button 
-          onClick={() => {
-            setShowSettings(false);
-            alert("Thresholds saved!");
-          }}
-          onMouseOver={(e) => e.currentTarget.style.background = "#059669"}
-          onMouseOut={(e) => e.currentTarget.style.background = "#10b981"}
-          style={{
-            padding: "10px 16px",
-            borderRadius: "10px",
-            border: "none",
-            background: "#10b981",
-            color: "white",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            cursor: "pointer",
-            fontWeight: "600"
-          }}>
-            <SaveIcon style={{ fontSize: "18px" }} />
-            Save
-        </button>
-
-        {/* 🔄 RESET */}
-        <button
-          onClick={() =>
-            setThresholds({
-              heartRate: 110,
-              spo2: 92,
-              temperature: 38
-            })
-          }
-          style={{
-            padding: "10px 16px",
-            borderRadius: "10px",
-            border: "1px solid #e5e7eb",
-            background: "#f9fafb",
-            cursor: "pointer"
-          }}
-        >
-          Reset Defaults
-        </button>
-
-      </div>
-
-    </div>
-  </div>
-)}
 
         {/* 🚨 ALERT */}
         <AlertBanner status={status} />
 
-        <div style={{
-          marginTop: "20px",
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          gap: isMobile ? "12px" : "0",
-          justifyContent: "space-between",
-          alignItems: isMobile ? "flex-start" : "center"
-        }}>
-
-        {/* LEFT */}
-        <div>
-          <h1 style={{
-            fontSize: isMobile ? "24px" : "28px",
-            fontWeight: "700",
-            margin: 0
-          }}>
-            My Health Dashboard
-          </h1>
-
-          <p style={{
-            color: "#6b7280",
-            marginTop: "4px",
-            fontSize: "14px"
-          }}>
-            Real-time health monitoring
-          </p>
-
-          {/* 🔽 below line */}
+        {fallDetected && (
           <div style={{
-            marginTop: "6px",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            fontSize: "13px",
-            color: "#6b7280"
+            marginTop: "12px",
+            padding: "12px",
+            background: colors.status.dangerBg,
+            color: colors.status.danger,
+            border: `1px solid ${colors.status.danger}`,
+            borderRadius: "10px"
           }}>
-            <span>
-              Last Updated: <strong style={{ color: "#111827" }}>{lastUpdated}</strong>
-            </span>
-
-            <span style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              flexWrap: "wrap",
-              padding: "4px 10px",
-              borderRadius: "999px",
-              background: "#dcfce7",
-              color: "#065f46",
-              fontWeight: "500"
-            }}>
-              ● Live Monitoring
-            </span>
+            🚨 Fall detected! Immediate attention required.
           </div>
-        </div>
+        )}
 
-        {/* RIGHT SIDE */}
-        <div style={{
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          width: isMobile ? "100%" : "auto",
-          gap: isMobile ? "14px" : "12px",
-          alignItems: isMobile ? "stretch" : "center"
-        }}>
-
-          {/* ⚙ BUTTON */}
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            style={{
-              padding: "8px 14px",
-              borderRadius: "10px",
-              border: "none",
-              background: "#e5e7eb",
-              cursor: "pointer",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-              fontWeight: "500"
-            }}
-          >
-            ⚙ Custom Thresholds
-          </button>
-
-          {/* 🚨 SIMULATE EMERGENCY */}
-          <button
-            onMouseOver={(e) => e.currentTarget.style.background = "#dc2626"}
-            onMouseOut={(e) => e.currentTarget.style.background = "#ef4444"}
-            onClick={() =>
-              setData({ heartRate: 140, spo2: 85, temperature: 39 })
-            }
-            style={{
-              padding: "8px 14px",
-              borderRadius: "10px",
-              border: "none",
-              background: "#ef4444",
-              color: "white",
-              cursor: "pointer",
-              fontWeight: "600",
-              display: "flex",
-              alignItems: "center",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-              gap: "6px"
-            }}
-          >
-            <CrisisAlertIcon style={{ fontSize: "18px" }} />
-            Simulate
-          </button>
-
-          {/* 🟢 STATUS */}
-          <div style={{
-            padding: "10px 20px",
-            borderRadius: "6px",
-            fontSize: "14px",
-            fontWeight: "700",
-            width: isMobile ? "100%" : "auto",
-            textAlign: "center",
-            background:
-              status === "EMERGENCY" ? "#fee2e2" :
-              status === "WARNING" ? "#fef3c7" :
-              "#dcfce7",
-            color:
-              status === "EMERGENCY" ? "#991b1b" :
-              status === "WARNING" ? "#92400e" :
-              "#065f46"
-          }}>
-            {status}
-          </div>
-
-        </div>
-
-      </div>
+        <HeaderSection
+          isMobile={isMobile}
+          lastUpdated={lastUpdated}
+          status={status}
+          setData={setData}
+          setFallDetected={setFallDetected}
+          fallDetected={fallDetected}
+        />
 
         {/* 📊 HEALTH SUMMARY */}
         <div style={{
@@ -517,9 +245,9 @@ export default function PatientDashboard() {
             height: "100px",
             borderRadius: "50%",
             border: `6px solid ${
-              (100 - riskScore * 5) < 50 ? "#ef4444" :
-              (100 - riskScore * 5) < 75 ? "#f59e0b" :
-              "#10b981"
+              healthScore < 50 ? colors.status.danger :
+              healthScore < 75 ? colors.status.warning :
+              colors.status.success
             }`,
             display: "flex",
             flexDirection: "column",
@@ -528,9 +256,9 @@ export default function PatientDashboard() {
             fontWeight: "700"
           }}>
             <span style={{ fontSize: "28px" }}>
-              {100 - riskScore * 5}
+              {healthScore}
             </span>
-            <span style={{ fontSize: "12px", color: "#6b7280" }}>
+            <span style={{ fontSize: "12px", color: colors.text.secondary }}>
               /100
             </span>
           </div>
@@ -542,15 +270,15 @@ export default function PatientDashboard() {
             </h3>
 
             <p style={{ margin: "6px 0", display: "flex", alignItems: "center", gap: "8px" }}>
-            <TrendingUpIcon style={{ fontSize: "18px", color: "#3b82f6" }} />
+            <TrendingUpIcon style={{ fontSize: "18px", color: colors.brand.secondary }} />
             Health Score:
-            <span style={{ color: "#ef4444", fontWeight: "600" }}>
-              {100 - riskScore * 5}/100
+            <span style={{ color: colors.status.danger, fontWeight: "600" }}>
+              {healthScore}/100
             </span>
           </p>
 
           <p style={{ margin: "6px 0", display: "flex", alignItems: "center", gap: "8px" }}>
-            <WarningIcon style={{ fontSize: "18px", color: "#f59e0b" }} />
+            <WarningIcon style={{ fontSize: "18px", color: colors.status.warning }} />
             Warnings detected:
             <span style={{ fontWeight: "600" }}>
               {riskLevel === "MEDIUM" ? 1 : 0}
@@ -558,7 +286,7 @@ export default function PatientDashboard() {
           </p>
 
           <p style={{ margin: "6px 0", display: "flex", alignItems: "center", gap: "8px" }}>
-            <ErrorIcon style={{ fontSize: "18px", color: "#ef4444" }} />
+            <ErrorIcon style={{ fontSize: "18px", color: colors.status.danger }} />
             Emergencies:
             <span style={{ fontWeight: "600" }}>
               {riskLevel === "HIGH" ? 1 : 0}
@@ -568,87 +296,65 @@ export default function PatientDashboard() {
 
         </div>
 
-{/* ❤️ VITALS */}
-<div style={{
-  display: "grid",
-  gridTemplateColumns: isMobile
-    ? "1fr"
-    : "repeat(auto-fit, minmax(280px, 1fr))",
-  gap: "20px",
-  marginTop: "20px"
-}}>
+        <VitalsGrid
+          heartRate={heartRate}
+          spo2={spo2}
+          temperature={temperature}
+          thresholds={thresholds}
+          isMobile={isMobile}
+        />
 
-  {/* ❤️ Heart Rate */}
-  <VitalCard
-    title="Heart Rate"
-    value={heartRate}
-    unit="bpm"
-    icon={
-      <FavoriteIcon
-        style={{
-          fontSize: "28px",
-          color: heartRate > thresholds.heartRate ? "#ef4444" : "#10b981"
-        }}
-      />
-    }
-    style={{
-      border:
-        heartRate > thresholds.heartRate
-          ? "2px solid #ef4444"
-          : "1px solid #e5e7eb",
-      background:
-        heartRate > thresholds.heartRate ? "#fef2f2" : "#f9fafb"
-    }}
-  />
 
-  {/* 🔵 SpO2 */}
-  <VitalCard
-    title="SpO2"
-    value={spo2}
-    unit="%"
-    icon={
-      <OpacityIcon
-        style={{
-          fontSize: "28px",
-          color: spo2 < thresholds.spo2 ? "#f59e0b" : "#10b981"
-        }}
-      />
-    }
-    style={{
-      border:
-        spo2 < thresholds.spo2
-          ? "2px solid #f59e0b"
-          : "1px solid #e5e7eb",
-      background:
-        spo2 < thresholds.spo2 ? "#fff7ed" : "#f9fafb"
-    }}
-  />
+        {/* 📈 AI INSIGHTS */}
+        {!aiData ? (
+          <p style={{ marginTop: "20px" }}>🧠 Analyzing patient data...</p>
+        ) : (
+          <>
+            <AIInsightsCard
+              riskLevel={aiData?.riskLevel || riskLevel}
+              explanation={aiData?.explanation}
+              medical={aiData?.medical}
+              actions={aiData?.actions}
+            />
 
-  {/* 🌡 Temperature */}
-  <VitalCard
-    title="Temperature"
-    value={temperature}
-    unit="°C"
-    icon={
-      <ThermostatIcon
-        style={{
-          fontSize: "28px",
-          color:
-            temperature > thresholds.temperature ? "#ef4444" : "#10b981"
-        }}
-      />
-    }
-    style={{
-      border:
-        temperature > thresholds.temperature
-          ? "2px solid #ef4444"
-          : "1px solid #e5e7eb",
-      background:
-        temperature > thresholds.temperature ? "#fef2f2" : "#f9fafb"
-    }}
-  />
+            {/* 📄 DOWNLOAD REPORT */}
+            <div style={{
+              display: "flex",
+              justifyContent: "center"
+            }}>
+              <button
+                onClick={() =>
+                  downloadReport({
+                    userName,
+                    heartRate,
+                    spo2,
+                    temperature,
+                    riskLevel,
+                    aiData
+                  })
+                }
+                style={{
+                  padding: "10px 16px",
+                  borderRadius: "10px",
+                  border: "none",
+                  background: colors.brand.primary,
+                  color: "white",
+                  cursor: "pointer",
+                  fontWeight: "600",
+                  marginTop: "20px"
+                }}
+              >
+                📄 Download Health Report
+              </button>
+            </div>
+          </>
+        )}
 
-</div>
+        {/* MEDICATION SECTION */}
+        <MedicationCard />
+
+        {/* APPOINTMENT SECTION */}
+        <AppointmentCard />
 
         {/* 📈 CHART SECTION */}
         <div style={{
@@ -675,20 +381,20 @@ export default function PatientDashboard() {
 
               <div style={{ display: "flex", gap: "10px" }}>
                 <span style={{
-                  background: "#10b981",
-                  color: "white",
+                  background: colors.status.success,
+                  color: colors.text.white,
                   padding: "5px 12px",
                   borderRadius: "999px",
                   fontSize: "12px"
                 }}>
                   24 Hours
                 </span>
-                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Weekly</span>
-                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Monthly</span>
+                <span style={{ fontSize: "12px", color: colors.text.muted }}>Weekly</span>
+                <span style={{ fontSize: "12px", color: colors.text.muted }}>Monthly</span>
               </div>
             </div>
 
-            <HeartRateChart data={history} dataKey="heartRate" color="#ef4444" />
+            <HeartRateChart data={history} dataKey="heartRate" color={colors.metrics.heartRate} />
           </div>
 
           {/* 🔵 SpO2 */}
@@ -706,20 +412,20 @@ export default function PatientDashboard() {
 
               <div style={{ display: "flex", gap: "10px" }}>
                 <span style={{
-                  background: "#10b981",
-                  color: "white",
+                  background: colors.status.success,
+                  color: colors.text.white,
                   padding: "5px 12px",
                   borderRadius: "999px",
                   fontSize: "12px"
                 }}>
                   24 Hours
                 </span>
-                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Weekly</span>
-                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Monthly</span>
+                <span style={{ fontSize: "12px", color: colors.text.muted }}>Weekly</span>
+                <span style={{ fontSize: "12px", color: colors.text.muted }}>Monthly</span>
               </div>
             </div>
 
-            <HeartRateChart data={history} dataKey="spo2" color="#3b82f6" />
+            <HeartRateChart data={history} dataKey="spo2" color={colors.metrics.spo2} />
           </div>
 
           {/* 🟡 TEMPERATURE */}
@@ -737,20 +443,20 @@ export default function PatientDashboard() {
 
               <div style={{ display: "flex", gap: "10px" }}>
                 <span style={{
-                  background: "#10b981",
-                  color: "white",
+                  background: colors.status.success,
+                  color: colors.text.white,
                   padding: "5px 12px",
                   borderRadius: "999px",
                   fontSize: "12px"
                 }}>
                   24 Hours
                 </span>
-                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Weekly</span>
-                <span style={{ fontSize: "12px", color: "#9ca3af" }}>Monthly</span>
+                <span style={{ fontSize: "12px", color: colors.text.muted }}>Weekly</span>
+                <span style={{ fontSize: "12px", color: colors.text.muted }}>Monthly</span>
               </div>
             </div>
 
-            <HeartRateChart data={history} dataKey="temperature" color="#f59e0b" />
+            <HeartRateChart data={history} dataKey="temperature" color={colors.metrics.temperature} />
           </div>
 
         </div>
@@ -762,60 +468,6 @@ export default function PatientDashboard() {
           gap: "20px",
           marginTop: "20px"
         }}>
-
-          {/* 💡 AI INSIGHTS */}
-          <div style={card}>
-            <h3 style={{ marginBottom: "10px" }}>Insights</h3>
-
-            {insights.map((msg, i) => {
-              const isDanger = msg.includes("🚨");
-              const isWarning = msg.includes("⚠");
-
-              return (
-                <div
-                  key={i}
-                  style={{
-                    marginTop: "10px",
-                    padding: "12px 14px",
-                    borderRadius: "10px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-
-                    background:
-                      isDanger ? "#fff1f2" :
-                      isWarning ? "#fffbeb" :
-                      "#f0fdf4",
-
-                    color:
-                      isDanger ? "#991b1b" :
-                      isWarning ? "#92400e" :
-                      "#065f46",
-
-                    border:
-                      isDanger
-                        ? "1px solid #fecaca"
-                        : isWarning
-                        ? "1px solid #fde68a"
-                        : "1px solid #a7f3d0",
-                  }}
-                >
-                  {getIcon(msg)}
-
-                  <span style={{ fontWeight: "500" }}>
-                    {msg
-                      .replace("🚨", "")
-                      .replace("⚠", "")
-                      .replace("📉", "")
-                      .replace("📈", "")
-                      .replace("📩", "")
-                      .replace("✅", "")
-                    }
-                  </span>
-                </div>
-              );
-            })}
-          </div>
 
         </div>
 

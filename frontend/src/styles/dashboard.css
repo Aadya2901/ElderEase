@@ -1,0 +1,36 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.alert-card {
+  background: #fee2e2;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.patient-detail {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.ai-box {
+  margin-top: 15px;
+  background: #eef2ff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.notification-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 200px;
+}

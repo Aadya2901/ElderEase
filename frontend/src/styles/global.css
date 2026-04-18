@@ -1,0 +1,50 @@
+/* ================= GLOBAL UI FIXES ================= */
+
+/* SECTION SPACING */
+.section {
+  padding: 80px 20px;
+}
+
+/* CARDS */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* HEADINGS */
+.title {
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.subtitle {
+  color: #6b7280;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* BUTTONS */
+.btn-primary {
+  /* background: #2563eb; */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-outline {
+  border: 2px solid #ccc;
+  background: transparent;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+}

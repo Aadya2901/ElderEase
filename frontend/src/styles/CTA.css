@@ -1,0 +1,148 @@
+.cta {
+  position: relative;
+  padding: 7rem 1.5rem;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-primary));
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .cta {
+    padding: 8rem 1.5rem;
+  }
+}
+
+.cta-decorations {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+}
+
+.cta-decoration {
+  position: absolute;
+  width: 24rem;
+  height: 24rem;
+  background-color: white;
+  border-radius: 50%;
+  filter: blur(48px);
+}
+
+.cta-decoration-top {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.cta-decoration-bottom {
+  bottom: 0;
+  right: 0;
+  transform: translate(50%, 50%);
+}
+
+.cta-content {
+  position: relative;
+  z-index: 10;
+  max-width: 56rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cta-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+}
+
+.cta-title {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 2rem;
+  text-wrap: balance;
+  line-height: 1.2;
+}
+
+@media (min-width: 640px) {
+  .cta-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cta-title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .cta-title {
+    font-size: 3.75rem;
+  }
+}
+
+.cta-description {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 42rem;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .cta-description {
+    font-size: 1.5rem;
+  }
+}
+
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .cta-buttons {
+    gap: 1.5rem;
+  }
+}
+
+.cta-btn-primary {
+  background-color: white;
+  color: var(--color-primary);
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-btn-primary:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-xl);
+  transform: scale(1.05);
+}
+
+.cta-btn-primary svg {
+  transition: transform var(--transition-normal);
+}
+
+.cta-btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+.cta-btn-outline {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+}
+
+.cta-btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
