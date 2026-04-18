@@ -9,12 +9,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Test route (optional but useful)
+// Test route
 app.get("/", (req, res) => {
   res.send("Backend is running ✅");
 });
 
-// ✅ AI ROUTE
+// AI ROUTE
 app.post("/api/ai-insight", async (req, res) => {
   try {
     const { heartRate, spo2, temperature, fallDetected } = req.body;
@@ -43,7 +43,6 @@ Rules:
 - Be medically safe
 `;
 
-    // ✅ Initialize Gemini
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
     const model = genAI.getGenerativeModel({
@@ -61,12 +60,9 @@ Rules:
 
     const text = result.response.text();
 
-    console.log("Gemini raw:", text);
-
     let parsed;
 
     try {
-      // ✅ Strong JSON cleaning
       const cleanText = text
         .replace(/```json/g, "")
         .replace(/```/g, "")
@@ -81,8 +77,6 @@ Rules:
       parsed.source = "ai";
 
     } catch (e) {
-      console.log("Parsing failed, raw:", text);
-
       parsed = {
         riskLevel: "MEDIUM",
         explanation: "AI response unclear, fallback used.",
@@ -95,8 +89,6 @@ Rules:
     res.json(parsed);
 
   } catch (err) {
-    console.error("FULL ERROR:", err.message);
-
     res.json({
       riskLevel: "MEDIUM",
       explanation: "Vitals slightly abnormal. Monitoring recommended.",
@@ -111,7 +103,9 @@ Rules:
   }
 });
 
-// ✅ Start server
-app.listen(5000, () => {
-  console.log("Server running on port 5000 🚀");
+// Start server
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT} 🚀`);
 });
