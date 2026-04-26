@@ -246,17 +246,18 @@ The architecture is ready for direct integration with real sensors in future pha
 ---
 
 # 🛠️ Tech Stack
+
 ```
-| Layer           |             Technology               |           Purpose                     |
-|-----------------|--------------------------------------|---------------------------------------|
-| Runtime         |             Node.js                  | Runs Node-RED and backend services    |
-| Core Engine     |               Node-RED               | Flow-based health data simulation     |
-| Backend         |         Express.js                   | API layer for system integration      |
-| Programming     |          JavaScript                  | System logic implementation           |
-| Data Format     |                  JSON                | Structured health data exchange       |
-| Database        |         MongoDB (Phase 3)            | Persistent health record storage      |
-| UI              | Node-RED Dashboard / React (Phase 4) | Monitoring interface                  |
-| Version Control |             Git + GitHub             | Project version management            |
+| Layer           | Technology          | Purpose                             |
+|-----------------|--------------------|--------------------------------------|
+| Runtime         | Node.js            | Runs Node-RED and backend services   |
+| Core Engine     | Node-RED           | Flow-based health data simulation    |
+| Backend         | Express.js         | API layer for system integration     |
+| Programming     | JavaScript         | System logic implementation          |
+| Data Format     | JSON               | Structured health data exchange      |
+| Database        | MongoDB            | Persistent health record storage     |
+| UI              | React              | Monitoring interface                 |
+| Version Control | Git + GitHub       | Project version management           |
 ```
 
 ---
