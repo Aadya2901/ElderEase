@@ -1,158 +1,139 @@
-import { useState, useEffect } from "react";
-import "../styles/dashboard.css";
+import { useEffect, useState } from "react";
+import api from "../services/api";
+import PatientCard from "../components/PatientCard";
+import PatientDetails from "../components/dashboard/PatientDetails";
+
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer
+} from "recharts";
 
 export default function CaregiverDashboard() {
+  const [patients, setPatients] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [clock, setClock] = useState("");
 
-  const [patients, setPatients] = useState([
-    { id: 1, name: "Margaret Johnson", heartRate: 95, spo2: 94, temperature: 37 },
-    { id: 2, name: "Robert Fox", heartRate: 78, spo2: 96, temperature: 36.7 }
-  ]);
+  const fetchData = async () => {
+    try {
+      const res = await api.get("/caregiver/dashboard");
+      setPatients(res.data);
+    } catch (err) {
+      console.log(err);
+    }
 
-  const [search, setSearch] = useState("");
-  const [selectedPatient, setSelectedPatient] = useState(null);
-  const [notifications, setNotifications] = useState([]);
+    setLoading(false);
+  };
 
-  // 🔁 REAL-TIME SIMULATION
   useEffect(() => {
-    const interval = setInterval(() => {
-      setPatients(prev =>
-        prev.map(p => {
-          const heartRate = Math.floor(60 + Math.random() * 50);
-          const spo2 = Math.floor(88 + Math.random() * 10);
-          const temperature = parseFloat((36 + Math.random()).toFixed(1));
+    fetchData();
 
-          // 🔔 Notifications
-          if (spo2 < 90) {
-            setNotifications(prev => [
-              {
-                msg: `${p.name} low SpO₂`,
-                time: new Date().toLocaleTimeString()
-              },
-              ...prev
-            ]);
-          }
+    const apiTimer = setInterval(fetchData, 5000);
 
-          return { ...p, heartRate, spo2, temperature };
-        })
-      );
-    }, 4000);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(apiTimer);
   }, []);
 
-  const filteredPatients = patients.filter(p =>
-    p.name.toLowerCase().includes(search.toLowerCase())
-  );
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setClock(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="container">
+        Loading...
+      </div>
+    );
+  }
+
+  const critical = patients.filter((p) => {
+  const vital = p.latestVital || {};
+
+  const hr = vital.heartRate || 0;
+  const spo2 = vital.spo2 || 0;
+  const temp = vital.temp ?? vital.temperature ?? 0;
 
   return (
-    <div className="dashboard">
+    hr < 60 ||
+    hr > 100 ||
+    spo2 < 95 ||
+    temp > 100
+  );
+}).length;
 
-      {/* 🔷 TOPBAR */}
-      <div className="topbar">
-        <h1>ElderEase</h1>
-        <div>🔔 👤</div>
+const stable = patients.filter((p) => {
+  const vital = p.latestVital || {};
+
+  const hr = vital.heartRate || 0;
+  const spo2 = vital.spo2 || 0;
+  const temp = vital.temp ?? vital.temperature ?? 0;
+
+  return !(
+    hr < 60 ||
+    hr > 100 ||
+    spo2 < 95 ||
+    temp > 100
+  );
+}).length;
+
+  return (
+    <div className="container">
+      <h1 className="title">
+        Caregiver Dashboard
+      </h1>
+
+      <p className="subtitle">
+        Real-time monitoring of all connected elders
+      </p>
+
+      {/* SUMMARY CARDS */}
+      <div className="summary-grid">
+        <div className="summary-card blue">
+          Total Patients
+          <div className="summary-value">
+            {patients.length}
+          </div>
+        </div>
+
+        <div className="summary-card red">
+          Critical Patients
+          <div className="summary-value">
+            {critical}
+          </div>
+        </div>
+
+        <div className="summary-card green">
+          Stable Patients
+          <div className="summary-value">
+            {stable}
+          </div>
+        </div>
+
+        <div className="summary-card purple">
+          Live Monitoring
+          <div className="summary-value">
+            {clock}
+          </div>
+        </div>
       </div>
 
-      {/* 🚨 ALERTS */}
-      <div className="alerts-section">
-        <h2>🚨 Critical Alerts</h2>
+      <br />
 
-        {patients
-          .filter(p => p.spo2 < 90 || p.heartRate > 110)
-          .map(p => (
-            <div className="alert-card" key={p.id}>
-              <h3>{p.name} 🔴 EMERGENCY</h3>
-              <p>SpO₂: {p.spo2} | HR: {p.heartRate}</p>
-
-              <div className="actions">
-                <button>📞 Call</button>
-                <button onClick={() => setSelectedPatient(p)}>📊 View</button>
-                <button>🏥 Hospital</button>
-              </div>
-            </div>
-          ))}
-      </div>
-
-      {/* 👨‍👩‍👧 PATIENTS */}
-      <div className="patients-section">
-
-        <div className="header">
-          <h2>Patients</h2>
-          <input
-            placeholder="Search patient..."
-            onChange={(e) => setSearch(e.target.value)}
+      {/* PATIENT CARDS */}
+      <div className="grid">
+        {patients.map((item) => (
+          <PatientCard
+            key={item.userId}
+            patient={item}
           />
-        </div>
-
-        <div className="patient-grid">
-          {filteredPatients.map(p => {
-            const status =
-              p.spo2 < 90 || p.heartRate > 110
-                ? "🔴 High"
-                : p.spo2 < 94
-                ? "🟡 Warning"
-                : "🟢 Stable";
-
-            return (
-              <div
-                className="patient-card"
-                onClick={() => setSelectedPatient(p)}
-                key={p.id}
-              >
-                <h3>{p.name}</h3>
-                <p>{status}</p>
-                <p>HR: {p.heartRate}</p>
-              </div>
-            );
-          })}
-        </div>
-
-      </div>
-
-      {/* 🧠 PATIENT DETAIL PANEL */}
-      {selectedPatient && (
-        <div className="patient-detail">
-
-          <h2>{selectedPatient.name}</h2>
-
-          <div className="vitals">
-            <p>❤️ HR: {selectedPatient.heartRate}</p>
-            <p>🫁 SpO₂: {selectedPatient.spo2}</p>
-            <p>🌡 Temp: {selectedPatient.temperature}</p>
-          </div>
-
-          <div className="status">
-            Status: {selectedPatient.spo2 < 90 ? "🔴 EMERGENCY" : "🟢 STABLE"}
-          </div>
-
-          <div className="ai-box">
-            <h3>🧠 AI Insight</h3>
-            <p>
-              {selectedPatient.spo2 < 90
-                ? "Low oxygen detected. Possible respiratory issue."
-                : "Vitals are stable."}
-            </p>
-          </div>
-
-          <div className="actions">
-            <h3>⚡ Recommended Actions</h3>
-            <ul>
-              <li>Call patient</li>
-              <li>Recheck vitals</li>
-              <li>Ensure hydration</li>
-            </ul>
-          </div>
-
-        </div>
-      )}
-
-      {/* 🔔 NOTIFICATIONS */}
-      <div className="notification-panel">
-        {notifications.slice(0, 5).map((n, i) => (
-          <p key={i}>{n.time} - {n.msg}</p>
         ))}
       </div>
-
     </div>
   );
 }

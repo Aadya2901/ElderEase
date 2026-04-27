@@ -1,0 +1,149 @@
+[
+    {
+        "id": "ae2ad0c4d6049533",
+        "type": "tab",
+        "label": "sensor simulator",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e98e0c05b52e9558",
+        "type": "inject",
+        "z": "ae2ad0c4d6049533",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 120,
+        "wires": [
+            [
+                "9d5c2660c6108978",
+                "f7f971f7a199cadd",
+                "a99ee0c145a8fe43"
+            ]
+        ]
+    },
+    {
+        "id": "9d5c2660c6108978",
+        "type": "function",
+        "z": "ae2ad0c4d6049533",
+        "name": "elder001",
+        "func": "msg.payload = {\n    userId: \"elder001\",\n    heartRate: Math.floor(Math.random() * 40) + 60,\n    spo2: Math.floor(Math.random() * 5) + 95,\n    temperature: Number((Math.random() * 2 + 36).toFixed(1))\n};\n\nreturn msg;\n// msg.payload = {\n//     userId: \"elder001\",\n//     heartRate: 135,\n//     spo2: 88,\n//     temperature: 39.2\n// };\n// return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "1788803e85307f3d"
+            ]
+        ]
+    },
+    {
+        "id": "1788803e85307f3d",
+        "type": "http request",
+        "z": "ae2ad0c4d6049533",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:5000/api/vitals/live",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Content-Type",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 610,
+        "y": 340,
+        "wires": [
+            [
+                "90b1db8543287b3d"
+            ]
+        ]
+    },
+    {
+        "id": "90b1db8543287b3d",
+        "type": "debug",
+        "z": "ae2ad0c4d6049533",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f7f971f7a199cadd",
+        "type": "function",
+        "z": "ae2ad0c4d6049533",
+        "name": "elder002",
+        "func": "// msg.payload = {\n//     userId: \"elder002\",\n//     heartRate: Math.floor(Math.random() * 40) + 60,\n//     spo2: Math.floor(Math.random() * 5) + 95,\n//     temperature: Number((Math.random() * 2 + 36).toFixed(1))\n// };\n\n// return msg;\n\nmsg.payload = {\n    userId: \"elder002\",\n    heartRate: 135,\n    spo2: 88,\n    temperature: 39.2\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 300,
+        "wires": [
+            [
+                "1788803e85307f3d"
+            ]
+        ]
+    },
+    {
+        "id": "a99ee0c145a8fe43",
+        "type": "function",
+        "z": "ae2ad0c4d6049533",
+        "name": "elder003",
+        "func": "msg.payload = {\n    userId: \"elder003\",\n    heartRate: Math.floor(Math.random() * 40) + 60,\n    spo2: Math.floor(Math.random() * 5) + 95,\n    temperature: Number((Math.random() * 2 + 36).toFixed(1))\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "1788803e85307f3d"
+            ]
+        ]
+    }
+]
