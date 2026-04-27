@@ -20,6 +20,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<PatientDashboard />} />
         <Route path="/caregiver" element={<CaregiverDashboard />} />
+        <Route path="/patient/:id" element={<PatientDetail />} />
+        <Route path="/reports/:id" element={<Reports />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

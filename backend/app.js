@@ -34,41 +34,39 @@ app.post("/api/ai-insight", async (req, res) => {
     const { heartRate, spo2, temperature, fallDetected } = req.body;
 
     const prompt = `
-You are a medical assistant AI.
+      You are a medical assistant AI.
 
-Patient vitals:
-Heart Rate: ${heartRate} bpm
-SpO2: ${spo2}%
-Temperature: ${temperature}°C
-Fall Detected: ${fallDetected}
+      Patient vitals:
+      Heart Rate: ${heartRate} bpm
+      SpO2: ${spo2}%
+      Temperature: ${temperature}°C
+      Fall Detected: ${fallDetected}
 
-Analyze and return ONLY JSON:
+      Analyze and return ONLY JSON:
 
-{
-  "riskLevel": "LOW | MEDIUM | HIGH",
-  "explanation": "short reason",
-  "medical": "possible condition",
-  "actions": ["action1", "action2"]
-}
+      {
+        "riskLevel": "LOW | MEDIUM | HIGH",
+        "explanation": "short reason",
+        "medical": "possible condition",
+        "actions": ["action1", "action2"]
+      }
 
-Rules:
-- Keep explanation under 15 words
-- Be practical
-- Be medically safe
+      Rules:
+      - Keep explanation under 15 words
+      - Be practical
+      - Be medically safe
 
-Return ONLY valid JSON.
-Do NOT add explanation.
-Do NOT add markdown.
-Do NOT wrap in ```.
-
-Strict JSON only.
-
-`;
+      Return ONLY valid JSON.
+      Do NOT add explanation.
+      Do NOT add markdown.
+      Strict JSON only.
+      Do NOT wrap in \`\`\`.
+      `;
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
     const model = genAI.getGenerativeModel({
-      model: "models/gemini-1.5-flash-latest"
+      model: "gemini-1.5-flash"
     });
 
     const result = await model.generateContent({

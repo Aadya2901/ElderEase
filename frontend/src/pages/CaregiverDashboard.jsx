@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import PatientCard from "../components/PatientCard";
+import PatientCard from "../components/dashboard/PatientCard";
 
 export default function CaregiverDashboard() {
   const [patients, setPatients] = useState([]);
