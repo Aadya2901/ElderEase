@@ -5,95 +5,57 @@ import {
  YAxis,
  Tooltip,
  CartesianGrid,
- ResponsiveContainer,
- Legend
+ ResponsiveContainer
 } from "recharts";
 
 export default function VitalChart({
- data
-}){
+ data = [],
+ dataKey,
+ title,
+ color,
+ unit
+}) {
 
- const chartData =
-  data.slice(0,15)
+ const chartData = data
+  .slice(0, 15)
   .reverse()
-  .map((item,index)=>({
-
-   reading:index + 1,
-   heartRate:item.heartRate,
-   spo2:item.spo2,
-   temp:item.temp
-
+  .map((item, index) => ({
+    reading: index + 1,
+    value: item[dataKey] ?? item.temperature ?? 0
   }));
 
- return(
+ return (
+  <div className="card">
 
- <div className="card">
+    <h3 style={{ marginBottom: "6px" }}>{title}</h3>
 
-  <h3>
-   Vital Signs Trend
-  </h3>
+    <p style={{ fontSize: "12px", color: "#6b7280" }}>
+      X-axis: Reading Number <br />
+      Y-axis: {unit}
+    </p>
 
-  <p>
-   X-axis: Reading sequence (oldest to latest)  
-   Y-axis: Vital values
-  </p>
+    <ResponsiveContainer width="100%" height={220}>
+      <LineChart data={chartData}>
 
-  <ResponsiveContainer
-   width="100%"
-   height={350}
-  >
+        <CartesianGrid stroke="#E5EFE8" strokeDasharray="3 3" />
 
-  <LineChart data={chartData}>
+        <XAxis dataKey="reading" tick={{ fontSize: 12 }} />
 
-   <CartesianGrid strokeDasharray="3 3" />
+        <YAxis tick={{ fontSize: 12 }} />
 
-   <XAxis
-    dataKey="reading"
-    label={{
-     value:"Reading Number",
-     position:"insideBottom",
-     offset:-5
-    }}
-   />
+        <Tooltip formatter={(v) => `${v} ${unit}`} />
 
-   <YAxis
-    label={{
-     value:"Measured Value",
-     angle:-90,
-     position:"insideLeft"
-    }}
-   />
+        <Line
+          type="monotone"
+          dataKey="value"
+          stroke={color}
+          strokeWidth={3}
+          dot={{ r: 3 }}
+        />
 
-   <Tooltip />
+      </LineChart>
+    </ResponsiveContainer>
 
-   <Legend />
-
-   <Line
-    type="monotone"
-    dataKey="heartRate"
-    name="Heart Rate (bpm)"
-    stroke="#ef4444"
-   />
-
-   <Line
-    type="monotone"
-    dataKey="spo2"
-    name="SpO2 (%)"
-    stroke="#3b82f6"
-   />
-
-   <Line
-    type="monotone"
-    dataKey="temp"
-    name="Temp (°F)"
-    stroke="#10b981"
-   />
-
-  </LineChart>
-
-  </ResponsiveContainer>
-
- </div>
-
+  </div>
  );
 }

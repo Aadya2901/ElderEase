@@ -1,31 +1,20 @@
-export default function VitalCard({ title, value, unit, icon, style }) {
+export default function VitalCard({ title, value, unit, icon }) {
   return (
-    <div
-      style={{
-        padding: "16px",
-        borderRadius: "14px",
-        background: "#fff",
-        border: "1px solid #e5e7eb",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        transition: "all 0.2s ease",
-        ...style
-      }}
-    >
-      {/* LEFT */}
+    <div className="card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+
       <div>
-        <p style={{ color: "#6b7280", fontSize: "14px" }}>{title}</p>
-        <h2 style={{ fontSize: "28px", fontWeight: "700" }}>
-          {value} <span style={{ fontSize: "16px" }}>{unit}</span>
+        <p style={{ color: "#6b7280", fontSize: "14px", marginBottom: "4px" }}>
+          {title}
+        </p>
+
+        <h2 style={{ fontSize: "26px", fontWeight: "700", margin: 0 }}>
+          {value} <span style={{ fontSize: "14px" }}>{unit}</span>
         </h2>
       </div>
 
-      {/* RIGHT ICON */}
       <div
         style={{
-          background: "#f3f4f6",
+          background: "#EAF4EA",
           padding: "10px",
           borderRadius: "12px",
           display: "flex",
@@ -35,6 +24,7 @@ export default function VitalCard({ title, value, unit, icon, style }) {
       >
         {icon}
       </div>
+
     </div>
   );
 }

@@ -6,11 +6,16 @@ import {
 
 import api from "../services/api";
 import StatCard from "../components/dashboard/StatCard";
+import useVitals from "../hooks/useVitals";
+import VitalsGrid from "../components/dashboard/VitalsGrid";
+import VitalChart from "../components/dashboard/VitalChart";
 
 export default function PatientDetail(){
 
  const { id } = useParams();
  const navigate = useNavigate();
+
+ const { history, latest } = useVitals(id);
 
  const [data,setData] =
   useState(null);
@@ -36,7 +41,7 @@ export default function PatientDetail(){
   loadData();
 
   const timer =
-   setInterval(loadData,5000);
+   setInterval(loadData, 10000);
 
   return ()=>clearInterval(timer);
 
@@ -50,18 +55,11 @@ export default function PatientDetail(){
   );
  }
 
- const vital =
-  data.latestVital || {};
+  const hr = latest?.heartRate || 0;
+  const spo2 = latest?.spo2 || 0;
+  const temp = latest?.temperature || 0;
 
- const hr =
-  vital.heartRate || 0;
-
- const spo2 =
-  vital.spo2 || 0;
-
-const temp = vital.temp ?? vital.temperature ?? 0;
-
- let status = "Stable";
+  let status = "Stable";
 
  if(
   hr > 100 ||
@@ -89,52 +87,26 @@ const temp = vital.temp ?? vital.temperature ?? 0;
     Monitoring ID: {id}
    </p>
 
-   {/* TOP STATS */}
-   <div className="grid">
-
-    <StatCard
-     title="Heart Rate"
-     value={hr + " bpm"}
-    />
-
-    <StatCard
-     title="SpO2"
-     value={spo2 + "%"}
-    />
-
-    <StatCard
-     title="Temperature"
-     value={temp + "°C"}
-    />
-
-    <StatCard
-     title="Status"
-     value={status}
-    />
-
-   </div>
+  {/* TOP STATS */}
+  <h3 style={{ marginBottom: "10px" }}>
+  Current Vitals
+</h3>
+  <VitalsGrid
+    heartRate={hr}
+    spo2={spo2}
+    temperature={temp}
+    thresholds={{
+      heartRate: { low: 60, high: 100 },
+      spo2: { low: 95 },
+      temperature: { high: 100 }
+    }}
+    isMobile={false}
+  />
 
    <br />
 
    {/* TWO COLUMN */}
    <div className="report-grid">
-
-    {/* Vital Card */}
-    <div className="card">
-
-     <h3>
-      Latest Vital Snapshot
-     </h3>
-
-     <p>
-      Live values refreshed every 5 sec
-     </p>
-
-     <p>❤️ Heart Rate: {hr} bpm</p>
-     <p>🩸 SpO2: {spo2}%</p>
-     <p>🌡 Temperature: {temp}°F</p>
-
-    </div>
 
     {/* Health Analysis */}
     <div className="card">
@@ -172,29 +144,6 @@ const temp = vital.temp ?? vital.temperature ?? 0;
 
     </div>
 
-    {/* Alerts
-    <div className="card">
-
-     <h3>
-      Latest Alerts
-     </h3>
-
-     {data.alerts?.length===0 ? (
-      <p>No alerts</p>
-     ) : (
-      data.alerts
-      .slice(0,5)
-      .map((a,index)=>(
-       <div
-        key={index}
-        className="alert-box"
-       >
-        ⚠ {a.message}
-       </div>
-      ))
-     )}
-
-    </div> */}
         {/* Quick Actions */}
     <div className="card">
 
@@ -254,9 +203,6 @@ const temp = vital.temp ?? vital.temperature ?? 0;
       })
   )}
 </div>
-
-
-
    </div>
 
   </div>
