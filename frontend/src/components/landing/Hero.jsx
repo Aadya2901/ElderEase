@@ -12,11 +12,6 @@ function Hero() {
     <section id="home" className="hero">
       {/* Background Image */}
       <div className="hero-background">
-        <img
-          src="/images/hero-bg.jpg"
-          alt="Modern healthcare facility"
-          className="hero-bg-image"
-        />
         <div className="hero-overlay hero-overlay-bottom"></div>
         <div className="hero-overlay hero-overlay-sides"></div>
         <div className="hero-overlay hero-overlay-top"></div>
