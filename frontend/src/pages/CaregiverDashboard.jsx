@@ -73,10 +73,6 @@ export default function CaregiverDashboard() {
           <div className="summary-value">
             {patients.length}
           </div>
-
-          <div className="summary-footer">
-            Updated: Just now
-          </div>
         </div>
 
         {/* CRITICAL */}
@@ -92,9 +88,6 @@ export default function CaregiverDashboard() {
             {critical}
           </div>
 
-          <div className="summary-footer">
-            Needs attention
-          </div>
         </div>
 
         {/* STABLE */}
@@ -110,9 +103,6 @@ export default function CaregiverDashboard() {
             {stable}
           </div>
 
-          <div className="summary-footer">
-            All good
-          </div>
         </div>
 
         {/* CLOCK */}
@@ -123,19 +113,13 @@ export default function CaregiverDashboard() {
               LIVE
             </span>
           </div>
-
           <div className="summary-value">
             {clock}
-          </div>
-
-          <div className="summary-footer">
-            Real-time updates
           </div>
         </div>
 
       </div>
 
-      <br />
 
       {/* PATIENT CARDS */}
       <div className="grid">

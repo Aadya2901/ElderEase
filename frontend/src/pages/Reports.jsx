@@ -1,284 +1,167 @@
 import { useEffect, useState } from "react";
-import {
- useParams,
- useNavigate
-} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import api from "../services/api";
-import StatCard from "../components/dashboard/StatCard";
 
-import {
- ResponsiveContainer,
- LineChart,
- Line,
- XAxis,
- YAxis,
- Tooltip,
- CartesianGrid,
- Legend
-} from "recharts";
+import useVitals from "../hooks/useVitals";
+import VitalsGrid from "../components/dashboard/VitalsGrid";
+import VitalChart from "../components/dashboard/VitalChart";
+
+import Navbar from "../components/common/Navbar";
+
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import OpacityIcon from "@mui/icons-material/Opacity";
+import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+
+import "../styles/Reports.css";
 
 export default function Reports(){
 
  const { id } = useParams();
  const navigate = useNavigate();
 
- const [summary,setSummary] =
-  useState(null);
+ const { history, latest } = useVitals(id);
 
- const [trends,setTrends] =
-  useState([]);
+ const [summary, setSummary] = useState(null);
+ const [alerts, setAlerts] = useState([]);
 
- const [alerts,setAlerts] =
-  useState([]);
+ useEffect(() => {
 
-useEffect(() => {
+  const loadData = async () => {
+   try {
+    const res1 = await api.get(`/reports/${id}/summary`);
+    const res2 = await api.get(`/reports/${id}/alerts`);
 
- const loadData = async () => {
+    setSummary(res1.data);
+    setAlerts(res2.data);
 
-  try {
+   } catch (err) {
+    console.log(err);
+   }
+  };
 
-   const res1 =
-    await api.get(
-     `/reports/${id}/summary`
-    );
+  loadData();
 
-   const res2 =
-    await api.get(
-     `/reports/${id}/trends`
-    );
+  const timer = setInterval(loadData, 10000);
+  return () => clearInterval(timer);
 
-   const res3 =
-    await api.get(
-     `/reports/${id}/alerts`
-    );
-
-   setSummary(res1.data);
-   setTrends(res2.data);
-   setAlerts(res3.data);
-
-  } catch (err) {
-   console.log(err);
-  }
-
- };
-
- loadData();
-
- const timer =
-  setInterval(loadData, 5000);
-
- return () =>
-  clearInterval(timer);
-
-}, [id]);
+ }, [id]);
 
  if(!summary){
-  return(
-   <div className="container">
-    Loading...
-   </div>
-  );
+  return <div className="reports-container">Loading...</div>;
  }
 
- const chartData =
-  trends.slice(0,15)
-  .reverse()
-  .map((item,index)=>({
-   reading:index + 1,
-   heartRate:item.heartRate,
-   spo2:item.spo2,
-   temp: item.temperature ?? item.temp
-  }));
+ const hr = latest?.heartRate || 0;
+ const spo2 = latest?.spo2 || 0;
+ const temp = latest?.temperature || 0;
 
  return(
-  <div className="container">
 
-   <button
-    className="btn"
-    onClick={()=>navigate(-1)}
-   >
+  <>
+    <Navbar
+    />
+
+  <div className="reports-container">
+
+   <button className="btn" onClick={()=>navigate(-1)}>
     Back
    </button>
 
-   <h1 className="title">
-    Patient Reports
-   </h1>
+   <h1 className="reports-title">Patient Reports</h1>
 
-   {/* SUMMARY */}
-   <div className="grid">
+   {/* 🔥 SUMMARY */}
+   <div className="summary-grid">
 
-    <StatCard
-     title="Avg HR"
-     value={summary.avgHeartRate}
+    <div className="summary-card clean">
+      <div className="card-header">
+        <span>Avg Heart Rate</span>
+        <FavoriteIcon className="icon" />
+      </div>
+
+      <div className="card-value">
+        {summary.avgHeartRate} <span>bpm</span>
+      </div>
+    </div>
+
+    <div className="summary-card clean">
+      <div className="card-header">
+        <span>Avg SpO2</span>
+        <OpacityIcon className="icon" />
+      </div>
+
+      <div className="card-value">
+        {summary.avgSpO2} <span>%</span>
+      </div>
+    </div>
+
+    <div className="summary-card clean">
+      <div className="card-header">
+        <span>Avg Temperature</span>
+        <DeviceThermostatIcon className="icon" />
+      </div>
+
+      <div className="card-value">
+        {summary.avgTemperature} <span>°C</span>
+      </div>
+    </div>
+
+    <div className="summary-card clean">
+      <div className="card-header">
+        <span>Total Alerts</span>
+        <WarningAmberIcon className="icon alert" />
+      </div>
+
+      <div className="card-value">
+        {summary.totalAlerts}
+      </div>
+    </div>
+
+  </div>
+
+   {/* 🔥 3 GRAPHS IN ONE ROW */}
+   <div className="report-grid">
+
+    <VitalChart
+      data={history}
+      dataKey="heartRate"
+      title="Heart Rate Trend"
+      color="#ef4444"
+      unit="bpm"
     />
 
-    <StatCard
-     title="Avg SpO2"
-     value={summary.avgSpO2 + "%"}
+    <VitalChart
+      data={history}
+      dataKey="spo2"
+      title="Oxygen Saturation Trend"
+      color="#3b82f6"
+      unit="%"
     />
 
-    <StatCard
-     title="Avg Temp"
-     value={summary.avgTemperature + "°C"}
-    />
-
-    <StatCard
-     title="Total Alerts"
-     value={summary.totalAlerts}
+    <VitalChart
+      data={history}
+      dataKey="temp"
+      title="Temperature Trend"
+      color="#10b981"
+      unit="°C"
     />
 
    </div>
 
-   <br />
+   {/* 🔥 ALERTS BELOW */}
+   {/* <div className="alert-card">
+    <h3>Latest Alerts</h3>
 
-   {/* TWO COLUMN AREA */}
-   <div className="report-grid">
-
-    {/* HR */}
-    <div className="card">
-     <h3>
-      Heart Rate Trend
-     </h3>
-
-     <p>
-      X-axis: Reading Number
-      <br />
-      Y-axis: BPM
-     </p>
-
-     <ResponsiveContainer
-      width="100%"
-      height={280}
-     >
-      <LineChart data={chartData}>
-       <CartesianGrid strokeDasharray="3 3" />
-       <XAxis dataKey="reading" />
-       <YAxis />
-       <Tooltip />
-       <Legend />
-
-       <Line
-        type="monotone"
-        dataKey="heartRate"
-        stroke="#ef4444"
-        name="Heart Rate"
-       />
-
-      </LineChart>
-     </ResponsiveContainer>
-    </div>
-
-    {/* SpO2 */}
-    <div className="card">
-     <h3>
-      Oxygen Saturation Trend
-     </h3>
-
-     <p>
-      X-axis: Reading Number
-      <br />
-      Y-axis: SpO2 %
-     </p>
-
-     <ResponsiveContainer
-      width="100%"
-      height={280}
-     >
-      <LineChart data={chartData}>
-       <CartesianGrid strokeDasharray="3 3" />
-       <XAxis dataKey="reading" />
-       <YAxis />
-       <Tooltip />
-       <Legend />
-
-       <Line
-        type="monotone"
-        dataKey="spo2"
-        stroke="#2563eb"
-        name="SpO2"
-       />
-
-      </LineChart>
-     </ResponsiveContainer>
-    </div>
-
-    {/* Temp */}
-    <div className="card">
-     <h3>
-      Temperature Trend
-     </h3>
-
-     <p>
-      X-axis: Reading Number
-      <br />
-      Y-axis: °C
-     </p>
-
-     <ResponsiveContainer
-      width="100%"
-      height={280}
-     >
-      <LineChart data={chartData}>
-       <CartesianGrid strokeDasharray="3 3" />
-       <XAxis dataKey="reading" />
-       <YAxis />
-       <Tooltip />
-       <Legend />
-
-       <Line
-        type="monotone"
-        dataKey="temp"
-        stroke="#10b981"
-        name="Temperature"
-       />
-
-      </LineChart>
-     </ResponsiveContainer>
-    </div>
-
-    {/*Alerts*/}
-    {/* <div className="card">
-
-     <h3>
-      Latest 5 Alerts
-     </h3>
-
-     {alerts.length===0 ? (
+    {alerts.length === 0 ? (
       <p>No alerts</p>
-     ) : (
-      alerts
-      .slice(0,5)
-      .map((a,index)=>(
-       <div
-        key={index}
-        className="alert-box"
-       >
-        ⚠ {a.message}
-       </div>
-      ))
-     )}
-
-    </div> */}
-    {/* Alerts */}
-<div className="card">
-  <h3>Latest 5 Alerts</h3>
-
-  {alerts.length === 0 ? (
-    <p>No alerts</p>
-  ) : (
-    alerts
-      .slice(0, 5)
-      .map((a, index) => {
+    ) : (
+      alerts.slice(0, 5).map((a, index) => {
         const alertTime = a.createdAt
           ? new Date(a.createdAt).toLocaleString()
           : "Time not available";
 
         return (
-          <div
-            key={index}
-            className="alert-box"
-          >
+          <div key={index} className="alert-box">
             <div style={{ fontWeight: "bold" }}>
               ⚠ {a.type || "Health Alert"}
             </div>
@@ -287,23 +170,16 @@ useEffect(() => {
               {a.message || "Abnormal vital detected"}
             </div>
 
-            <small>
-              Time: {alertTime}
-            </small>
-
+            <small>Time: {alertTime}</small>
             <br />
-
-            <small>
-              Status: {a.status || "active"}
-            </small>
+            <small>Status: {a.status || "active"}</small>
           </div>
         );
       })
-  )}
-</div>
-
-   </div>
+    )}
+   </div> */}
 
   </div>
+  </>
  );
 }
