@@ -1,16 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import PatientCard from "../components/PatientCard";
-import PatientDetails from "../components/dashboard/PatientDetails";
-
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  Legend,
-  ResponsiveContainer
-} from "recharts";
 
 export default function CaregiverDashboard() {
   const [patients, setPatients] = useState([]);
@@ -30,9 +20,7 @@ export default function CaregiverDashboard() {
 
   useEffect(() => {
     fetchData();
-
     const apiTimer = setInterval(fetchData, 5000);
-
     return () => clearInterval(apiTimer);
   }, []);
 
@@ -45,82 +33,106 @@ export default function CaregiverDashboard() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="container">
-        Loading...
-      </div>
-    );
+    return <div className="container">Loading...</div>;
   }
 
-  const critical = patients.filter((p) => {
-  const vital = p.latestVital || {};
-
+  const isCritical = (vital = {}) => {
   const hr = vital.heartRate || 0;
   const spo2 = vital.spo2 || 0;
   const temp = vital.temp ?? vital.temperature ?? 0;
 
-  return (
-    hr < 60 ||
-    hr > 100 ||
-    spo2 < 95 ||
-    temp > 100
-  );
-}).length;
+    return hr < 60 || hr > 100 || spo2 < 95 || temp > 100;
+  };
 
-const stable = patients.filter((p) => {
-  const vital = p.latestVital || {};
+  const critical = patients.filter((p) =>
+    isCritical(p.latestVital)
+  ).length;
 
-  const hr = vital.heartRate || 0;
-  const spo2 = vital.spo2 || 0;
-  const temp = vital.temp ?? vital.temperature ?? 0;
-
-  return !(
-    hr < 60 ||
-    hr > 100 ||
-    spo2 < 95 ||
-    temp > 100
-  );
-}).length;
+  const stable = patients.length - critical;
 
   return (
     <div className="container">
-      <h1 className="title">
-        Caregiver Dashboard
-      </h1>
+      <h1 className="title">Caregiver Dashboard</h1>
 
       <p className="subtitle">
         Real-time monitoring of all connected elders
       </p>
 
-      {/* SUMMARY CARDS */}
+      {/* SUMMARY */}
       <div className="summary-grid">
-        <div className="summary-card blue">
-          Total Patients
+
+        {/* TOTAL */}
+        <div className="summary-card">
+          <div className="summary-top">
+            <b>Total Patients</b>
+            <span className="summary-status status-normal">
+              NORMAL
+            </span>
+          </div>
+
           <div className="summary-value">
             {patients.length}
           </div>
+
+          <div className="summary-footer">
+            Updated: Just now
+          </div>
         </div>
 
-        <div className="summary-card red">
-          Critical Patients
+        {/* CRITICAL */}
+        <div className="summary-card">
+          <div className="summary-top">
+            <b>Critical Patients</b>
+            <span className="summary-status status-emergency">
+              EMERGENCY
+            </span>
+          </div>
+
           <div className="summary-value">
             {critical}
           </div>
+
+          <div className="summary-footer">
+            Needs attention
+          </div>
         </div>
 
-        <div className="summary-card green">
-          Stable Patients
+        {/* STABLE */}
+        <div className="summary-card">
+          <div className="summary-top">
+            <b>Stable Patients</b>
+            <span className="summary-status status-normal">
+              NORMAL
+            </span>
+          </div>
+
           <div className="summary-value">
             {stable}
           </div>
+
+          <div className="summary-footer">
+            All good
+          </div>
         </div>
 
-        <div className="summary-card purple">
-          Live Monitoring
+        {/* CLOCK */}
+        <div className="summary-card">
+          <div className="summary-top">
+            <b>Live Monitoring</b>
+            <span className="summary-status status-warning">
+              LIVE
+            </span>
+          </div>
+
           <div className="summary-value">
             {clock}
           </div>
+
+          <div className="summary-footer">
+            Real-time updates
+          </div>
         </div>
+
       </div>
 
       <br />
@@ -128,10 +140,7 @@ const stable = patients.filter((p) => {
       {/* PATIENT CARDS */}
       <div className="grid">
         {patients.map((item) => (
-          <PatientCard
-            key={item.userId}
-            patient={item}
-          />
+          <PatientCard key={item.userId} patient={item} />
         ))}
       </div>
     </div>

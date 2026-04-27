@@ -4,9 +4,8 @@ import {
  useNavigate
 } from "react-router-dom";
 
-import api from "../../services/api";
-import StatCard from "./StatCard";
-
+import api from "../services/api";
+import StatCard from "../components/dashboard/StatCard";
 
 export default function PatientDetail(){
 
@@ -23,9 +22,7 @@ export default function PatientDetail(){
    try{
 
     const res =
-     await api.get(
- `/caregiver/patient/${id}/detail`
-);
+     await api.get(`/caregiver/patient/${id}/detail`)
 
     setData(res.data);
 

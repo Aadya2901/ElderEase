@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 
 import api from "../services/api";
-import StatCard from "../components/StatCard";
+import StatCard from "../components/dashboard/StatCard";
 
 import {
  ResponsiveContainer,
@@ -142,6 +142,8 @@ useEffect(() => {
      </h3>
 
      <p>
+      X-axis: Reading Number
+      <br />
       Y-axis: BPM
      </p>
 
@@ -174,6 +176,8 @@ useEffect(() => {
      </h3>
 
      <p>
+      X-axis: Reading Number
+      <br />
       Y-axis: SpO2 %
      </p>
 
@@ -206,6 +210,8 @@ useEffect(() => {
      </h3>
 
      <p>
+      X-axis: Reading Number
+      <br />
       Y-axis: °C
      </p>
 

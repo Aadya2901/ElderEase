@@ -5,9 +5,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import PatientDetail from "./pages/PatientDetail";
+import Reports from "./pages/Reports";
 
 import './styles/index.css';
 import "./styles/global.css";
+import "./styles/caregiver.css";
 
 function App() {
   return (
