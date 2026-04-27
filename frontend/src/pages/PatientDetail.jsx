@@ -24,7 +24,7 @@ export default function PatientDetail(){
 
     const res =
      await api.get(
- `/caregiver/patient/${id}/detail`
+ `/./patient/${id}/detail`
 );
 
     setData(res.data);
