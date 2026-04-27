@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { getDashboard } = require("../controllers/dashboard.controller");
+const { getCaregiverDashboard } = require("../controllers/dashboard.controller");
 
-router.get("/:userId", getDashboard);
+router.get("/:userId", getCaregiverDashboard);
 
 module.exports = router;

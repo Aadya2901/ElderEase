@@ -2,7 +2,7 @@ const Vital = require("../models/vital.model");
 const Alert = require("../models/alert.model");
 const Reminder = require("../models/reminder.model");
 
-exports.getDashboard = async (req, res) => {
+exports.getCaregiverDashboard = async (req, res) => {
   try {
     const userId = req.params.userId;
 
