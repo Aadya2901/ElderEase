@@ -5,7 +5,13 @@ const app = express();
 
 const allowedOrigins = [
   "https://elder-ease-care-hub.web.app/",
+  "http://localhost:5173"
   process.env.CLIENT_URL
+];
+
+const allowedOrigins = [
+  "https://elder-ease-care-hub.web.app", // ✅ no trailing slash
+  "http://localhost:5173" // add this explicitly
 ];
 
 app.use(cors({

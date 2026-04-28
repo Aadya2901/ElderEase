@@ -44,8 +44,10 @@ export default function CaregiverDashboard() {
     return hr < 60 || hr > 100 || spo2 < 95 || temp > 100;
   };
 
+  console.log("patients:", patients);
+
   const critical = patients.filter((p) =>
-    isCritical(p.latestVital)
+    isCritical(p.latestVital || p)
   ).length;
 
   const stable = patients.length - critical;
