@@ -13,10 +13,10 @@ export default function PatientCard({ patient }) {
 
   // status logic
   const isCritical =
-    hr < 60 || hr > 100 || spo2 < 95 || temp > 100;
+    hr < 60 || hr > 100 || spo2 < 85 || temp > 100;
 
   const isWarning =
-    !isCritical && (hr > 90 || spo2 < 97);
+    !isCritical && (hr > 90 || hr < 65 || spo2 < 97);
 
   let status = "normal";
   if (isCritical) status = "emergency";

@@ -7,8 +7,6 @@ import useVitals from "../hooks/useVitals";
 import VitalsGrid from "../components/dashboard/VitalsGrid";
 import VitalChart from "../components/dashboard/VitalChart";
 
-import Navbar from "../components/common/Navbar";
-
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
@@ -57,10 +55,6 @@ export default function Reports(){
  const temp = latest?.temperature || 0;
 
  return(
-
-  <>
-    <Navbar
-    />
 
   <div className="reports-container">
 
@@ -148,8 +142,8 @@ export default function Reports(){
 
    </div>
 
-   {/* 🔥 ALERTS BELOW */}
-   {/* <div className="alert-card">
+   {/* 🔥 ALERTS BELOW
+    <div className="alert-card">
     <h3>Latest Alerts</h3>
 
     {alerts.length === 0 ? (
@@ -180,6 +174,5 @@ export default function Reports(){
    </div> */}
 
   </div>
-  </>
  );
 }

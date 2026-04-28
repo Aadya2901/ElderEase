@@ -2,23 +2,13 @@ body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#F9FDFB; /* softer bg */
-  color:#1f2937;
+  color:hsl(215, 28%, 17%);
+  padding: 2rem;
 }
 
 a{
   text-decoration:none;
   color:inherit;
-}
-
-/* NAVBAR */
-.navbar{
-  background:linear-gradient(90deg,#84B179,#A2CB8B); /* green */
-  color:white;
-  padding:18px 28px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
 .brand{
@@ -35,13 +25,10 @@ a{
 .title{
   font-size:32px;
   font-weight:700;
-  margin-bottom:8px;
+  margin-bottom:2px;
+  /* padding-top: 10px; */
 }
 
-.subtitle{
-  color:#6b7280;
-  margin-bottom:24px;
-}
 
 /* CARD */
 .card{
@@ -69,6 +56,7 @@ a{
   padding:10px 14px;
   border-radius:10px;
   cursor:pointer;
+  margin-bottom: 10px;
 }
 
 .btn:hover{
@@ -241,6 +229,7 @@ hr{
   box-shadow:0 4px 10px rgba(0,0,0,0.04);
   transition:0.2s;
 
+  gap: 0.3rem;
   width:100%;
   max-width:340px;   
 }

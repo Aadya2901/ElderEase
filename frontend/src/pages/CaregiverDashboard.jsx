@@ -65,9 +65,9 @@ export default function CaregiverDashboard() {
         <div className="summary-card">
           <div className="summary-top">
             <b>Total Patients</b>
-            <span className="summary-status status-normal">
+            {/* <span className="summary-status status-normal">
               NORMAL
-            </span>
+            </span> */}
           </div>
 
           <div className="summary-value">
@@ -79,9 +79,9 @@ export default function CaregiverDashboard() {
         <div className="summary-card">
           <div className="summary-top">
             <b>Critical Patients</b>
-            <span className="summary-status status-emergency">
+            {/* <span className="summary-status status-emergency">
               EMERGENCY
-            </span>
+            </span> */}
           </div>
 
           <div className="summary-value">
@@ -94,9 +94,9 @@ export default function CaregiverDashboard() {
         <div className="summary-card">
           <div className="summary-top">
             <b>Stable Patients</b>
-            <span className="summary-status status-normal">
+            {/* <span className="summary-status status-normal">
               NORMAL
-            </span>
+            </span> */}
           </div>
 
           <div className="summary-value">
@@ -109,9 +109,9 @@ export default function CaregiverDashboard() {
         <div className="summary-card">
           <div className="summary-top">
             <b>Live Monitoring</b>
-            <span className="summary-status status-warning">
+            {/* <span className="summary-status status-warning">
               LIVE
-            </span>
+            </span> */}
           </div>
           <div className="summary-value">
             {clock}
