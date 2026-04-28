@@ -1,14 +1,15 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+require("dotenv").config();
 
-dotenv.config();
+const app = require("./app");
+const connectDB = require("./config/db");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+const PORT = process.env.PORT || 5000;
 
+// Connect DB first
+connectDB();
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 // Test route
 app.get("/", (req, res) => {
   res.send("Backend is running ✅");

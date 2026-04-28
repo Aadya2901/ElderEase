@@ -5,9 +5,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import PatientDetail from "./pages/PatientDetail";
+import Reports from "./pages/Reports";
 
 import './styles/index.css';
 import "./styles/global.css";
+import "./styles/caregiver.css";
 
 function App() {
   return (
@@ -17,6 +20,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<PatientDashboard />} />
         <Route path="/caregiver" element={<CaregiverDashboard />} />
+        <Route path="/patient/:id" element={<PatientDetail />} />
+        <Route path="/reports/:id" element={<Reports />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

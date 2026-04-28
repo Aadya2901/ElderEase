@@ -1,37 +1,71 @@
-export default function PatientCard({ patient }) {
+import { useNavigate } from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import OpacityIcon from "@mui/icons-material/Opacity";
+import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 
-  const risk =
-    patient.heartRate > 110 || patient.spo2 < 92 || patient.temperature > 38
-      ? "high"
-      : "normal";
+export default function PatientCard({ patient }) {
+  const navigate = useNavigate();
+
+  const v = patient.latestVital || {};
+  const hr = v.heartRate || 0;
+  const spo2 = v.spo2 || 0;
+  const temp = v.temp ?? v.temperature ?? "--";
+
+  // status logic
+  const isCritical =
+    hr < 60 || hr > 100 || spo2 < 95 || temp > 100;
+
+  const isWarning =
+    !isCritical && (hr > 90 || spo2 < 97);
+
+  let status = "normal";
+  if (isCritical) status = "emergency";
+  else if (isWarning) status = "warning";
 
   return (
-    <div className={`patient-card ${risk}`}>
+    <div className={`patient-row ${status}`}>
 
-      <h3>{patient.name}</h3>
-
-      <div className={`status ${risk}`}>
-        {risk === "high" ? "EMERGENCY" : "NORMAL"}
+      {/* LEFT */}
+      <div className="patient-left">
+        <h3>{patient.name}</h3>
+        <p className="sub">{patient.relation}</p>
       </div>
 
-      {risk === "high" && (
-        <div className="alert">
-          🚨 Immediate attention required
+      {/* CENTER */}
+      <div className="patient-vitals">
+        <span>
+          <FavoriteIcon className={`icon ${status}`} />
+          {hr} bpm
+        </span>
+
+        <span>
+          <OpacityIcon className={`icon ${status}`} />
+          {spo2}%
+        </span>
+
+        <span>
+          <DeviceThermostatIcon className={`icon ${status}`} />
+          {temp}°C
+        </span>
+      </div>
+
+      {/* RIGHT */}
+      <div className="status-row">
+        <span className={`status-badge ${status}`}>
+          {status.toUpperCase()}
+        </span>
+
+        <div className="updated">
+          Updated: Just now
         </div>
-      )}
-
-      <div className="vitals">
-        ❤️ HR: {patient.heartRate} bpm <br />
-        🔵 SpO2: {patient.spo2}% <br />
-        🌡 Temp: {patient.temperature}°C
       </div>
 
+      {/* BUTTON */}
       <button
-        className="view-btn"
-        onClick={() => {
-          localStorage.setItem("selectedPatient", JSON.stringify(patient));
-          window.location.href = "/dashboard";
-        }}
+        className="btn"
+        onClick={() =>
+          navigate(`/patient/${patient.userId}`)
+        }
       >
         View Details
       </button>
