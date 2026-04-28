@@ -13,9 +13,7 @@
 
 ElderEase is a real-time elderly health monitoring system built for the Google Solution Challenge under the theme "Rapid Crisis Response."
 
-It gives caregivers a live command center to monitor multiple patients simultaneously, detect health emergencies early using AI-powered risk analysis, and respond 
-
-before situations escalate.
+It gives caregivers a live command center to monitor multiple patients simultaneously, detect health emergencies early using AI-powered risk analysis,and respond before situations escalate.
 
 ---
 
