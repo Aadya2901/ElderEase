@@ -10,5 +10,9 @@ const {
 router.post("/live", saveVitals);
 router.get("/latest/:userId", getLatestVitals);
 router.get("/history/:userId", getHistory);
+const { addVitals, getVitals } = require("../controllers/vital.controller");
+
+router.post("/", addVitals);
+router.get("/", getVitals);
 
 module.exports = router;
