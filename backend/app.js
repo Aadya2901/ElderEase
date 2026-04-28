@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173",
+  "https://elder-ease-care-hub.web.app/",
   process.env.CLIENT_URL
 ];
 
