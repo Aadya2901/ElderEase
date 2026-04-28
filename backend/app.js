@@ -4,18 +4,23 @@ const cors = require("cors");
 const app = express();
 
 const allowedOrigins = [
-  "https://elder-ease-care-hub.web.app/",
-  "http://localhost:5173"
-  process.env.CLIENT_URL
-];
-
-const allowedOrigins = [
-  "https://elder-ease-care-hub.web.app", // ✅ no trailing slash
-  "http://localhost:5173" // add this explicitly
+  "http://localhost:5173",
+  "https://elder-ease-care-hub.web.app"
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    console.log("Origin:", origin); // debug
+
+    // allow requests like Postman (no origin)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true
 }));
 
