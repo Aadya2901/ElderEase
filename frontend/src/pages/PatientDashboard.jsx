@@ -41,7 +41,6 @@ export default function PatientDashboard() {
   useEffect(() => {
     const fetchAI = async () => {
 
-      // 🚫 PREVENT UNNECESSARY API CALLS
       if (
         prevVitals.current.spo2 !== null &&
         Math.abs(prevVitals.current.spo2 - spo2) < 1 &&
@@ -62,7 +61,6 @@ export default function PatientDashboard() {
 
       setAIData(res);
 
-      // 🔁 UPDATE PREVIOUS VALUES
       prevVitals.current = {
         spo2,
         heartRate,
