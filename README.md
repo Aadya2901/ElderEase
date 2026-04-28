@@ -41,6 +41,7 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 ⚙️ Backend API: https://elderease-24ia.onrender.com
 📡 IoT Simulation: https://elderease-node-red.onrender.com
 💻 Repository: https://github.com/Aadya2901/ElderEase
+
 📌 Overview
 
 ElderEase is a real-time elderly health monitoring system built for the Google Solution Challenge under the theme Rapid Crisis Response.
@@ -128,19 +129,19 @@ Anish Kushwaha – Backend + APIs
 cd backend
 npm install
 cp .env.example .env
-# Add MONGO_URI
+## Add MONGO_URI
 npm run dev
 
 ## Frontend
 cd frontend
 npm install
-# Add VITE_API_URL
+Add VITE_API_URL
 npm run dev
 
 ## Node-RED
 cd node-red
-# Import flow.json
-# Configure backend API URL
+Import flow.json
+Configure backend API URL
 
 🔮 Future Enhancements
 ESP32 hardware integration
