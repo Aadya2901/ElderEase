@@ -1,16 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  saveVitals,
-  getLatestVitals,
-  getHistory
-} = require("../controllers/vital.controller");
+const controller = require("../controllers/vital.controller");
 
-router.post("/live", saveVitals);
+// Debug (temporary)
+console.log("Controller:", controller);
 
-// Dashboard APIs
-router.get("/latest/:userId", getLatestVitals);
-router.get("/history/:userId", getHistory);
+router.post("/live", controller.saveVitals);
+router.get("/latest/:userId", controller.getLatestVitals);
+router.get("/history/:userId", controller.getHistory);
 
 module.exports = router;
