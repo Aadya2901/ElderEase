@@ -2,7 +2,7 @@
 
 > A caregiver-first platform for real-time vitals monitoring, AI-powered risk detection, and rapid crisis response.
 > 
-[Version](https://img.shields.io/badge/version-v2.0-blue)
+![Version](https://img.shields.io/badge/version-v2.0-blue)
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![GCP](https://img.shields.io/badge/hosted-Firebase%20GCP-orange)
