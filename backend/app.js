@@ -4,11 +4,18 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
+const connectDB = require("./config/db");
+
 const app = express();
 
+// Connect DB
+connectDB();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Routes
 app.get("/", (req, res) => {
   res.json({ message: "ElderEase Backend Running" });
 });
@@ -18,17 +25,10 @@ app.use("/api/alerts", require("./routes/alert.routes"));
 app.use("/api/reminders", require("./routes/reminder.routes"));
 app.use("/api/dashboard", require("./routes/dashboard.routes"));
 app.use("/api/summary", require("./routes/summary.routes"));
+app.use("/api/caregiver", require("./routes/caregiver.routes"));
+app.use("/api/reports", require("./routes/report.routes"));
 
-app.use(
- "/api/caregiver",
- require("./routes/caregiver.routes")
-);
-
-app.use(
- "/api/reports",
- require("./routes/report.routes")
-);
-
+// AI Insight Route
 app.post("/api/ai-insight", async (req, res) => {
   try {
     const { heartRate, spo2, temperature, fallDetected } = req.body;
@@ -55,13 +55,8 @@ app.post("/api/ai-insight", async (req, res) => {
       - Keep explanation under 15 words
       - Be practical
       - Be medically safe
-
-      Return ONLY valid JSON.
-      Do NOT add explanation.
-      Do NOT add markdown.
-      Strict JSON only.
-      Do NOT wrap in \`\`\`.
-      `;
+      - Return ONLY valid JSON
+    `;
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -82,35 +77,34 @@ app.post("/api/ai-insight", async (req, res) => {
 
     let parsed;
 
-try {
-  let cleanText = text
-    .replace(/```json/g, "")
-    .replace(/```/g, "")
-    .trim();
+    try {
+      let cleanText = text
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
 
-  const match = cleanText.match(/\{[\s\S]*\}/);
+      const match = cleanText.match(/\{[\s\S]*\}/);
+      if (!match) throw new Error("No JSON found");
 
-  if (!match) throw new Error("No JSON found");
+      parsed = JSON.parse(match[0]);
 
-  parsed = JSON.parse(match[0]);
+      if (!parsed.riskLevel || !parsed.actions) {
+        throw new Error("Invalid AI structure");
+      }
 
-  if (!parsed.riskLevel || !parsed.actions) {
-    throw new Error("Invalid AI structure");
-  }
-  
-  parsed.source = "ai";
+      parsed.source = "ai";
 
-} catch (e) {
-  console.log("Parsing failed, raw:", text);
+    } catch (e) {
+      console.log("Parsing failed:", text);
 
-  parsed = {
-    riskLevel: "MEDIUM",
-    explanation: "AI response unclear, fallback used.",
-    medical: "Parsing failed.",
-    actions: ["Recheck vitals"],
-    source: "fallback"
-  };
-}
+      parsed = {
+        riskLevel: "MEDIUM",
+        explanation: "AI response unclear, fallback used.",
+        medical: "Parsing failed.",
+        actions: ["Recheck vitals"],
+        source: "fallback"
+      };
+    }
 
     res.json(parsed);
 
@@ -125,24 +119,6 @@ try {
       source: "fallback"
     });
   }
-const connectDB = require("./config/db");
-const vitalRoutes = require("./routes/vital.routes");
-
-const app = express();
-
-// Connect DB
-connectDB();
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Routes
-app.use("/api/vitals", vitalRoutes);
-
-// Test route
-app.get("/", (req, res) => {
-  res.send("Backend Running");
 });
 
 module.exports = app;
