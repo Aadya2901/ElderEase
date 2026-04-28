@@ -13,11 +13,12 @@
 
 ## 📄 Abstract
 
-ElderEase is an intelligent IoT-based health monitoring system designed to provide real-time tracking and proactive care for elderly individuals.
 
-Phase 1 establishes a rule-based monitoring architecture using Node-RED, enabling structured health data simulation, validation, classification, and logging.
+ElderEase is a real-time elderly health monitoring system built for the Google Solution Challenge under the theme "Rapid Crisis Response."
 
-The system follows an event-driven, flow-based design and is built entirely using open-source technologies to ensure FOSS compliance.
+It gives caregivers a live command center to monitor multiple patients simultaneously, detect health emergencies early using AI-powered risk analysis, and respond 
+
+before situations escalate.
 
 ---
 
@@ -175,11 +176,11 @@ npm run dev
 
 
 # 🔮 Future Enhancements
--ESP32 hardware integration
--SMS/WhatsApp alerts (Twilio)
--Family access portal
--Predictive ML models
--Hospital EMR integration
+- ESP32 hardware integration
+- SMS/WhatsApp alerts (Twilio)
+- Family access portal
+- Predictive ML models
+- Hospital EMR integration
 
 # 📄 License
 
