@@ -120,20 +120,22 @@ ElderEase provides a real-time monitoring and intelligent alert system that brid
 
 ## 🏗️ Architecture
 
+```
 IoT Sensors (Node-RED)
-↓
+        ↓
 HTTP API (Express Backend)
-↓
+        ↓
 MongoDB Database
-↓
+        ↓
 AI Analysis Layer
-↓
+        ↓
 React Frontend
-↓
+        ↓
 Caregiver Dashboard
+```
 
 
----
+
 
 ## 👥 Team – CleverCubed
 
