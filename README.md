@@ -168,8 +168,8 @@ npm run dev
 
  ### Node Red
  cd node-red
-# Import flow.json
-# Configure backend API URL
+### Import flow.json
+### Configure backend API URL
 
 
 # 🔮 Future Enhancements
