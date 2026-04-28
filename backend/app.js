@@ -24,6 +24,8 @@ app.use(cors({
   credentials: true
 }));
 
+app.options("*", cors());
+
 app.get("/api/health", (req, res) => {
   res.json({
     status: "ok",
