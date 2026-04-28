@@ -12,10 +12,10 @@ a{
 
 /* NAVBAR */
 .navbar{
-  background:linear-gradient(90deg,#84B179,#A2CB8B); /* green */
-  color:white;
-  padding:18px 28px;
-  display:flex;
+  background:linear-gradient(90deg,#84B179,#A2CB8B);  
+  color: white;
+  /* padding:18px 28px; */
+  /* display:flex; */
   justify-content:space-between;
   align-items:center;
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
@@ -43,12 +43,6 @@ a{
   margin-bottom:12px;
 }
 
-/* GRID
-.grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
-  gap:24px;  
-} */
 
 /* CARD */
 .card{
