@@ -2,7 +2,7 @@ const Vital = require("../models/vital.model");
 const Alert = require("../models/alert.model");
 
 // POST /api/vitals/live
-exports.saveVitals = async (req, res) => {
+const saveVitals = async (req, res) => {
   try {
     const vital = await Vital.create(req.body);
 
@@ -10,21 +10,10 @@ exports.saveVitals = async (req, res) => {
 
     let alerts = [];
 
-    if (heartRate > 120) {
-      alerts.push("High Heart Rate");
-    }
-
-    if (heartRate < 50) {
-      alerts.push("Low Heart Rate");
-    }
-
-    if (spo2 < 92) {
-      alerts.push("Low Oxygen Level");
-    }
-
-    if (temperature > 38.5) {
-      alerts.push("High Temperature");
-    }
+    if (heartRate > 120) alerts.push("High Heart Rate");
+    if (heartRate < 50) alerts.push("Low Heart Rate");
+    if (spo2 < 92) alerts.push("Low Oxygen Level");
+    if (temperature > 38.5) alerts.push("High Temperature");
 
     for (let item of alerts) {
       await Alert.create({
@@ -46,7 +35,7 @@ exports.saveVitals = async (req, res) => {
 };
 
 // GET latest vitals
-exports.getLatestVitals = async (req, res) => {
+const getLatestVitals = async (req, res) => {
   try {
     const vital = await Vital.findOne({
       userId: req.params.userId
@@ -59,7 +48,7 @@ exports.getLatestVitals = async (req, res) => {
 };
 
 // GET history
-exports.getHistory = async (req, res) => {
+const getHistory = async (req, res) => {
   try {
     const vitals = await Vital.find({
       userId: req.params.userId
