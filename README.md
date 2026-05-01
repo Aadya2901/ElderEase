@@ -73,9 +73,9 @@ Most existing systems are reactive and hardware-dependent. ElderEase aims to cre
 # 🎥 Demo
 
 🚀 **Live Demo:**  
-👉 [Visit the ElderEase App](https://elder-ease-rose.vercel.app/)
+👉 [Visit the ElderEase WebApp](https://elder-ease-rose.vercel.app/)
 
-📹 **Demo Video:** Coming Soon!
+📹 **Demo Video:** [View the Demo for ElderEase WebApp](https://youtu.be/_SGCBwhe9vI?si=pGgSuiL00rZGUVpZ)
 
 ---
 
