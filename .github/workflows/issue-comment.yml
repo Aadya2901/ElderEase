@@ -1,0 +1,27 @@
+name: Issue Auto Comment
+
+on:
+issues:
+types: [opened]
+
+jobs:
+comment:
+runs-on: ubuntu-latest
+
+```
+permissions:
+  issues: write
+
+steps:
+  - name: Comment on new issue
+    uses: peter-evans/create-or-update-comment@v4
+    with:
+      issue-number: ${{ github.event.issue.number }}
+      body: |
+        Thank you for raising this issue! 🚀  
+        We’ll review it as soon as possible.
+
+        Please ensure the issue is not a duplicate and make sure to read the CONTRIBUTING.md guidelines before contributing.
+
+        Your support and contributions to ElderEase are highly appreciated 💙
+```
