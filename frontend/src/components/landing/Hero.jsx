@@ -53,7 +53,7 @@ function Hero() {
           <div className="hero-buttons">
             <button
               className="btn btn-primary btn-lg"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/signup")}
             >
               Get Started
             </button>
