@@ -304,3 +304,178 @@
 .hero-video-container iframe {
   border-radius: 12px;
 }
+
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+  .hero-content {
+    padding: 4rem 1.5rem 0;
+    max-width: 90%;
+  }
+
+  .hero-card {
+    padding: 3rem;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    line-height: 1.15;
+  }
+
+  .hero-subtitle {
+    font-size: 1.8rem;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    max-width: 36rem;
+  }
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .hero {
+    min-height: auto;
+    padding: 5rem 0 3rem;
+  }
+
+  .hero-content {
+    padding: 2rem 1rem 0;
+    max-width: 100%;
+  }
+
+  .hero-card {
+    padding: 2rem 1.5rem;
+    border-radius: 1.2rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .hero-play-button {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-play-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-buttons button,
+  .hero-buttons a {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero-modal-content {
+    max-width: 100%;
+    border-radius: 1rem;
+  }
+
+  .hero-modal-close {
+    width: 2.2rem;
+    height: 2.2rem;
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+
+  .hero-decoration,
+  .hero-overlay-sides {
+    display: none;
+  }
+}
+
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+
+  .hero {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .hero-content {
+    padding: 1.5rem 0.8rem 0;
+  }
+
+  .hero-card {
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .hero-description {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-play-button {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-play-icon {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .hero-buttons {
+    width: 100%;
+  }
+
+  .hero-buttons button,
+  .hero-buttons a {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-modal {
+    padding: 0.5rem;
+  }
+
+  .hero-modal-content {
+    border-radius: 0.8rem;
+  }
+
+  .hero-modal-text {
+    font-size: 1rem;
+  }
+
+  .hero-modal-subtext {
+    font-size: 0.8rem;
+  }
+}

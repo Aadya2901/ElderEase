@@ -496,3 +496,182 @@ hr{
     grid-template-columns: 1fr;
   }
 }
+
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+  body {
+    padding: 1.5rem;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .grid,
+  .report-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .patient-row {
+    max-width: 100%;
+  }
+
+  .summary-value,
+  .card-value {
+    font-size: 26px;
+  }
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  body {
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .summary-grid,
+  .grid,
+  .report-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card,
+  .summary-card,
+  .summary-card.clean {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .patient-row {
+    max-width: 100%;
+    padding: 14px;
+  }
+
+  .patient-vitals {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .patient-vitals span {
+    min-width: 45%;
+    font-size: 13px;
+  }
+
+  .status-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .summary-item {
+    gap: 10px;
+  }
+
+  .summary-left p,
+  .summary-value,
+  .card-value {
+    font-size: 24px;
+  }
+
+  .summary-icon {
+    padding: 8px;
+  }
+
+  .summary-icon svg,
+  .icon {
+    font-size: 24px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+
+  body {
+    padding: 0.8rem;
+  }
+
+  .container {
+    padding: 8px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .card,
+  .summary-card,
+  .summary-card.clean {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .patient-left h3 {
+    font-size: 16px;
+  }
+
+  .patient-left .sub,
+  .card p {
+    font-size: 12px;
+  }
+
+  .patient-vitals {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .patient-vitals span {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .summary-left p,
+  .summary-value,
+  .card-value {
+    font-size: 20px;
+  }
+
+  .summary-left h3,
+  .card-header {
+    font-size: 12px;
+  }
+
+  .summary-footer,
+  .updated,
+  .status-badge {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .summary-icon svg,
+  .icon {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 9px 12px;
+  }
+
+  .alert-box {
+    font-size: 13px;
+  }
+}

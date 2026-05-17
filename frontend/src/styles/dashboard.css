@@ -34,3 +34,91 @@
   border-radius: 10px;
   width: 200px;
 }
+
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+  .topbar {
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .notification-panel {
+    width: 180px;
+    right: 15px;
+    top: 15px;
+  }
+
+  .patient-detail {
+    padding: 18px;
+  }
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .alert-card {
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  .patient-detail {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .ai-box {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .notification-panel {
+    position: static;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+}
+
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+
+  .topbar {
+    gap: 10px;
+  }
+
+  .alert-card {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
+  .patient-detail {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .ai-box {
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
+  .notification-panel {
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+}

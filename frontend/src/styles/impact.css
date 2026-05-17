@@ -120,3 +120,148 @@
   font-size: 1.125rem;
   color: var(--color-text-muted);
 }
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+  .impact {
+    padding: 4rem 1.5rem;
+  }
+
+  .impact-content {
+    max-width: 90%;
+  }
+
+  .impact-quote-icon {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .impact-quote-main {
+    font-size: 2.6rem;
+    line-height: 1.2;
+  }
+
+  .impact-quote-secondary {
+    font-size: 1.5rem;
+  }
+
+  .impact-stats {
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  .impact-stat {
+    padding: 1.8rem;
+  }
+
+  .impact-stat-value {
+    font-size: 3rem;
+  }
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .impact {
+    padding: 3.5rem 1rem;
+  }
+
+  .impact-content {
+    max-width: 100%;
+  }
+
+  .impact-quote-icon {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .impact-quotes {
+    gap: 2rem;
+  }
+
+  .impact-quote-main {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+
+  .impact-divider {
+    width: 6rem;
+    height: 0.3rem;
+  }
+
+  .impact-quote-secondary {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .impact-stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .impact-stat {
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+
+  .impact-stat-value {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .impact-stat-label {
+    font-size: 1rem;
+  }
+}
+
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+
+  .impact {
+    padding: 3rem 0.8rem;
+  }
+
+  .impact-quote-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .impact-quote-main {
+    font-size: 1.6rem;
+    line-height: 1.35;
+  }
+
+  .impact-quote-secondary {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .impact-divider {
+    width: 5rem;
+  }
+
+  .impact-stats {
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .impact-stat {
+    padding: 1.25rem;
+  }
+
+  .impact-stat-value {
+    font-size: 2rem;
+  }
+
+  .impact-stat-label {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}

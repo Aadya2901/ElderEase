@@ -329,3 +329,143 @@ hr{
 }
 
 
+
+@media (max-width: 992px){
+
+  .navbar{
+    padding:14px 18px;
+  }
+
+  .title{
+    font-size:28px;
+  }
+
+  .subtitle{
+    font-size:14px;
+  }
+
+  .patient-row{
+    max-width:100%;
+  }
+
+  .patient-vitals{
+    gap:10px;
+  }
+}
+
+
+/* MOBILE */
+@media (max-width: 768px){
+
+  .container{
+    padding:0.8rem;
+  }
+
+  .navbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+    padding:14px 16px;
+  }
+
+  .brand{
+    font-size:22px;
+  }
+
+  .nav-right{
+    font-size:13px;
+  }
+
+  .title{
+    font-size:24px;
+  }
+
+  .subtitle{
+    font-size:13px;
+  }
+
+  .card{
+    padding:16px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .patient-row{
+    width:100%;
+    max-width:100%;
+    padding:14px;
+  }
+
+  .patient-vitals{
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .patient-vitals span{
+    min-width:45%;
+    font-size:13px;
+  }
+
+  .status-row{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .btn{
+    width:100%;
+    text-align:center;
+  }
+}
+
+
+/* SMALL MOBILE */
+@media (max-width: 480px){
+
+  .container{
+    padding:0.6rem;
+  }
+
+  .brand{
+    font-size:20px;
+  }
+
+  .title{
+    font-size:21px;
+  }
+
+  .patient-left h3{
+    font-size:16px;
+  }
+
+  .patient-left .sub{
+    font-size:12px;
+  }
+
+  .patient-vitals{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .patient-vitals span{
+    width:100%;
+    min-width:100%;
+  }
+
+  .status-badge,
+  .updated{
+    font-size:11px;
+    padding:5px 10px;
+  }
+
+  .btn{
+    padding:9px 12px;
+    font-size:13px;
+  }
+
+  .alert-box{
+    font-size:13px;
+  }
+}
