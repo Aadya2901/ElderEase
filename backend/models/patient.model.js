@@ -5,12 +5,12 @@ const patientSchema = new mongoose.Schema({
     type: String,
     unique: true
   },
-
   name: String,
   age: Number,
   gender: String,
-  relation: String
-
+  relation: String,
+  caregiverPhone: String,
+  caregiverEmail: String
 }, { timestamps: true });
 
 module.exports =

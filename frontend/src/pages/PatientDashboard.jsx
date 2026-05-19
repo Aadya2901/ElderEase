@@ -16,7 +16,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 
 import { colors } from "../styles/colors";
-
+import api from "../services/api";
 export default function PatientDashboard() {
   const [data, setData] = useState({
     heartRate: 82,
@@ -103,37 +103,40 @@ export default function PatientDashboard() {
   const hours = ["00:00","04:00","08:00","12:00","16:00","20:00"];
   const indexRef = useRef(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+useEffect(() => {
+  const interval = setInterval(async () => {
+    const newData = {
+      time: hours[indexRef.current],
+      heartRate: Math.floor(70 + Math.random() * 50),
+      spo2: Math.floor(88 + Math.random() * 10),
+      temperature: parseFloat((36 + Math.random() * 2).toFixed(1))
+    };
 
-      const newData = {
-        time: hours[indexRef.current], 
-        heartRate: Math.floor(70 + Math.random() * 50),
-        spo2: Math.floor(88 + Math.random() * 10),
-        temperature: parseFloat((36 + Math.random() * 2).toFixed(1))
-      };
+    indexRef.current = (indexRef.current + 1) % hours.length;
 
-      indexRef.current = (indexRef.current + 1) % hours.length;
+    setData(prev => ({ ...prev, ...newData }));
+    setHistory(prev => [...prev.slice(-9), newData]);
 
-      setData(prev => ({
-        ...prev,
-        ...newData
-      }));
-      setHistory(prev => [...prev.slice(-9), newData]);
+    // Send vitals to backend with logged-in user's userId
+    try {
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        await api.post("/vitals/live", {
+          userId,
+          heartRate: newData.heartRate,
+          spo2: newData.spo2,
+          temperature: newData.temperature
+        });
+      }
+    } catch (err) {
+      console.log("Failed to send vitals:", err.message);
+    }
 
-    }, 3000);
+  }, 3000);
+  return () => clearInterval(interval);
+}, []);
 
-    return () => clearInterval(interval);
-  }, []);
-
-  // 🧠 AI LOGIC
-  const riskScore = predictRisk(
-    heartRate,
-    spo2,
-    temperature,
-    thresholds
-  );
-
+ const riskScore = predictRisk(heartRate, spo2, temperature, thresholds);
   const riskLevel = getRiskLevel(riskScore);
   const healthScore = 100 - riskScore * 5;
 

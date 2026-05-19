@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-
 const vitalSchema = new mongoose.Schema({
+  userId: String,
   heartRate: Number,
   temperature: Number,
   spo2: Number,
@@ -10,5 +10,4 @@ const vitalSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-
 module.exports = mongoose.model("Vital", vitalSchema);

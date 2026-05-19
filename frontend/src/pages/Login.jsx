@@ -111,29 +111,36 @@ export default function Login() {
             style={styles.loginBtn}
             onMouseOver={(e) => e.currentTarget.style.background = "#059669"}
             onMouseOut={(e) => e.currentTarget.style.background = "#10b981"}
-            onClick={() => {
-              const savedProfile = JSON.parse(localStorage.getItem("profile"));
-
-              if (!savedProfile) {
-                alert("No account found. Please sign up.");
+           onClick={async () => {
+              if (!email || !password) {
+                alert("Please enter email and password");
                 return;
               }
 
-              if (
-                email === savedProfile.email &&
-                password === savedProfile.password
-              ) {
-                localStorage.setItem("userName", savedProfile.name);
+              try {
+                const res = await fetch("http://localhost:5000/api/users/login", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ email, password, role })
+                });
 
-                alert("Login successful!");
+                const data = await res.json();
 
-                navigate(
-                  localStorage.getItem("role") === "caregiver"
-                    ? "/caregiver"
-                    : "/dashboard"
-                );
-              } else {
-                alert("Invalid credentials");
+                if (data.success) {
+                  localStorage.setItem("userName", data.user.name);
+                  localStorage.setItem("userId", data.user._id);
+                  localStorage.setItem("role", data.user.role);
+
+                  alert("Login successful!");
+
+                  navigate(
+                    data.user.role === "caregiver" ? "/caregiver" : "/dashboard"
+                  );
+                } else {
+                  alert(data.message || "Invalid credentials");
+                }
+              } catch (err) {
+                alert("Login failed. Is the backend running?");
               }
             }}
           >

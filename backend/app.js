@@ -54,4 +54,6 @@ app.use(
  "/api/reports",
  require("./routes/report.routes")
 );
+
+app.use("/api/users", require("./routes/user.routes"));
 module.exports = app;

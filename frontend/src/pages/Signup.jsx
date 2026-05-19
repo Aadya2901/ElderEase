@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { colors } from "../styles/colors";
+import api from "../services/api";
 
 export default function Signup() {
 
@@ -13,15 +14,15 @@ export default function Signup() {
     phone: "",
     password: "",
     confirmPassword: "",
-    emergency: "",
-    relationship: ""
+    caregiverPhone: "",
+    caregiverEmail: ""
   });
 
   const handleChange = (key, value) => {
     setForm({ ...form, [key]: value });
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (!form.name || !form.email || !form.password) {
       alert("Please fill all required fields");
       return;
@@ -32,19 +33,37 @@ export default function Signup() {
       return;
     }
 
-    localStorage.setItem("role", role);
-    localStorage.setItem("profile", JSON.stringify(form));
+    if (role === "patient" && (!form.caregiverPhone || !form.caregiverEmail)) {
+      alert("Please enter caregiver phone and email");
+      return;
+    }
 
-    alert("Signup successful!");
+    try {
+      const res = await api.post("/users/register", {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        password: form.password,
+        role,
+        age: form.age,
+        gender: form.gender,
+        caregiverPhone: form.caregiverPhone,
+        caregiverEmail: form.caregiverEmail
+      });
 
-    window.location.href = "/login";
+      if (res.data.success) {
+        alert("Signup successful!");
+        window.location.href = "/login";
+      }
+
+    } catch (err) {
+      alert(err.response?.data?.message || "Signup failed");
+    }
   };
 
   return (
     <div style={container}>
-
       <div style={card}>
-
         <h2 style={{ marginBottom: "10px" }}>Create Account</h2>
 
         {/* ROLE SELECT */}
@@ -85,26 +104,22 @@ export default function Signup() {
             <input placeholder="Gender" style={input}
               onChange={(e) => handleChange("gender", e.target.value)} />
 
-            <input placeholder="Emergency Contact" style={input}
-              onChange={(e) => handleChange("emergency", e.target.value)} />
+                    <p style={{ fontSize: "12px", color: "#6b7280", marginTop: "10px", marginBottom: "0" }}>
+            Caregiver Phone (include country code)
+          </p>
+          <input placeholder="+91XXXXXXXXXX" style={{...input, marginTop: "4px"}}
+            onChange={(e) => handleChange("caregiverPhone", e.target.value)} />
+
+            <input placeholder="Caregiver Email" style={input}
+              onChange={(e) => handleChange("caregiverEmail", e.target.value)} />
           </>
         )}
 
-        {/* CAREGIVER ONLY */}
-        {role === "caregiver" && (
-          <input placeholder="Relationship" style={input}
-            onChange={(e) => handleChange("relationship", e.target.value)} />
-        )}
-
         {/* SIGNUP BUTTON */}
-        <button
-          onClick={handleSignup}
-          style={btn}
-        >
+        <button onClick={handleSignup} style={btn}>
           Sign Up
         </button>
 
-        {/* LOGIN */}
         <p style={{ marginTop: "10px", fontSize: "14px", textAlign: "center" }}>
           Already have an account?{" "}
           <span
@@ -119,8 +134,6 @@ export default function Signup() {
     </div>
   );
 }
-
-// 🔥 STYLES
 
 const container = {
   display: "flex",
