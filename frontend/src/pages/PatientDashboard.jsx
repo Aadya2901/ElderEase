@@ -1,14 +1,17 @@
 import { useEffect, useState, useRef } from "react";
-import AlertBanner from "../components/dashboard/AlertBanner";
-import HeartRateChart from "../components/dashboard/HeartRateChart";
-import VitalsGrid from "../components/dashboard/VitalsGrid";
-import AIInsightsCard from "../components/dashboard/AIInsightsCard";
-import HeaderSection from "../components/dashboard/HeaderSection";
-import AppointmentCard from "../components/dashboard/AppointmentCard";
+
+import AlertBanner from "../components/patient/AlertBanner";
+import HeartRateChart from "../components/patient/HeartRateChart";
+import VitalsGrid from "../components/patient/VitalsGrid";
+import AIInsightsCard from "../components/patient/AIInsightsCard";
+import HeaderSection from "../components/patient/HeaderSection";
+import AppointmentCard from "../components/patient/AppointmentCard";
+import MedicationCard from "../components/patient/MedicationCard";
+
 import { downloadReport } from "../utils/report";
 import { predictRisk, getRiskLevel } from "../utils/aiModel";
-import MedicationCard from "../components/dashboard/MedicationCard";
 import { getAIResponse } from "../services/aiService";
+
 import Navbar from "../components/common/Navbar";
 
 import WarningIcon from "@mui/icons-material/Warning";

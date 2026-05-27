@@ -9,8 +9,7 @@ import PatientDetail from "./pages/PatientDetail";
 import Reports from "./pages/Reports";
 
 import './styles/index.css';
-import "./styles/global.css";
-import "./styles/caregiver.css";
+// import "./styles/global.css";
 
 function App() {
   return (

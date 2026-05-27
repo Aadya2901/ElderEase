@@ -1,4 +1,4 @@
-import "../../styles/Caregivers.css";
+import '../../styles/landing/Landing-Caregivers.css'
 
 const points = [
   {

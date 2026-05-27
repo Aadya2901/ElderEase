@@ -5,10 +5,12 @@ import {
 } from "react-router-dom";
 
 import api from "../services/api";
-import StatCard from "../components/dashboard/StatCard";
+import StatCard from "../components/caregiver/StatCard";
 import useVitals from "../hooks/useVitals";
-import VitalsGrid from "../components/dashboard/VitalsGrid";
-import VitalChart from "../components/dashboard/VitalChart";
+import VitalsGrid from "../components/patient/VitalsGrid";
+import VitalChart from "../components/caregiver/VitalChart";
+
+import "../styles/caregiver/PatientDetail.css";
 
 export default function PatientDetail(){
 
@@ -49,7 +51,7 @@ export default function PatientDetail(){
 
  if(!data){
   return(
-   <div className="container">
+   <div className="patient-detail container">
     Loading...
    </div>
   );
@@ -70,7 +72,7 @@ export default function PatientDetail(){
  }
 
  return(
-  <div className="container">
+  <div className="patient-detail container">
 
    <button
     className="btn"
@@ -91,6 +93,7 @@ export default function PatientDetail(){
   <h3 style={{ marginBottom: "10px" }}>
   Current Vitals
 </h3>
+<div className="vitals-wrapper">
   <VitalsGrid
     heartRate={hr}
     spo2={spo2}
@@ -100,10 +103,8 @@ export default function PatientDetail(){
       spo2: { low: 95 },
       temperature: { high: 100 }
     }}
-    isMobile={false}
   />
-
-   <br />
+</div>
 
    {/* TWO COLUMN */}
    <div className="report-grid">

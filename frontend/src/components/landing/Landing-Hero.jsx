@@ -1,17 +1,27 @@
-import { useState } from 'react'
-import "../../styles/Hero.css";
-
-import { useNavigate } from "react-router-dom";
+import { useState, useRef } from 'react'
+import '../../styles/landing/Landing-Hero.css'
 
 function Hero() {
   const [showVideo, setShowVideo] = useState(false)
 
-  const navigate = useNavigate();
+  const iframeRef = useRef(null)
+
+  const closeModal = () => {
+    setShowVideo(false)
+    if (iframeRef.current) {
+      iframeRef.current.src = iframeRef.current.src
+    }
+  }
 
   return (
     <section id="home" className="hero">
       {/* Background Image */}
       <div className="hero-background">
+        {/* <img
+          src="/images/hero-bg.jpg"
+          alt="Modern healthcare facility"
+          className="hero-bg-image"
+        /> */}
         <div className="hero-overlay hero-overlay-bottom"></div>
         <div className="hero-overlay hero-overlay-sides"></div>
         <div className="hero-overlay hero-overlay-top"></div>
@@ -52,15 +62,18 @@ function Hero() {
           {/* CTA Buttons */}
           <div className="hero-buttons">
             <button
+              onClick={() =>
+                document
+                  .getElementById("features")
+                  .scrollIntoView({ behavior: "smooth" })
+              }
               className="btn btn-primary btn-lg"
-              onClick={() => navigate("/login")}
             >
               Get Started
             </button>
-
             <button
-              className="btn btn-outline btn-lg"
               onClick={() => setShowVideo(true)}
+              className="btn btn-outline btn-lg"
             >
               View Demo
             </button>
@@ -70,10 +83,10 @@ function Hero() {
 
       {/* Video Modal */}
       {showVideo && (
-        <div className="hero-modal" onClick={() => setShowVideo(false)}>
+        <div className="hero-modal" onClick={closeModal}>
           <div className="hero-modal-content" onClick={(e) => e.stopPropagation()}>
             <button
-              onClick={() => setShowVideo(false)}
+              onClick={closeModal}
               className="hero-modal-close"
               aria-label="Close video"
             >
@@ -84,12 +97,11 @@ function Hero() {
             </button>
             <div className="hero-video-container">
               <iframe
-                width="100%"
-                height="400"
-                src="https://www.youtube.com/embed/_SGCBwhe9vI"
+                ref={iframeRef}
+                src="https://www.youtube.com/embed/_SGCBwhe9vI?autoplay=1"
                 title="Demo Video"
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="autoplay; encrypted-media"
                 allowFullScreen
               ></iframe>
             </div>
@@ -101,6 +113,3 @@ function Hero() {
 }
 
 export default Hero
-
-
-

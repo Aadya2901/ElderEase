@@ -1,0 +1,81 @@
+/* ===== PATIENT DETAIL ===== */
+
+.patient-detail .report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.patient-detail button {
+  margin-bottom: 15px;
+}
+
+.patient-detail .alert-box {
+  margin-top: 10px;
+}
+
+.patient-detail > h1,
+.patient-detail > p,
+.patient-detail > h3 {
+  margin-bottom: 16px;
+}
+
+.patient-detail {
+  overflow-x: hidden;
+}
+
+.patient-detail .report-grid > * {
+  min-width: 0;
+}
+
+.patient-detail canvas,
+.patient-detail svg {
+  max-width: 100%;
+}
+
+/* * {
+  outline: 1px solid red;
+} */
+
+.patient-detail .vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.patient-detail .vitals-grid > * {
+  min-width: 0;
+  width: 100%;
+}
+
+.patient-detail * {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.patient-detail .vitals-grid > * {
+  min-width: 0;
+  width: 100%;
+  overflow: hidden; /* 🔥 THIS stops inner push */
+}
+
+.patient-detail .vitals-grid * {
+  max-width: 100%;
+}
+
+.patient-detail svg {
+  flex-shrink: 0;
+}
+
+
+.patient-detail {
+  overflow-x: hidden;
+  max-width: 100vw;
+}

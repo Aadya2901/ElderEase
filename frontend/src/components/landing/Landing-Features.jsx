@@ -1,4 +1,4 @@
-import "../../styles/features.css";
+import '../../styles/landing/Landing-Features.css'
 
 const features = [
   {

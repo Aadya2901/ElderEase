@@ -1,4 +1,4 @@
-import '../../styles/Impact.css'
+import '../../styles/landing/Landing-Impact.css'
 
 const stats = [
   { value: "40%", label: "Faster Emergency Response", color: "primary" },

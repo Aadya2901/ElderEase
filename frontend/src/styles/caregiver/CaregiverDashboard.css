@@ -1,0 +1,72 @@
+/* ===== CAREGIVER DASHBOARD ===== */
+
+.caregiver-dashboard .container {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 0.4rem;
+}
+
+.caregiver-dashboard .title{
+  font-size:32px;
+  font-weight:700;
+}
+
+.caregiver-dashboard .subtitle{
+  color:#6b7280;
+  margin-bottom:12px;
+}
+
+/* GRID */
+
+.caregiver-dashboard .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+@media (max-width: 900px){
+  .caregiver-dashboard .grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px){
+  .caregiver-dashboard .grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* SUMMARY */
+
+.caregiver-dashboard .summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.caregiver-dashboard .summary-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #E5EFE8;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  transition: 0.2s;
+}
+
+.caregiver-dashboard .summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.caregiver-dashboard .summary-top {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.caregiver-dashboard .summary-value {
+  font-size: 32px;
+  font-weight: 700;
+}

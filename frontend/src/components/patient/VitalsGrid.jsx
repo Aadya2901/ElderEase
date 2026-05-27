@@ -9,17 +9,9 @@ export default function VitalsGrid({
   spo2,
   temperature,
   thresholds,
-  isMobile
 }) {
   return (
-    <div style={{
-      display: "grid",
-      gridTemplateColumns: isMobile
-        ? "1fr"
-        : "repeat(auto-fit, minmax(280px, 1fr))",
-      gap: "20px",
-      marginTop: "20px"
-    }}>
+    <div className="vitals-grid">
 
       <VitalCard
         title="Heart Rate"

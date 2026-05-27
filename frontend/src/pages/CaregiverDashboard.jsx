@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import PatientCard from "../components/dashboard/PatientCard";
+import PatientCard from "../components/caregiver/PatientCard";
+
+import "../styles/caregiver/CaregiverDashboard.css";
 
 export default function CaregiverDashboard() {
   const [patients, setPatients] = useState([]);
@@ -33,7 +35,7 @@ export default function CaregiverDashboard() {
   }, []);
 
   if (loading) {
-    return <div className="container">Loading...</div>;
+    return <div className="caregiver-dashboard container">Loading...</div>;
   }
 
   const isCritical = (vital = {}) => {
@@ -53,7 +55,7 @@ export default function CaregiverDashboard() {
   const stable = patients.length - critical;
 
   return (
-    <div className="container">
+    <div className="caregiver-dashboard container">
       <h1 className="title">Caregiver Dashboard</h1>
 
       <p className="subtitle">

@@ -1,4 +1,4 @@
-import '../../styles/ProblemSolution.css';
+import '../../styles/landing/Landing-ProblemSolution.css'
 
 const problems = [
   {
